@@ -921,7 +921,7 @@ async function loadCleaners() {
   const grid = document.getElementById('cleaners-grid');
   const waitlist = document.getElementById('waitlist-box');
   if (!grid) return;
-  const { data } = await sb.from('businesses').select('id,name,address,city,services,rating,review_count,plan,feature_nontoxic,feature_express,pickup_delivery').eq('is_active', true).eq('is_approved', true).order('rating', { ascending: false });
+  const { data } = await sb.from('businesses').select('id,name,address,city,services,rating,review_count,plan,feature_nontoxic,feature_express').eq('is_active', true).eq('is_approved', true).order('rating', { ascending: false });
   if (!data || !data.length) {
     grid.innerHTML = '';
     waitlist?.classList.remove('hidden');
