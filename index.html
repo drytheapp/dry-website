@@ -4,6 +4,16 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Dry. — Your grandmother's dry cleaner, with your efficiency.</title>
+<meta name="description" content="Find trusted local dry cleaners, book in two minutes, track your order live. Modern dry cleaning for modern people."/>
+<meta property="og:title" content="Dry. — Your grandmother's dry cleaner, with your efficiency."/>
+<meta property="og:description" content="Find trusted local dry cleaners, book in two minutes, track your order live."/>
+<meta property="og:image" content="https://drytheapp.com/og-image.png"/>
+<meta property="og:url" content="https://drytheapp.com"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Dry. — Your grandmother's dry cleaner, with your efficiency."/>
+<meta name="twitter:description" content="Find trusted local dry cleaners, book in two minutes, track your order live."/>
+<meta name="twitter:image" content="https://drytheapp.com/og-image.png"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -887,6 +897,7 @@ const SB_URL  = 'https://ftaqabwiqnuzoyjjkipj.supabase.co';
 const SB_ANON = 'sb_publishable_mVpLiNGElB4QNu76cMfX7Q_GltdnrJh';
 const sb = createClient(SB_URL, SB_ANON);
 let _user = null;
+let _userProfile = null;
 
 // ── Auth state ──────────────────────────────────────────────────────────────
 sb.auth.getSession().then(({data:{session}}) => {
@@ -898,11 +909,23 @@ sb.auth.onAuthStateChange((_e, session) => {
   if (_user) onSignedIn(); else onSignedOut();
 });
 
-function onSignedIn() {
+async function onSignedIn() {
   updateNavBtns();
   loadCleaners();
   loadOrders();
   document.getElementById('c-orders-section')?.classList.remove('hidden');
+  // Load user profile + auto-create if missing
+  const { data: profile, error } = await sb.from('users').select('full_name,phone').eq('id', _user.id).single();
+  if (profile) {
+    _userProfile = profile;
+    const firstName = profile.full_name?.split(' ')[0] || '';
+    document.getElementById('orders-greeting')?.textContent && (document.getElementById('orders-greeting').textContent = firstName ? `Welcome back, ${firstName}.` : 'Welcome back.');
+  } else {
+    // Auto-create row
+    const name = _user.user_metadata?.full_name || _user.email?.split('@')[0] || '';
+    await sb.from('users').insert({ id: _user.id, full_name: name });
+    _userProfile = { full_name: name };
+  }
 }
 function onSignedOut() {
   updateNavBtns();
@@ -967,20 +990,55 @@ async function loadOrders() {
     const { data: bizzes } = await sb.from('businesses').select('id,name').in('id', bizIds);
     (bizzes||[]).forEach(b => { bizMap[b.id] = b.name; });
   }
-  const SC = {scheduled:'var(--lav)',received:'#C97B2A',in_cleaning:'#3A6EC8',qc:'#B8860B',ready:'#5BA87A',completed:'var(--ink-lt)'};
-  const SL = {scheduled:'Scheduled',received:'Received',in_cleaning:'In Cleaning',qc:'Quality Check',ready:'&#x2705; Ready for Pickup',completed:'Completed'};
-  list.innerHTML = orders.map(o => `
-    <div style="background:#fff;border:1px solid var(--bdlt);border-radius:16px;padding:18px 22px;margin-bottom:12px;display:flex;align-items:center;gap:16px">
-      <div style="flex:1">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:3px">${bizMap[o.business_id]||'Your Cleaner'}</div>
-        <div style="font-size:13px;color:var(--ink-lt)">${o.garments_summary||'Order'} &middot; $${o.total||'—'}</div>
-        <div style="font-size:12px;color:var(--ink-lt);margin-top:2px">${new Date(o.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;background:${SC[o.status]||'var(--lav)'}22;flex-shrink:0">
-        <div style="width:7px;height:7px;border-radius:50%;background:${SC[o.status]||'var(--lav)'}"></div>
-        <span style="font-size:11px;color:${SC[o.status]||'var(--lav)'}">${SL[o.status]||o.status}</span>
-      </div>
-    </div>`).join('');
+  const SC = {scheduled:'var(--lav)',received:'#C97B2A',in_cleaning:'#3A6EC8',qc:'#B8860B',ready:'#5BA87A',completed:'#5BA87A'};
+  const SL = {scheduled:'Scheduled',received:'Received',in_cleaning:'In Cleaning',qc:'Quality Check',ready:'&#x2705; Ready for Pickup',completed:'&#x2713; Completed'};
+  const STEPS = ['Scheduled','Received','In Cleaning','QC','Ready','Done'];
+  const SIDX  = {scheduled:0,received:1,in_cleaning:2,qc:3,ready:4,completed:5};
+  list.innerHTML = orders.map(function(o) {
+    var si = SIDX[o.status] || 0;
+    var sc = SC[o.status] || 'var(--lav)';
+    var date = o.scheduled_date
+      ? new Date(o.scheduled_date+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})
+      : new Date(o.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    var steps = STEPS.map(function(s,i) {
+      var done = i < si, active = i === si;
+      var bg = (done || active) ? sc : '#DDD3ED';
+      var line = i < STEPS.length-1 ? '<div style="flex:1;height:2px;background:'+(done?sc:'#DDD3ED')+'"></div>' : '';
+      return '<div style="display:flex;align-items:center;flex:'+(i<STEPS.length-1?'1':'0')+'">'
+        +'<div style="width:18px;height:18px;border-radius:50%;background:'+bg+';border:2px solid '+bg+';display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;flex-shrink:0">'+(done?'&#x2713;':active?'&#x25CF;':'')+'</div>'
+        +line+'</div>';
+    }).join('');
+    var stepLabels = STEPS.map(function(s,i) {
+      return '<div style="font-size:9px;color:'+(i===si?sc:'var(--ink-lt)')+';text-align:center;flex:1">'+s+'</div>';
+    }).join('');
+    var readyBox = o.status==='ready'
+      ? '<div style="margin-top:14px;background:#fff;border:1.5px solid #5BA87A40;border-radius:12px;padding:14px;text-align:center"><div style="font-size:13px;color:#5BA87A;margin-bottom:4px">&#x1F389; Ready for Pickup!</div><div style="font-size:11px;color:var(--ink-lt)">Show order code <strong>'+o.id+'</strong> at the counter</div></div>'
+      : '';
+    return '<div style="background:#fff;border:1px solid var(--bdlt);border-radius:16px;margin-bottom:12px;overflow:hidden">'
+      +'<div style="padding:16px 20px;cursor:pointer;display:flex;align-items:center;gap:14px" onclick="this.parentElement.querySelector(\'.order-detail\').classList.toggle(\'hidden\')">'
+      +'<div style="flex:1">'
+      +'<div style="font-family:\'Cormorant Garamond\',serif;font-size:17px;color:var(--ink);margin-bottom:2px">'+(bizMap[o.business_id]||'Your Cleaner')+'</div>'
+      +'<div style="font-size:13px;color:var(--ink-lt)">'+(o.garments_summary||'Order')+' &middot; $'+(o.total||'&mdash;')+' &middot; '+date+'</div>'
+      +'<div style="font-size:11px;color:var(--lav-mid);margin-top:2px;letter-spacing:1px">'+o.id+'</div>'
+      +'</div>'
+      +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">'
+      +'<div style="display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:16px;background:'+sc+'20">'
+      +'<div style="width:6px;height:6px;border-radius:50%;background:'+sc+'"></div>'
+      +'<span style="font-size:11px;color:'+sc+'">'+(SL[o.status]||o.status)+'</span></div>'
+      +'<span style="font-size:12px;color:var(--ink-lt)">&#x25BC;</span>'
+      +'</div></div>'
+      +'<div class="order-detail hidden" style="border-top:1px solid var(--bdlt);padding:16px 20px;background:var(--lav-glow)">'
+      +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px">'
+      +'<div style="background:#fff;border-radius:10px;padding:10px 12px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-lt);margin-bottom:3px">Order ID</div><div style="font-size:12px;color:var(--ink)">'+o.id+'</div></div>'
+      +'<div style="background:#fff;border-radius:10px;padding:10px 12px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-lt);margin-bottom:3px">Scheduled</div><div style="font-size:12px;color:var(--ink)">'+date+'</div></div>'
+      +'<div style="background:#fff;border-radius:10px;padding:10px 12px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-lt);margin-bottom:3px">Total</div><div style="font-size:12px;color:var(--ink)">$'+o.total+'</div></div>'
+      +'</div>'
+      +'<div style="margin-bottom:8px;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-lt)">Order Progress</div>'
+      +'<div style="display:flex;align-items:center;margin-bottom:6px">'+steps+'</div>'
+      +'<div style="display:flex;justify-content:space-between">'+stepLabels+'</div>'
+      +readyBox
+      +'</div></div>';
+  }).join('');
 }
 
 // ── Auth modal ───────────────────────────────────────────────────────────────
@@ -988,7 +1046,7 @@ function openAuthModal(tab) {
   const modal = document.getElementById('c-auth-modal');
   if (!modal) return;
   modal.style.display = 'flex';
-  if (_user) { showAuthState('signedin'); document.getElementById('auth-user-name').textContent = _user.email; }
+  if (_user) { showAuthState('signedin'); document.getElementById('auth-user-name').textContent = _userProfile?.full_name || _user.email; }
   else switchAuthTab(tab || 'in');
 }
 function closeAuthModal() {
@@ -1032,26 +1090,33 @@ document.getElementById('auth-signin-btn')?.addEventListener('click', async () =
   const { error } = await sb.auth.signInWithPassword({ email, password: pass });
   if (error) { err.textContent = error.message; err.classList.remove('hidden'); btn.disabled = false; btn.textContent = 'Sign In'; return; }
   showAuthState('signedin');
-  document.getElementById('auth-user-name').textContent = email;
+  document.getElementById('auth-user-name').textContent = _userProfile?.full_name || email;
   setTimeout(closeAuthModal, 700);
   btn.disabled = false; btn.textContent = 'Sign In';
 });
 
 document.getElementById('auth-signup-btn')?.addEventListener('click', async () => {
-  const name  = document.getElementById('auth-up-name').value.trim();
-  const email = document.getElementById('auth-up-email').value.trim();
-  const pass  = document.getElementById('auth-up-pass').value;
-  const err   = document.getElementById('auth-up-err');
-  const btn   = document.getElementById('auth-signup-btn');
+  const firstName = document.getElementById('auth-up-firstname').value.trim();
+  const lastName  = document.getElementById('auth-up-lastname').value.trim();
+  const phone     = document.getElementById('auth-up-phone')?.value.trim() || '';
+  const email     = document.getElementById('auth-up-email').value.trim();
+  const pass      = document.getElementById('auth-up-pass').value;
+  const err       = document.getElementById('auth-up-err');
+  const btn       = document.getElementById('auth-signup-btn');
   err.classList.add('hidden');
-  if (!name || !email || !pass) { err.textContent = 'Please fill in all fields.'; err.classList.remove('hidden'); return; }
+  if (!firstName || !email || !pass) { err.textContent = 'Please fill in first name, email, and password.'; err.classList.remove('hidden'); return; }
   if (pass.length < 6) { err.textContent = 'Password must be at least 6 characters.'; err.classList.remove('hidden'); return; }
   btn.disabled = true; btn.textContent = 'Creating account…';
+  const fullName = (firstName + ' ' + lastName).trim();
   const { data, error } = await sb.auth.signUp({ email, password: pass });
   if (error) { err.textContent = error.message; err.classList.remove('hidden'); btn.disabled = false; btn.textContent = 'Create Account'; return; }
-  if (data.user) await sb.from('users').upsert({ id: data.user.id, full_name: name, email });
+  if (data.user) {
+    const insertData = { id: data.user.id, full_name: fullName };
+    if (phone) insertData.phone = phone;
+    await sb.from('users').insert(insertData);
+  }
   showAuthState('signedin');
-  document.getElementById('auth-user-name').textContent = name + ' — welcome to Dry.!';
+  document.getElementById('auth-user-name').textContent = firstName + ' — welcome to Dry.!';
   setTimeout(closeAuthModal, 800);
   btn.disabled = false; btn.textContent = 'Create Account';
 });
@@ -1068,8 +1133,13 @@ document.getElementById('open-account-btn')?.addEventListener('click', () => {
   document.getElementById('acct-email').value = _user.email || '';
   document.getElementById('acct-pw').value = '';
   document.getElementById('acct-msg').classList.add('hidden');
-  sb.from('users').select('full_name').eq('id', _user.id).single().then(({data}) => {
-    if (data) document.getElementById('acct-name').value = data.full_name || '';
+  sb.from('users').select('full_name,phone').eq('id', _user.id).single().then(({data}) => {
+    if (data) {
+      const parts = (data.full_name || '').split(' ');
+      document.getElementById('acct-firstname').value = parts[0] || '';
+      document.getElementById('acct-lastname').value  = parts.slice(1).join(' ') || '';
+      if (document.getElementById('acct-phone')) document.getElementById('acct-phone').value = data.phone || '';
+    }
   });
 });
 document.getElementById('acct-modal-close')?.addEventListener('click', () => {
@@ -1079,14 +1149,19 @@ document.getElementById('acct-modal')?.addEventListener('click', e => {
   if (e.target.id === 'acct-modal') document.getElementById('acct-modal').style.display = 'none';
 });
 document.getElementById('acct-save-btn')?.addEventListener('click', async () => {
-  const name = document.getElementById('acct-name').value.trim();
+  const acctFirst = document.getElementById('acct-firstname')?.value.trim() || '';
+  const acctLast  = document.getElementById('acct-lastname')?.value.trim() || '';
+  const name = (acctFirst + ' ' + acctLast).trim();
   const pw   = document.getElementById('acct-pw').value;
   const msg  = document.getElementById('acct-msg');
   const btn  = document.getElementById('acct-save-btn');
   msg.classList.add('hidden');
   btn.disabled = true; btn.textContent = 'Saving…';
   try {
-    if (name) await sb.from('users').upsert({ id: _user.id, full_name: name, email: _user.email });
+    const acctPhone = document.getElementById('acct-phone')?.value.trim();
+    const updateData = { id: _user.id, full_name: name };
+    if (acctPhone !== undefined) updateData.phone = acctPhone || null;
+    if (name) await sb.from('users').upsert(updateData);
     if (pw) {
       if (pw.length < 6) { msg.textContent = 'Password must be at least 6 characters.'; msg.style.cssText = 'background:#fdf0f0;color:#c0392b;padding:10px 14px;border-radius:10px;font-family:Georgia'; msg.classList.remove('hidden'); btn.disabled = false; btn.textContent = 'Save Changes'; return; }
       const { error } = await sb.auth.updateUser({ password: pw });
@@ -1133,18 +1208,36 @@ document.getElementById('acct-save-btn')?.addEventListener('click', async () => 
         <div style="text-align:center;margin-top:16px;font-size:13px;color:var(--ink-lt);font-family:'EB Garamond',Georgia">Don't have an account? <span onclick="switchAuthTab('up')" style="color:var(--lav);cursor:pointer;text-decoration:underline">Create one</span></div>
       </div>
       <!-- Sign Up form -->
-      <div id="auth-signup" class="hidden">
-        <div style="margin-bottom:16px">
-          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Full Name</label>
-          <input id="auth-up-name" type="text" placeholder="Your name" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+      <div id="auth-signup" class="hidden" style="max-height:65vh;overflow-y:auto;padding-right:4px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+          <div>
+            <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">First Name *</label>
+            <input id="auth-up-firstname" type="text" placeholder="First" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+          </div>
+          <div>
+            <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Last Name</label>
+            <input id="auth-up-lastname" type="text" placeholder="Last" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+          </div>
         </div>
-        <div style="margin-bottom:16px">
-          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Email</label>
-          <input id="auth-up-email" type="email" placeholder="your email address" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        <div style="margin-bottom:14px">
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Phone Number</label>
+          <input id="auth-up-phone" type="tel" placeholder="(555) 555-5555" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
         </div>
-        <div style="margin-bottom:24px">
-          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Password</label>
-          <input id="auth-up-pass" type="password" placeholder="••••••••" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        <div style="margin-bottom:14px">
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Date of Birth</label>
+          <input id="auth-up-dob" type="date" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        </div>
+        <div style="margin-bottom:14px">
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Address</label>
+          <input id="auth-up-address" type="text" placeholder="123 Main St, City, State ZIP" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        </div>
+        <div style="margin-bottom:14px">
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Email *</label>
+          <input id="auth-up-email" type="email" placeholder="your email address" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        </div>
+        <div style="margin-bottom:20px">
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Password *</label>
+          <input id="auth-up-pass" type="password" placeholder="••••••••" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
         </div>
         <div id="auth-up-err" class="hidden" style="font-size:13px;color:#c0392b;padding:10px 14px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
         <button id="auth-signup-btn" class="btn btn-primary" style="width:100%">Create Account</button>
@@ -1169,20 +1262,31 @@ document.getElementById('acct-save-btn')?.addEventListener('click', async () => 
       <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#fff;font-style:italic">Account Details</div>
       <button id="acct-modal-close" style="background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer">&#x2715;</button>
     </div>
-    <div style="padding:32px 36px">
+    <div style="padding:28px 36px;max-height:70vh;overflow-y:auto">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+        <div>
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">First Name</label>
+          <input id="acct-firstname" type="text" placeholder="First" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        </div>
+        <div>
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Last Name</label>
+          <input id="acct-lastname" type="text" placeholder="Last" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        </div>
+      </div>
+      <div style="margin-bottom:14px">
+        <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Phone Number</label>
+        <input id="acct-phone" type="tel" placeholder="(555) 555-5555" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+      </div>
       <div style="margin-bottom:16px">
-        <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Full Name</label>
-        <input id="acct-name" type="text" placeholder="Your name" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
-      </div>
-      <div style="margin-bottom:20px">
         <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Email Address</label>
-        <input id="acct-email" type="email" disabled style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink-lt);outline:none;box-sizing:border-box;background:#f0ecf7"/>
+        <input id="acct-email" type="email" disabled style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink-lt);outline:none;box-sizing:border-box;background:#f0ecf7"/>
+        <div style="font-size:11px;color:var(--ink-lt);font-style:italic;margin-top:4px">Email cannot be changed — contact support</div>
       </div>
-      <div style="border-top:1px solid var(--bdlt);margin-bottom:20px"></div>
+      <div style="border-top:1px solid var(--bdlt);margin:16px 0"></div>
       <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--ink);margin-bottom:14px">Change Password</div>
       <div style="margin-bottom:20px">
         <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">New Password (leave blank to keep current)</label>
-        <input id="acct-pw" type="password" placeholder="New password" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        <input id="acct-pw" type="password" placeholder="New password" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
       </div>
       <div id="acct-msg" class="hidden" style="padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:13px;font-family:'EB Garamond',Georgia"></div>
       <button id="acct-save-btn" class="btn btn-primary" style="width:100%">Save Changes</button>
