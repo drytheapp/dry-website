@@ -10,19 +10,17 @@
 :root{
   --lav:#7B5EA7;--lav-deep:#5C3D8F;--lav-mid:#9B7EC8;
   --lav-soft:#C4A8E0;--lav-mist:#EDE6F5;--lav-glow:#F7F3FC;
-  --white:#FFFFFF;--off:#FAF8FD;
+  --white:#FFFFFF;--off:#FAF8FD;--petal:#F2ECF9;
   --ink:#2A1F3D;--ink-mid:#5A4A72;--ink-lt:#8A7A9A;
   --green:#5BA87A;--green-lt:#EBF7F1;--gold:#F5B942;
+  --warn:#C97B2A;--warn-lt:#FDF3E7;
   --border:#DDD3ED;--bdlt:#EDE6F5;
 }
 html{scroll-behavior:smooth}
 body{font-family:'EB Garamond',Georgia,serif;background:var(--off);color:var(--ink);line-height:1.6;overflow-x:hidden}
 .hidden{display:none!important}
-.lbl{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--lav);margin-bottom:12px;font-family:'EB Garamond',Georgia}
-.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:300;color:var(--ink);line-height:1.1;margin-bottom:14px}
-.sec-sub{font-size:17px;color:var(--ink-mid);font-style:italic;max-width:540px;line-height:1.6}
-.card{background:#fff;border-radius:20px;border:1px solid var(--bdlt);box-shadow:0 2px 16px rgba(123,94,167,.07)}
-.tag{display:inline-block;background:var(--lav-mist);color:var(--lav);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:20px;font-family:'EB Garamond',Georgia}
+
+/* ── BUTTONS ── */
 .btn{padding:13px 28px;border:none;border-radius:15px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;cursor:pointer;transition:transform .15s,box-shadow .15s;display:inline-block;text-decoration:none;letter-spacing:0.2px}
 .btn:hover{transform:translateY(-1px)}
 .btn-primary{background:linear-gradient(135deg,var(--lav-deep),var(--lav));color:#fff;box-shadow:0 6px 20px rgba(123,94,167,.35)}
@@ -33,19 +31,19 @@ body{font-family:'EB Garamond',Georgia,serif;background:var(--off);color:var(--i
 .btn-sm{padding:9px 18px;font-size:14px;border-radius:12px}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
 
-/* NAV */
-nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,248,253,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--bdlt);padding:0 5%;display:flex;align-items:center;height:66px;gap:0}
-.nav-logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-style:italic;font-weight:300;color:var(--lav-deep);text-decoration:none;flex-shrink:0}
-.nav-links{display:flex;align-items:center;gap:18px;flex:1;justify-content:center}
-.nav-links a{font-size:14px;color:var(--ink-mid);text-decoration:none;transition:color .2s;cursor:pointer}
-.nav-links a:hover{color:var(--lav)}
-.nav-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
-.nav-back{font-size:13px;color:var(--ink-lt);cursor:pointer;text-decoration:none}
-.nav-back:hover{color:var(--lav)}
+/* ── SHARED ── */
+.lbl{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--lav);margin-bottom:12px;font-family:'EB Garamond',Georgia}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:300;color:var(--ink);line-height:1.1;margin-bottom:14px}
+.sec-sub{font-size:17px;color:var(--ink-mid);font-style:italic;max-width:540px;line-height:1.6}
+.card{background:#fff;border-radius:20px;border:1px solid var(--bdlt);box-shadow:0 2px 16px rgba(123,94,167,.07)}
+.tag{display:inline-block;background:var(--lav-mist);color:var(--lav);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:20px;font-family:'EB Garamond',Georgia}
+.stars span{color:var(--gold);font-size:12px}
+.pill{font-size:10px;color:var(--ink-mid);background:#fff;border:1px solid var(--bdlt);padding:3px 8px;border-radius:9px}
+.pill-v{color:var(--lav);background:var(--lav-mist);border-color:var(--lav-soft)}
 
-/* ENTRY */
-#entry{min-height:100vh;background:linear-gradient(160deg,var(--lav-deep) 0%,var(--lav) 60%,var(--lav-mid) 100%);display:flex;align-items:center;justify-content:center;padding:40px 20px}
-.entry-inner{text-align:center;max-width:640px;width:100%}
+/* ── ENTRY SCREEN ── */
+#entry{min-height:100vh;background:linear-gradient(160deg,var(--lav-deep) 0%,var(--lav) 60%,var(--lav-mid) 100%);display:flex;align-items:center;justify-content:center;padding:40px 20px;position:relative;overflow:hidden}
+.entry-inner{text-align:center;position:relative;z-index:1;max-width:640px;width:100%}
 .entry-logo{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;font-style:italic;color:#fff;letter-spacing:-2px;margin-bottom:10px;line-height:1}
 .entry-tagline{font-size:16px;color:rgba(255,255,255,.72);font-style:italic;margin-bottom:56px}
 .entry-q{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#fff;margin-bottom:32px}
@@ -56,12 +54,28 @@ nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,
 .entry-card-title{font-family:'Cormorant Garamond',serif;font-size:24px;color:#fff;margin-bottom:8px;font-weight:300}
 .entry-card-sub{font-size:13px;color:rgba(255,255,255,.7);font-style:italic;line-height:1.6}
 
-/* CUSTOMER */
+/* ── SHARED NAV ── */
+nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,248,253,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--bdlt);padding:0 5%;display:flex;align-items:center;height:66px;gap:0}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-style:italic;font-weight:300;color:var(--lav-deep);text-decoration:none;flex-shrink:0;margin-right:0}
+.nav-links{display:flex;align-items:center;gap:18px;flex:1;justify-content:center}
+.nav-links a{font-size:14px;color:var(--ink-mid);text-decoration:none;transition:color .2s;cursor:pointer}
+.nav-links a:hover{color:var(--lav)}
+.nav-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.nav-back{font-size:13px;color:var(--ink-lt);cursor:pointer;text-decoration:none;transition:color .2s}
+.nav-back:hover{color:var(--lav)}
+
+/* ══ CUSTOMER SIDE ══ */
 #customer{display:none}
+
+/* CUSTOMER HERO */
 .c-hero{min-height:100vh;background:linear-gradient(160deg,var(--lav-deep) 0%,var(--lav) 55%,var(--lav-mid) 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 6% 80px;position:relative;overflow:hidden}
+.c-hero-inner{position:relative;z-index:1;max-width:740px}
 .c-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(46px,8vw,84px);font-weight:300;font-style:italic;color:#fff;line-height:1.04;letter-spacing:-1px;margin-bottom:22px}
 .c-hero-sub{font-size:clamp(15px,2.2vw,19px);color:rgba(255,255,255,.78);font-style:italic;margin-bottom:44px;line-height:1.55}
 .c-hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.sprig{position:absolute;pointer-events:none;opacity:.15}
+
+/* HOW IT WORKS */
 .c-how{background:#fff;padding:96px 6%}
 .c-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px;margin-top:56px}
 .c-step{background:var(--lav-glow);border:1px solid var(--bdlt);border-radius:22px;padding:30px 26px;transition:transform .2s,box-shadow .2s}
@@ -70,13 +84,17 @@ nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,
 .c-step-icon{font-size:24px;margin-bottom:10px}
 .c-step h3{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ink);margin-bottom:7px}
 .c-step p{font-size:14px;color:var(--ink-mid);line-height:1.65;font-style:italic}
+
+/* SERVICES */
 .c-svc{background:var(--off);padding:96px 6%}
 .c-svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:52px}
-.c-svc-card{background:#fff;border:1px solid var(--bdlt);border-radius:18px;padding:26px;transition:transform .2s,box-shadow .2s}
+.c-svc-card{background:#fff;border:1px solid var(--bdlt);border-radius:18px;padding:26px;box-shadow:0 2px 14px rgba(123,94,167,.05);transition:transform .2s,box-shadow .2s}
 .c-svc-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(123,94,167,.11)}
 .c-svc-icon{width:48px;height:48px;border-radius:14px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
 .c-svc-card h3{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ink);margin-bottom:7px}
 .c-svc-card p{font-size:14px;color:var(--ink-mid);line-height:1.65;font-style:italic}
+
+/* FIND */
 .c-find{background:#fff;padding:96px 6%}
 .c-find-inner{max-width:760px;margin:0 auto;text-align:center}
 .c-find-box{background:var(--lav-glow);border:1.5px solid var(--lav-soft);border-radius:24px;padding:48px 40px;margin-top:48px}
@@ -84,24 +102,40 @@ nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,
 .c-find-search input{flex:1;min-width:220px;padding:14px 20px;border-radius:14px;border:1.5px solid var(--bdlt);font-size:15px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;background:#fff}
 .c-find-search input:focus{border-color:var(--lav)}
 .c-find-filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:28px}
+.c-find-coming{text-align:center;padding:32px 0}
+
+/* TESTIMONIALS */
 .c-testi{background:var(--off);padding:96px 6%}
 .c-testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;margin-top:52px}
-.c-t-card{background:#fff;border:1px solid var(--bdlt);border-radius:18px;padding:26px}
+.c-t-card{background:#fff;border:1px solid var(--bdlt);border-radius:18px;padding:26px;box-shadow:0 2px 12px rgba(123,94,167,.05)}
 .c-t-stars{color:var(--gold);font-size:13px;letter-spacing:2px;margin-bottom:12px}
 .c-t-text{font-size:15px;color:var(--ink-mid);font-style:italic;line-height:1.7;margin-bottom:16px}
 .c-t-name{font-size:13px;color:var(--ink-lt)}
+
+/* FAQ */
 .c-faq{background:#fff;padding:96px 6%}
 .c-faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:52px}
 .c-faq-item{background:var(--lav-glow);border:1px solid var(--bdlt);border-radius:16px;padding:22px 24px}
 .c-faq-q{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:8px}
 .c-faq-a{font-size:14px;color:var(--ink-mid);line-height:1.7;font-style:italic}
+
+/* CUSTOMER CTA */
 .c-cta{background:linear-gradient(135deg,var(--lav-deep),var(--lav));padding:96px 6%;text-align:center}
 .c-cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,54px);font-weight:300;font-style:italic;color:#fff;margin-bottom:16px}
 .c-cta p{font-size:17px;color:rgba(255,255,255,.78);font-style:italic;margin-bottom:36px}
-.c-contact{background:var(--off);padding:80px 6%}
 
-/* BUSINESS */
+/* CONTACT */
+.c-contact{background:var(--off);padding:80px 6%}
+.c-contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:40px auto 0}
+.c-contact-card{background:#fff;border:1px solid var(--bdlt);border-radius:20px;padding:28px 22px;text-align:center}
+.c-contact-card h4{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);margin:12px 0 8px}
+.c-contact-card p{font-size:13px;color:var(--ink-mid);font-style:italic;line-height:1.6;margin-bottom:14px}
+.c-contact-card a{font-size:13px;color:var(--lav);text-decoration:none}
+
+/* ══ BUSINESS SIDE ══ */
 #business{display:none}
+
+/* BUSINESS HERO */
 .b-hero{min-height:100vh;background:linear-gradient(160deg,var(--lav-deep) 0%,#3d2875 40%,var(--lav) 100%);display:flex;align-items:center;justify-content:center;padding:120px 6% 80px;position:relative;overflow:hidden}
 .b-hero-inner{position:relative;z-index:1;max-width:1060px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .b-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,68px);font-weight:300;font-style:italic;color:#fff;line-height:1.06;margin-bottom:20px}
@@ -112,31 +146,28 @@ nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,
 .b-hero-stat:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
 .b-hero-stat-val{font-family:'Cormorant Garamond',serif;font-size:32px;color:#fff;margin-bottom:4px}
 .b-hero-stat-lbl{font-size:13px;color:rgba(255,255,255,.65);font-style:italic}
+
+/* BUSINESS FEATURES */
 .b-features{background:#fff;padding:96px 6%}
 .b-feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:52px}
 .b-feat-card{background:var(--lav-glow);border:1px solid var(--bdlt);border-radius:20px;padding:28px}
 .b-feat-icon{font-size:28px;margin-bottom:14px}
 .b-feat-card h3{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:8px}
 .b-feat-card p{font-size:14px;color:var(--ink-mid);font-style:italic;line-height:1.7}
-.b-dash{background:var(--off);padding:96px 6%}
-.b-dash-preview{background:#fff;border-radius:24px;border:1px solid var(--bdlt);overflow:hidden;margin-top:48px;box-shadow:0 8px 32px rgba(123,94,167,.1)}
-.b-dash-bar{background:linear-gradient(135deg,var(--lav-deep),var(--lav));padding:16px 28px;display:flex;align-items:center;gap:16px}
-.b-dash-dots{display:flex;gap:6px}
-.b-dash-dots span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.3)}
-.b-dash-title{font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(255,255,255,.8);font-style:italic}
-.b-dash-body{padding:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.b-dash-metric{background:var(--lav-glow);border:1px solid var(--bdlt);border-radius:14px;padding:16px}
-.b-dash-metric-val{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--lav-deep)}
-.b-dash-metric-lbl{font-size:11px;color:var(--ink-lt);margin-top:3px}
-.b-how{background:#fff;padding:96px 6%}
-.b-how-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;margin-top:52px}
-.b-how-step{padding:28px 24px;text-align:center}
+
+/* BUSINESS HOW IT WORKS */
+.b-how{background:var(--off);padding:96px 6%}
+.b-how-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;margin-top:52px;position:relative}
+.b-how-step{padding:28px 24px;text-align:center;position:relative}
+.b-how-step:not(:last-child)::after{content:'→';position:absolute;right:-12px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--lav-soft)}
 .b-how-num{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--lav-deep),var(--lav));color:#fff;font-family:'Cormorant Garamond',serif;font-size:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 6px 16px rgba(123,94,167,.4)}
 .b-how-step h3{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);margin-bottom:8px}
 .b-how-step p{font-size:13px;color:var(--ink-mid);font-style:italic;line-height:1.6}
-.b-pricing{background:var(--off);padding:96px 6%}
+
+/* PRICING */
+.b-pricing{background:#fff;padding:96px 6%}
 .b-pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:860px;margin:52px auto 0}
-.b-plan-card{border-radius:24px;padding:36px;border:1.5px solid var(--bdlt);background:#fff}
+.b-plan-card{border-radius:24px;padding:36px;border:1.5px solid var(--bdlt)}
 .b-plan-card.featured{background:linear-gradient(135deg,var(--lav-deep),var(--lav));border-color:transparent}
 .b-plan-price{font-family:'Cormorant Garamond',serif;font-size:44px;color:var(--lav-deep);margin-bottom:4px}
 .b-plan-card.featured .b-plan-price{color:#fff}
@@ -145,15 +176,21 @@ nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,
 .b-plan-features{list-style:none;margin-bottom:28px}
 .b-plan-features li{font-size:14px;color:var(--ink-mid);font-style:italic;padding:7px 0;border-bottom:1px solid var(--bdlt);display:flex;align-items:center;gap:8px}
 .b-plan-card.featured .b-plan-features li{color:rgba(255,255,255,.82);border-color:rgba(255,255,255,.15)}
-.b-plan-features li::before{content:"✓";color:var(--lav);flex-shrink:0;font-style:normal;font-weight:bold}
+.b-plan-features li::before{content:'✓';color:var(--lav);flex-shrink:0;font-style:normal;font-weight:bold}
 .b-plan-card.featured .b-plan-features li::before{color:rgba(255,255,255,.8)}
-.b-faq{background:#fff;padding:96px 6%}
+
+/* BUSINESS FAQ */
+.b-faq{background:var(--off);padding:96px 6%}
 .b-faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:52px}
-.b-faq-item{background:var(--off);border:1px solid var(--bdlt);border-radius:16px;padding:22px 24px}
+.b-faq-item{background:#fff;border:1px solid var(--bdlt);border-radius:16px;padding:22px 24px}
 .b-faq-q{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:8px}
 .b-faq-a{font-size:14px;color:var(--ink-mid);line-height:1.7;font-style:italic}
+
+/* BUSINESS SIGNUP FORM */
 .b-signup{background:linear-gradient(135deg,var(--lav-deep),var(--lav));padding:96px 6%}
 .b-signup-inner{max-width:680px;margin:0 auto}
+.b-signup-inner .sec-title{color:#fff}
+.b-signup-inner .sec-sub{color:rgba(255,255,255,.78)}
 .b-form{background:#fff;border-radius:28px;padding:40px;margin-top:40px;box-shadow:0 32px 80px rgba(0,0,0,.15)}
 .b-field{margin-bottom:18px}
 .b-field label{display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px}
@@ -173,6 +210,18 @@ nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,
 .b-step-line{flex:1;height:2px;background:var(--bdlt)}
 .b-step-line.done{background:var(--lav)}
 
+/* BUSINESS DASHBOARD PREVIEW */
+.b-dash{background:var(--off);padding:96px 6%}
+.b-dash-preview{background:#fff;border-radius:24px;border:1px solid var(--bdlt);overflow:hidden;margin-top:48px;box-shadow:0 8px 32px rgba(123,94,167,.1)}
+.b-dash-bar{background:linear-gradient(135deg,var(--lav-deep),var(--lav));padding:16px 28px;display:flex;align-items:center;gap:16px}
+.b-dash-dots{display:flex;gap:6px}
+.b-dash-dots span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.3)}
+.b-dash-title{font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(255,255,255,.8);font-style:italic}
+.b-dash-body{padding:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.b-dash-metric{background:var(--lav-glow);border:1px solid var(--bdlt);border-radius:14px;padding:16px}
+.b-dash-metric-val{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--lav-deep)}
+.b-dash-metric-lbl{font-size:11px;color:var(--ink-lt);margin-top:3px}
+
 /* FOOTER */
 footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.65)}
 .ft{display:flex;justify-content:space-between;flex-wrap:wrap;gap:36px;margin-bottom:44px}
@@ -183,13 +232,48 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
 .ft-col a:hover{color:#fff}
 .ft-bottom{border-top:1px solid rgba(255,255,255,.14);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px}
 
-/* CONTACT FORM */
-.contact-form-wrap{max-width:680px;margin:40px auto 0}
-.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-.cf-field{margin-bottom:16px}
-.cf-field label{display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px}
-.cf-field input,.cf-field select,.cf-field textarea{width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:#fff;transition:border-color .2s}
-.cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{border-color:var(--lav)}
+/* ORDER MODAL */
+#order-modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:rgba(44,31,61,.45);backdrop-filter:blur(6px)}
+#order-modal.open{display:flex}
+.modal-box{background:#fff;border-radius:28px;width:min(680px,95vw);max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(44,31,61,.28)}
+.modal-header{padding:22px 28px 18px;border-bottom:1px solid var(--bdlt);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);font-weight:300}
+.modal-close{background:none;border:none;font-size:20px;color:var(--ink-lt);cursor:pointer;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:var(--lav-mist);color:var(--lav)}
+.modal-body{padding:24px 28px;overflow-y:auto;flex:1}
+.modal-footer{padding:18px 28px;border-top:1px solid var(--bdlt);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;background:#fff}
+.step-prog{display:flex;gap:8px;margin-bottom:24px}
+.step-prog-item{flex:1;height:4px;border-radius:2px;background:var(--bdlt);transition:background .3s}
+.step-prog-item.done{background:var(--lav)}
+.step-prog-item.active{background:var(--lav-mid)}
+.svc-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.svc-opt{padding:16px 18px;border-radius:14px;border:1.5px solid var(--bdlt);cursor:pointer;transition:border-color .15s,background .15s;display:flex;gap:12px;align-items:flex-start}
+.svc-opt:hover{border-color:var(--lav-soft);background:var(--lav-glow)}
+.svc-opt.selected{border-color:var(--lav);background:var(--lav-mist)}
+.svc-opt.unavailable{opacity:.4;cursor:not-allowed;pointer-events:none}
+.svc-opt-name{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--ink);margin-bottom:3px}
+.svc-opt-desc{font-size:12px;color:var(--ink-lt);font-style:italic}
+.garment-row{padding:13px 16px;border-bottom:1px solid var(--bdlt);display:flex;align-items:center;gap:12px}
+.garment-row:last-child{border-bottom:none}
+.g-counter{display:flex;align-items:center;gap:10px}
+.g-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);background:var(--lav-mist);color:var(--lav);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
+.g-btn:hover{background:var(--lav);color:#fff}
+.g-count{font-size:16px;color:var(--ink);min-width:20px;text-align:center;font-family:'Cormorant Garamond',serif}
+.day-row{display:flex;gap:10px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px}
+.day-btn{flex-shrink:0;padding:11px 14px;border-radius:14px;border:1.5px solid var(--bdlt);background:#fff;cursor:pointer;text-align:center;transition:all .15s}
+.day-btn:hover{border-color:var(--lav-soft);background:var(--lav-glow)}
+.day-btn.selected{border-color:var(--lav);background:var(--lav);color:#fff}
+.day-name{font-size:10px;letter-spacing:.5px;margin-bottom:4px}
+.day-num{font-family:'Cormorant Garamond',serif;font-size:22px}
+.time-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.time-btn{padding:10px;border-radius:10px;border:1.5px solid var(--bdlt);background:#fff;cursor:pointer;text-align:center;font-size:13px;font-family:'EB Garamond',Georgia;transition:all .15s}
+.time-btn:hover{border-color:var(--lav-soft);background:var(--lav-glow)}
+.time-btn.selected{border-color:var(--lav);background:var(--lav);color:#fff}
+.tog{width:42px;height:24px;border-radius:12px;border:none;cursor:pointer;position:relative;flex-shrink:0;transition:background .2s}
+.tog-knob{width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:3px;transition:left .2s;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.summary-line{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--bdlt);font-size:14px}
+.summary-line:last-child{border-bottom:none}
+.summary-total{display:flex;justify-content:space-between;padding:14px 0;font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--lav-deep);border-top:1.5px solid var(--border)}
 
 @media(max-width:900px){
   .entry-cards{grid-template-columns:1fr}
@@ -199,186 +283,305 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
   .b-dash-body{grid-template-columns:1fr 1fr}
   .b-field-row{grid-template-columns:1fr}
   .b-plan-select{grid-template-columns:1fr}
+  .c-contact-grid{grid-template-columns:1fr}
   nav.top-nav .nav-links{display:none}
 }
 </style>
 </head>
 <body>
 
-<!-- ENTRY -->
+<!-- ══════════════════════════════════════
+     ENTRY — "Which are you?"
+══════════════════════════════════════ -->
 <div id="entry">
   <div class="entry-inner">
     <div class="entry-logo">dry.</div>
     <div class="entry-tagline">your grandmother's dry cleaner, with your efficiency.</div>
     <div class="entry-q">Which are you?</div>
     <div class="entry-cards">
-      <div class="entry-card" data-action="show-customer">
-        <div class="entry-card-icon">&#x1F9D1;</div>
+      <div class="entry-card" onclick="showCustomer()">
+        <div class="entry-card-icon">🧺</div>
         <div class="entry-card-title">I'm a customer</div>
+        <div class="entry-card-sub">I want to find a dry cleaner, book online, and track my order.</div>
       </div>
-      <div class="entry-card" data-action="show-business">
-        <div class="entry-card-icon">&#x1F3E2;</div>
-        <div class="entry-card-title">I'm a business owner</div>
+      <div class="entry-card" onclick="showBusiness()">
+        <div class="entry-card-icon">🏢</div>
+        <div class="entry-card-title">I run a dry cleaner</div>
+        <div class="entry-card-sub">I want to list my business and manage orders through the platform.</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- CUSTOMER SIDE -->
+<!-- ══════════════════════════════════════
+     CUSTOMER SIDE
+══════════════════════════════════════ -->
 <div id="customer">
   <nav class="top-nav">
     <a class="nav-logo">dry.</a>
     <div class="nav-links">
-      <a data-scroll="c-how">How It Works</a>
-      <a data-scroll="c-svc">Services</a>
-      <a data-scroll="c-find">Find a Cleaner</a>
-      <a data-scroll="c-faq">FAQ</a>
-      <a data-scroll="c-contact">Contact</a>
+      <a onclick="goTo('c-how')">How It Works</a>
+      <a onclick="goTo('c-svc')">Services</a>
+      <a onclick="goTo('c-find')">Find a Cleaner</a>
+      <a onclick="goTo('c-faq')">FAQ</a>
+      <a onclick="goTo('c-contact')">Contact</a>
     </div>
     <div class="nav-right">
-      <span class="nav-back" data-action="go-home">&#8592; Change</span>
-      <button class="btn btn-outline btn-sm" id="c-signin-btn">Sign In</button>
-      <button class="btn btn-primary btn-sm" style="color:#fff" id="c-getstarted-btn">Get Started</button>
+      <span class="nav-back" onclick="goHome()">← Change</span>
+      <button class="btn btn-outline btn-sm" onclick="goTo('c-find')">Sign In</button>
+      <button class="btn btn-primary btn-sm" style="color:#fff" onclick="goTo('c-find')">Get Started</button>
     </div>
   </nav>
 
+  <!-- HERO -->
   <section class="c-hero" id="c-hero">
-    <svg style="position:absolute;pointer-events:none;opacity:.15;top:7%;right:5%" width="130" height="190" viewBox="0 0 40 60">
+    <svg class="sprig" width="130" height="190" viewBox="0 0 40 60" style="top:7%;right:5%">
       <line x1="20" y1="60" x2="20" y2="10" stroke="white" stroke-width="1.5"/>
       <ellipse cx="14" cy="18" rx="6" ry="3.5" fill="white" transform="rotate(-25 14 18)"/>
       <ellipse cx="26" cy="26" rx="6" ry="3.5" fill="white" transform="rotate(25 26 26)"/>
       <ellipse cx="14" cy="34" rx="6" ry="3.5" fill="white" transform="rotate(-25 14 34)"/>
       <ellipse cx="20" cy="10" rx="5" ry="3" fill="white"/>
     </svg>
-    <div style="position:relative;z-index:1;max-width:740px;text-align:center">
+    <svg class="sprig" width="80" height="120" viewBox="0 0 40 60" style="bottom:10%;left:4%;opacity:.1">
+      <line x1="20" y1="60" x2="20" y2="10" stroke="white" stroke-width="1.5"/>
+      <ellipse cx="14" cy="22" rx="5" ry="3" fill="white" transform="rotate(-25 14 22)"/>
+      <ellipse cx="26" cy="32" rx="5" ry="3" fill="white" transform="rotate(25 26 32)"/>
+    </svg>
+    <div class="c-hero-inner">
+      <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:18px">New York City</div>
       <h1>Clean clothes,<br>zero effort.</h1>
       <p class="c-hero-sub">Find trusted local dry cleaners, book in two minutes, track your order live, and pay automatically. No calls. No guessing. No waiting.</p>
       <div class="c-hero-btns">
-        <button class="btn btn-white" data-scroll="c-find">Find a Cleaner Near Me</button>
-        <button class="btn btn-ghost" data-scroll="c-how">See How It Works</button>
+        <button class="btn btn-white" onclick="goTo('c-find')">Find a Cleaner Near Me</button>
+        <button class="btn btn-ghost" onclick="goTo('c-how')">See How It Works</button>
       </div>
     </div>
   </section>
 
+  <!-- HOW IT WORKS -->
   <section class="c-how" id="c-how">
     <div class="lbl">Simple by design</div>
     <h2 class="sec-title">Clean clothes in four steps.</h2>
     <p class="sec-sub">We replaced everything complicated about dry cleaning with something that just works.</p>
     <div class="c-steps">
-      <div class="c-step"><div class="c-step-icon">&#x1F50D;</div><div class="c-step-num">1</div><h3>Find a cleaner</h3><p>Browse local dry cleaners by rating, services, and chemical type. Filter for non-toxic, express, or pickup. Read real reviews before you book.</p></div>
-      <div class="c-step"><div class="c-step-icon">&#x1F4F1;</div><div class="c-step-num">2</div><h3>Book online</h3><p>Select your services, assign garments, photograph any stains, choose hang dry if needed, and schedule — all in under two minutes.</p></div>
-      <div class="c-step"><div class="c-step-icon">&#x25CE;</div><div class="c-step-num">3</div><h3>Track live</h3><p>Watch your order move through each stage in real time. You get notified the moment your items are ready for pickup.</p></div>
-      <div class="c-step"><div class="c-step-icon">&#x2728;</div><div class="c-step-num">4</div><h3>Pick up &amp; pay</h3><p>Show your QR code, collect your clothes, and go. Your card is charged automatically. No cash, no fumbling at the counter.</p></div>
+      <div class="c-step">
+        <div class="c-step-icon">🔍</div>
+        <div class="c-step-num">1</div>
+        <h3>Find a cleaner</h3>
+        <p>Browse local dry cleaners by rating, services, and chemical type. Filter for non-toxic, express, or pickup. Read real reviews before you book.</p>
+      </div>
+      <div class="c-step">
+        <div class="c-step-icon">📱</div>
+        <div class="c-step-num">2</div>
+        <h3>Book online</h3>
+        <p>Select your services, assign garments, photograph any stains, choose hang dry if needed, and schedule — all in under two minutes.</p>
+      </div>
+      <div class="c-step">
+        <div class="c-step-icon">◎</div>
+        <div class="c-step-num">3</div>
+        <h3>Track live</h3>
+        <p>Watch your order move through each stage in real time. You get notified the moment your items are ready for pickup.</p>
+      </div>
+      <div class="c-step">
+        <div class="c-step-icon">✨</div>
+        <div class="c-step-num">4</div>
+        <h3>Pick up & pay</h3>
+        <p>Show your QR code, collect your clothes, and go. Your card is charged automatically. No cash, no fumbling at the counter.</p>
+      </div>
     </div>
   </section>
 
+  <!-- SERVICES -->
   <section class="c-svc" id="c-svc">
     <div class="lbl">What we handle</div>
     <h2 class="sec-title">Every service, one platform.</h2>
     <p class="sec-sub">Every cleaner sets their own menu. You always know exactly what's available before you walk in.</p>
     <div class="c-svc-grid">
-      <div class="c-svc-card"><div class="c-svc-icon">&#x2728;</div><h3>Dry Clean</h3><p>Solvent-based care for structured pieces and delicates. Filter for non-toxic GreenEarth solvents.</p><span class="tag" style="margin-top:12px">Most Popular</span></div>
-      <div class="c-svc-card"><div class="c-svc-icon">&#x1F455;</div><h3>Launder &amp; Press</h3><p>Full wash, dry, and crisp press. Add the hang dry option for wool, cashmere, or silk — air only, no heat — for $3 per item.</p></div>
-      <div class="c-svc-card"><div class="c-svc-icon">&#x1F9FA;</div><h3>Wash &amp; Fold</h3><p>Everyday laundry washed, dried, and folded. Set your preferences once and they apply to every order.</p></div>
-      <div class="c-svc-card"><div class="c-svc-icon">&#x1F454;</div><h3>Press Only</h3><p>Steam press without a cleaning cycle. Perfect for freshening pieces before a meeting or event.</p></div>
-      <div class="c-svc-card"><div class="c-svc-icon">&#x1FAA1;</div><h3>Repairs &amp; Alterations</h3><p>Expert tailoring, hemming, and repairs. Photograph the damage during booking so the tailor knows exactly what to fix.</p></div>
-      <div class="c-svc-card"><div class="c-svc-icon">&#x1F9E5;</div><h3>Leather &amp; Suede</h3><p>Specialist cleaning for leather, suede, and fur. Filter for it when you search — clearly marked on every profile that offers it.</p></div>
+      <div class="c-svc-card">
+        <div class="c-svc-icon">✨</div>
+        <h3>Dry Clean</h3>
+        <p>Solvent-based care for structured pieces and delicates. Filter for non-toxic GreenEarth solvents — no harsh chemicals, no odor.</p>
+        <span class="tag" style="margin-top:12px">Most Popular</span>
+      </div>
+      <div class="c-svc-card">
+        <div class="c-svc-icon">👕</div>
+        <h3>Launder & Press</h3>
+        <p>Full wash, dry, and crisp press. Add the hang dry option for wool, cashmere, or silk — air only, no heat — for $3 per item.</p>
+        <span class="tag" style="margin-top:12px;background:var(--lav-glow)">+ Hang Dry Add-On</span>
+      </div>
+      <div class="c-svc-card">
+        <div class="c-svc-icon">🧺</div>
+        <h3>Wash & Fold</h3>
+        <p>Everyday laundry washed, dried, and folded. Hang dry available here too. Set your preferences once and they apply to every order.</p>
+      </div>
+      <div class="c-svc-card">
+        <div class="c-svc-icon">👔</div>
+        <h3>Press Only</h3>
+        <p>Steam press without a cleaning cycle. Perfect for freshening pieces before a meeting, event, or trip.</p>
+      </div>
+      <div class="c-svc-card">
+        <div class="c-svc-icon">🪡</div>
+        <h3>Repairs & Alterations</h3>
+        <p>Expert tailoring, hemming, and repairs. Photograph the damage during booking so the tailor knows exactly what to fix before you arrive.</p>
+      </div>
+      <div class="c-svc-card">
+        <div class="c-svc-icon">🧥</div>
+        <h3>Leather & Suede</h3>
+        <p>Specialist cleaning for leather, suede, and fur. Filter for it when you search — not all cleaners offer it, and those who do are clearly marked.</p>
+      </div>
     </div>
   </section>
 
+  <!-- FIND A CLEANER -->
   <section class="c-find" id="c-find">
     <div class="c-find-inner">
+      <div class="lbl">New York City</div>
       <h2 class="sec-title">Find your cleaner.</h2>
       <p class="sec-sub" style="margin:0 auto">Search by neighborhood, name, or service. Every profile shows real ratings, exact services, hours, and pricing before you book.</p>
       <div class="c-find-box">
         <div class="c-find-search">
-          <input id="find-input" placeholder="Search by name, neighborhood, or zip code&#x2026;" />
-          <button class="btn btn-primary" id="search-btn">Search</button>
+          <input id="find-input" placeholder="Search by name, neighborhood, or zip code…" onkeydown="if(event.key==='Enter')doSearch()"/>
+          <button class="btn btn-primary" onclick="doSearch()">Search</button>
         </div>
         <div class="c-find-filters">
-          <button class="btn btn-outline btn-sm" data-filter="Non-Toxic">&#x1F33F; Non-Toxic</button>
-          <button class="btn btn-outline btn-sm" data-filter="Express">&#x26A1; Express</button>
-          <button class="btn btn-outline btn-sm" data-filter="Pickup">&#x1F697; Pickup &amp; Delivery</button>
-          <button class="btn btn-outline btn-sm" data-filter="Alterations">&#x1FAA1; Alterations</button>
+          <button class="btn btn-outline btn-sm" onclick="filterSearch('Non-Toxic')">🌿 Non-Toxic</button>
+          <button class="btn btn-outline btn-sm" onclick="filterSearch('Express')">⚡ Express</button>
+          <button class="btn btn-outline btn-sm" onclick="filterSearch('Pickup')">🚗 Pickup & Delivery</button>
+          <button class="btn btn-outline btn-sm" onclick="filterSearch('Alterations')">🪡 Alterations</button>
+          <button class="btn btn-outline btn-sm" onclick="filterSearch('Luxury')">✨ Luxury</button>
         </div>
-        <div style="text-align:center;padding:32px 0">
-          <div style="font-size:40px;margin-bottom:16px">&#x1F33F;</div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);margin-bottom:10px">We're onboarding cleaners in your city now.</div>
-          <div style="font-size:15px;color:var(--ink-mid);font-style:italic;line-height:1.7;max-width:460px;margin:0 auto 24px">Sign up to be notified the moment a cleaner near you joins the platform.</div>
+        <div class="c-find-coming">
+          <div style="font-size:40px;margin-bottom:16px">🌿</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);margin-bottom:10px">We're onboarding cleaners in New York City now.</div>
+          <div style="font-size:15px;color:var(--ink-mid);font-style:italic;line-height:1.7;max-width:460px;margin:0 auto 24px">Sign up to be notified the moment a cleaner in your neighborhood joins the platform.</div>
           <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
             <input id="notify-email" placeholder="Your email address" style="padding:12px 18px;border-radius:14px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;background:#fff;min-width:240px"/>
-            <button class="btn btn-primary" id="notify-btn">Notify Me</button>
+            <button class="btn btn-primary" onclick="submitNotify()">Notify Me</button>
           </div>
-          <div id="notify-thanks" class="hidden" style="margin-top:16px;font-size:14px;color:var(--lav);font-style:italic">&#x2713; You're on the list. We'll email you when a cleaner near you goes live.</div>
+          <div id="notify-thanks" class="hidden" style="margin-top:16px;font-size:14px;color:var(--lav);font-style:italic">✓ You're on the list. We'll email you when a cleaner near you goes live.</div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- TESTIMONIALS -->
   <section class="c-testi">
     <div class="lbl">Real customers</div>
     <h2 class="sec-title">What people are saying.</h2>
     <div class="c-testi-grid">
-      <div class="c-t-card"><div class="c-t-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div><p class="c-t-text">"I've been going to the same dry cleaner for years but never knew they had express service until I found them on Dry. Live tracking alone is worth it."</p><div class="c-t-name">Sandra K., Midtown</div></div>
-      <div class="c-t-card"><div class="c-t-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div><p class="c-t-text">"Finally an app that treats laundry like a real service. Booked, dropped off, got a notification, picked up. My dry cleaner has been there forever — now I just interact smarter."</p><div class="c-t-name">David L., Chelsea</div></div>
-      <div class="c-t-card"><div class="c-t-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div><p class="c-t-text">"The photo documentation for stains is genius. I photographed the wine stain before drop-off and they treated it perfectly."</p><div class="c-t-name">Priya M., Upper East Side</div></div>
-      <div class="c-t-card"><div class="c-t-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div><p class="c-t-text">"Quick Drop is a game changer. Three kids, zero time. Scan the QR code, drop the bag, approve the charge, done."</p><div class="c-t-name">Marcus W., Upper West Side</div></div>
+      <div class="c-t-card">
+        <div class="c-t-stars">★★★★★</div>
+        <p class="c-t-text">"I've been going to the same dry cleaner for years but never knew they had express service until I found them on Dry. Live tracking alone is worth it — no more wondering if my suits are done."</p>
+        <div class="c-t-name">Sandra K., Midtown</div>
+      </div>
+      <div class="c-t-card">
+        <div class="c-t-stars">★★★★★</div>
+        <p class="c-t-text">"Finally an app that treats laundry like a real service. Booked, dropped off, got a notification, picked up. My dry cleaner has been there forever — now I just interact smarter."</p>
+        <div class="c-t-name">David L., Chelsea</div>
+      </div>
+      <div class="c-t-card">
+        <div class="c-t-stars">★★★★★</div>
+        <p class="c-t-text">"The photo documentation for stains is genius. I photographed the wine stain before drop-off and they treated it perfectly. No more 'we didn't see it' surprises."</p>
+        <div class="c-t-name">Priya M., Upper East Side</div>
+      </div>
+      <div class="c-t-card">
+        <div class="c-t-stars">★★★★★</div>
+        <p class="c-t-text">"Quick Drop is a game changer. Three kids, zero time. Scan the QR code, drop the bag, approve the charge, done. The whole thing takes thirty seconds."</p>
+        <div class="c-t-name">Marcus W., Upper West Side</div>
+      </div>
     </div>
   </section>
 
+  <!-- FAQ -->
   <section class="c-faq" id="c-faq">
     <div class="lbl">Good questions</div>
     <h2 class="sec-title">Everything you need to know.</h2>
     <div class="c-faq-grid">
-      <div class="c-faq-item"><div class="c-faq-q">Is there a fee to use Dry?</div><div class="c-faq-a">A 5% booking fee applies to every order — shown at checkout before you confirm. Dry cleaners pay a flat monthly subscription and keep 100% of their order revenue.</div></div>
-      <div class="c-faq-item"><div class="c-faq-q">What is Quick Drop?</div><div class="c-faq-a">After a few orders at a location, Quick Drop unlocks automatically. Drop your bag with just a QR code — staff logs every item and sends you an itemized estimate to approve before anything is charged.</div></div>
-      <div class="c-faq-item"><div class="c-faq-q">How does payment work?</div><div class="c-faq-a">Add a card once in your account. Standard orders are charged at confirmation. Quick Drop orders are charged only after you approve the itemized estimate from the cleaner.</div></div>
-      <div class="c-faq-item"><div class="c-faq-q">What is hang dry?</div><div class="c-faq-a">An add-on for Launder &amp; Press and Wash &amp; Fold orders. Air dry only — no heat, no dryer. Recommended for wool, cashmere, silk, and delicate knits. +$3 per item.</div></div>
-      <div class="c-faq-item"><div class="c-faq-q">Can I document stains before drop-off?</div><div class="c-faq-a">Yes — photograph any stains or damage during the order flow. Photos go directly to the cleaner so they know exactly what to treat before touching your garment.</div></div>
-      <div class="c-faq-item"><div class="c-faq-q">How do I get support?</div><div class="c-faq-a">Use the contact form below or tap Help &amp; Support inside the app under your Profile tab. We typically reply within a few hours.</div></div>
-      <div class="c-faq-item"><div class="c-faq-q">Can I save my laundry preferences?</div><div class="c-faq-a">Yes — set preferences like always hang dry knitwear, no fabric softener, or cold wash, and they apply to every order automatically. Find them under Profile in the app.</div></div>
-      <div class="c-faq-item"><div class="c-faq-q">Are the chemicals safe?</div><div class="c-faq-a">It depends on the cleaner. Some use non-toxic GreenEarth solvents. Every profile states exactly what they use. Filter for non-toxic when you search.</div></div>
+      <div class="c-faq-item">
+        <div class="c-faq-q">Is there a fee to use Dry?</div>
+        <div class="c-faq-a">A 5% booking fee applies to every order — shown at checkout before you confirm. It covers digital booking, live tracking, and automatic payment. Dry cleaners pay a flat monthly subscription and keep 100% of their order revenue.</div>
+      </div>
+      <div class="c-faq-item">
+        <div class="c-faq-q">What is Quick Drop?</div>
+        <div class="c-faq-a">After a few orders at a location, Quick Drop unlocks automatically. Drop your bag with just a QR code — no form to fill out. Staff logs every item and sends you an itemized estimate to approve before anything is charged.</div>
+      </div>
+      <div class="c-faq-item">
+        <div class="c-faq-q">How does payment work?</div>
+        <div class="c-faq-a">Add a card once in your account. Standard orders are charged at confirmation. Quick Drop orders are charged only after you approve the itemized estimate from the cleaner.</div>
+      </div>
+      <div class="c-faq-item">
+        <div class="c-faq-q">What is hang dry?</div>
+        <div class="c-faq-a">An add-on for Launder & Press and Wash & Fold orders. Air dry only — no heat, no dryer. Recommended for wool, cashmere, silk, and delicate knits. Toggle it on when you assign garments. +$3 per item.</div>
+      </div>
+      <div class="c-faq-item">
+        <div class="c-faq-q">Can I document stains before drop-off?</div>
+        <div class="c-faq-a">Yes — photograph any stains or damage during the order flow. Photos go directly to the cleaner so they know exactly what to treat before touching your garment.</div>
+      </div>
+      <div class="c-faq-item">
+        <div class="c-faq-q">Are the chemicals safe?</div>
+        <div class="c-faq-a">It depends on the cleaner. Some use non-toxic GreenEarth liquid silicone solvents — no harsh chemicals, no odor. Every profile states exactly what they use. Filter for non-toxic when you search.</div>
+      </div>
+      <div class="c-faq-item">
+        <div class="c-faq-q">Can I save my laundry preferences?</div>
+        <div class="c-faq-a">Yes — set preferences like always hang dry knitwear, no fabric softener, cold wash, or separate darks, and they apply to every order automatically. Find them under Profile → Laundry Preferences in the app.</div>
+      </div>
+      <div class="c-faq-item">
+        <div class="c-faq-q">How do I get support?</div>
+        <div class="c-faq-a">Use the contact form below, or tap Help &amp; Support inside the app under your Profile tab. We typically reply within a few hours.</div>
+      </div>
     </div>
   </section>
 
+  <!-- CTA -->
   <section class="c-cta">
     <h2>Ready to try it?</h2>
-    <p>Find your first cleaner in under a minute.</p>
+    <p>Find your first cleaner in under a minute. A 5% booking fee applies at checkout.</p>
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-      <button class="btn btn-white" data-scroll="c-find">Find a Cleaner</button>
-      <button class="btn btn-ghost" data-scroll="c-find">Join the Waitlist</button>
+      <button class="btn btn-white" onclick="goTo('c-find')">Find a Cleaner</button>
+      <button class="btn btn-ghost" onclick="goTo('c-find')">Join the Waitlist</button>
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section class="c-contact" id="c-contact">
     <div style="text-align:center;margin-bottom:48px">
       <div class="lbl">Get in touch</div>
       <h2 class="sec-title">We're here when you need us.</h2>
       <p class="sec-sub" style="margin:0 auto">Real people, real responses. We typically reply within a few hours.</p>
     </div>
-    <div class="contact-form-wrap">
-      <div class="card" style="padding:36px 40px">
-        <div id="contact-form-inner">
-          <div class="cf-grid">
-            <div class="cf-field"><label>Your Name</label><input id="cf-name" placeholder="Your name"/></div>
-            <div class="cf-field"><label>Your Email</label><input id="cf-email" type="email" placeholder="your email address"/></div>
+    <div style="max-width:680px;margin:0 auto">
+      <div style="background:#fff;border:1px solid var(--bdlt);border-radius:24px;padding:36px 40px;box-shadow:0 2px 16px rgba(123,94,167,.07)">
+        <div id="contact-form-wrap">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+            <div>
+              <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Your Name</label>
+              <input id="cf-name" placeholder="Your name" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+            </div>
+            <div>
+              <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Your Email</label>
+              <input id="cf-email" type="email" placeholder="your email address" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+            </div>
           </div>
-          <div class="cf-field"><label>Topic</label>
-            <select id="cf-topic">
-              <option value="">Select a topic&#x2026;</option>
-              <option value="support">Customer Support &#x2014; order issue or account question</option>
-              <option value="business">Business Inquiry &#x2014; joining the platform</option>
-              <option value="legal">Legal &amp; Privacy &#x2014; terms or data request</option>
-              <option value="other">General &#x2014; something else</option>
+          <div style="margin-bottom:16px">
+            <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Topic</label>
+            <select id="cf-topic" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)">
+              <option value="">Select a topic…</option>
+              <option value="support">Customer Support — order issue or account question</option>
+              <option value="business">Business Inquiry — joining the platform</option>
+              <option value="legal">Legal & Privacy — terms or data request</option>
+              <option value="other">General — something else</option>
             </select>
           </div>
-          <div class="cf-field"><label>Message</label><textarea id="cf-message" rows="5" placeholder="Tell us how we can help&#x2026;"></textarea></div>
-          <div id="cf-err" class="hidden" style="font-size:13px;color:#c0392b;padding:12px 16px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
-          <button class="btn btn-primary" style="width:100%" id="contact-submit-btn">Send Message &#x2192;</button>
+          <div style="margin-bottom:24px">
+            <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Message</label>
+            <textarea id="cf-message" rows="5" placeholder="Tell us how we can help…" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off);resize:vertical"></textarea>
+          </div>
+          <div id="cf-err" style="display:none;font-size:13px;color:#c0392b;padding:12px 16px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
+          <button class="btn btn-primary" style="width:100%" onclick="submitContact()">Send Message →</button>
           <div style="font-size:12px;color:var(--ink-lt);font-style:italic;text-align:center;margin-top:14px">We typically reply within a few hours.</div>
         </div>
-        <div id="contact-success" class="hidden" style="text-align:center;padding:20px 0">
-          <div style="font-size:44px;margin-bottom:16px">&#x1F4AC;</div>
+        <div id="contact-success" style="display:none;text-align:center;padding:20px 0">
+          <div style="font-size:44px;margin-bottom:16px">💬</div>
           <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--ink);margin-bottom:10px">Message sent!</div>
           <div style="font-size:14px;color:var(--ink-mid);font-style:italic;line-height:1.7">We'll get back to you within a few hours.</div>
         </div>
@@ -389,34 +592,37 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
   <footer>
     <div class="ft">
       <div><div class="ft-logo">dry.</div><p class="ft-tagline">Your grandmother's dry cleaner, with your efficiency.</p></div>
-      <div class="ft-col"><h4>Product</h4><a data-scroll="c-how">How It Works</a><a data-scroll="c-svc">Services</a><a data-scroll="c-find">Find a Cleaner</a><a data-scroll="c-faq">FAQ</a></div>
-      <div class="ft-col"><h4>For Businesses</h4><a data-action="show-business">Get Started</a><a data-action="show-business">Pricing</a><a data-action="show-business">Business Dashboard</a></div>
-      <div class="ft-col"><h4>Contact</h4><a data-scroll="c-contact">Customer Support</a><a data-scroll="c-contact">General Inquiries</a><a data-scroll="c-contact">Legal &amp; Privacy</a></div>
+      <div class="ft-col"><h4>Product</h4><a onclick="goTo('c-how')">How It Works</a><a onclick="goTo('c-svc')">Services</a><a onclick="goTo('c-find')">Find a Cleaner</a><a onclick="goTo('c-faq')">FAQ</a></div>
+      <div class="ft-col"><h4>For Businesses</h4><a onclick="showBusiness()">List Your Business</a><a onclick="showBusiness()">Pricing</a><a onclick="showBusiness()">Business Dashboard</a></div>
+      <div class="ft-col"><h4>Contact</h4><a onclick="goTo('c-contact')">Customer Support</a><a onclick="goTo('c-contact')">General Inquiries</a><a onclick="goTo('c-contact')">Legal &amp; Privacy</a></div>
     </div>
-    <div class="ft-bottom"><div>&#x00A9; 2026 Dry Technologies, LLC. All rights reserved.</div><div><a data-scroll="c-faq">FAQ</a>&nbsp;&nbsp;<a data-scroll="c-contact">Privacy</a>&nbsp;&nbsp;<a data-scroll="c-contact">Terms</a></div></div>
+    <div class="ft-bottom"><div>© 2026 Dry. LLC. All rights reserved.</div><div><a onclick="goTo('c-faq')">FAQ</a>&nbsp;&nbsp;<a onclick="goTo('c-contact')">Privacy</a>&nbsp;&nbsp;<a onclick="goTo('c-contact')">Terms</a></div></div>
   </footer>
 </div>
 
-<!-- BUSINESS SIDE -->
+<!-- ══════════════════════════════════════
+     BUSINESS SIDE
+══════════════════════════════════════ -->
 <div id="business">
   <nav class="top-nav">
     <a class="nav-logo">dry.</a>
     <div class="nav-links">
-      <a data-scroll="b-features">Features</a>
-      <a data-scroll="b-how">How It Works</a>
-      <a data-scroll="b-pricing">Pricing</a>
-      <a data-scroll="b-faq">FAQ</a>
-      <a data-scroll="b-signup">Get Started</a>
+      <a onclick="goTo('b-features')">Features</a>
+      <a onclick="goTo('b-how')">How It Works</a>
+      <a onclick="goTo('b-pricing')">Pricing</a>
+      <a onclick="goTo('b-faq')">FAQ</a>
+      <a onclick="goTo('b-signup')">Get Started</a>
     </div>
     <div class="nav-right">
-      <span class="nav-back" data-action="go-home">&#8592; Change</span>
-      <button class="btn btn-outline btn-sm" id="biz-login-btn">Log In</button>
-      <button class="btn btn-primary btn-sm" style="color:#fff" data-scroll="b-signup">Get Started</button>
+      <span class="nav-back" onclick="goHome()">← Change</span>
+      <button class="btn btn-outline btn-sm" onclick="goTo('b-signup')">Log In</button>
+      <button class="btn btn-primary btn-sm" style="color:#fff" onclick="goTo('b-signup')">Get Started Free</button>
     </div>
   </nav>
 
+  <!-- HERO -->
   <section class="b-hero" id="b-hero">
-    <svg style="position:absolute;pointer-events:none;opacity:.15;top:7%;right:5%" width="130" height="190" viewBox="0 0 40 60">
+    <svg class="sprig" width="130" height="190" viewBox="0 0 40 60" style="top:7%;right:5%">
       <line x1="20" y1="60" x2="20" y2="10" stroke="white" stroke-width="1.5"/>
       <ellipse cx="14" cy="18" rx="6" ry="3.5" fill="white" transform="rotate(-25 14 18)"/>
       <ellipse cx="26" cy="26" rx="6" ry="3.5" fill="white" transform="rotate(25 26 26)"/>
@@ -425,81 +631,143 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
     </svg>
     <div class="b-hero-inner">
       <div>
-        <div class="lbl" style="color:rgba(255,255,255,.65)">For dry cleaners</div>
+        <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:18px">For dry cleaners</div>
         <h1>Grow your business.<br>Keep every dollar.</h1>
         <p class="b-hero-sub">Dry. puts your location in front of customers already looking for a cleaner. You set your own prices, offer your own services, and keep 100% of your order revenue. We charge a flat monthly subscription — no commissions, no transaction cuts.</p>
         <div class="b-hero-btns">
-          <button class="btn btn-white" data-scroll="b-signup">Get Started</button>
-          <button class="btn btn-ghost" data-scroll="b-pricing">See Pricing</button>
+          <button class="btn btn-white" onclick="goTo('b-signup')">Get Started Free</button>
+          <button class="btn btn-ghost" onclick="goTo('b-pricing')">See Pricing</button>
         </div>
       </div>
       <div class="b-hero-card">
-        <div class="b-hero-stat"><div class="b-hero-stat-val">100%</div><div class="b-hero-stat-lbl">of order revenue goes directly to you — no commission</div></div>
-        <div class="b-hero-stat"><div class="b-hero-stat-val">Real-time</div><div class="b-hero-stat-lbl">order management — customers notified automatically</div></div>
-        <div class="b-hero-stat"><div class="b-hero-stat-val">14 days</div><div class="b-hero-stat-lbl">free trial — no credit card required to get started</div></div>
+        <div class="b-hero-stat">
+          <div class="b-hero-stat-val">100%</div>
+          <div class="b-hero-stat-lbl">of order revenue goes directly to you — no commission</div>
+        </div>
+        <div class="b-hero-stat">
+          <div class="b-hero-stat-val">Real-time</div>
+          <div class="b-hero-stat-lbl">order management — customers notified automatically</div>
+        </div>
+        <div class="b-hero-stat">
+          <div class="b-hero-stat-val">Instant</div>
+          <div class="b-hero-stat-lbl">profile updates — change hours or services and the app reflects it immediately</div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- FEATURES -->
   <section class="b-features" id="b-features">
     <div class="lbl">What you get</div>
     <h2 class="sec-title">Everything you need to run a modern dry cleaner.</h2>
     <p class="sec-sub">Built specifically for dry cleaning businesses. Not a generic booking tool.</p>
     <div class="b-feat-grid">
-      <div class="b-feat-card"><div class="b-feat-icon">&#x1F4CB;</div><h3>Order Management Dashboard</h3><p>Every order in one place. Advance statuses with a tap — received, in cleaning, QC, ready. Customers notified automatically at each stage. No calls required.</p></div>
-      <div class="b-feat-card"><div class="b-feat-icon">&#x25CE;</div><h3>Live Order Tracking</h3><p>Customers see their order status in real time. When you mark an order ready, they get a notification instantly. No more "is it done?" phone calls.</p></div>
-      <div class="b-feat-card"><div class="b-feat-icon">&#x1F4CA;</div><h3>Analytics &amp; Insights</h3><p>See your revenue by day and week, service mix, busiest days, and customer return rates. Pro members get zip code reports and at-risk customer alerts.</p></div>
-      <div class="b-feat-card"><div class="b-feat-icon">&#x1F465;</div><h3>Customer Profiles</h3><p>Every customer builds a profile at your location — visit count, lifetime spend, last visit, top service. Know your regulars automatically.</p></div>
-      <div class="b-feat-card"><div class="b-feat-icon">&#x1F504;</div><h3>Live Profile Updates</h3><p>Update your hours, services, or pricing in your dashboard and the consumer app reflects it immediately. No waiting for approval.</p></div>
-      <div class="b-feat-card"><div class="b-feat-icon">&#x1F4A7;</div><h3>Hang Dry Tracking</h3><p>Orders with hang dry requests are automatically flagged in your dashboard so staff know before touching the garment. Air dry only — tracked automatically.</p></div>
+      <div class="b-feat-card">
+        <div class="b-feat-icon">📋</div>
+        <h3>Order Management Dashboard</h3>
+        <p>Every order in one place. Advance statuses with a single tap — received, in cleaning, QC, ready. Customers are notified automatically at each stage. No calls required.</p>
+      </div>
+      <div class="b-feat-card">
+        <div class="b-feat-icon">◎</div>
+        <h3>Live Order Tracking</h3>
+        <p>Customers see their order status in real time in the app. When you mark an order ready, they get a push notification instantly. No more "is it done?" phone calls.</p>
+      </div>
+      <div class="b-feat-card">
+        <div class="b-feat-icon">📊</div>
+        <h3>Analytics & Insights</h3>
+        <p>See your revenue by day and week, your service mix, busiest days, and customer return rates. Pro members get zip code reports and at-risk customer alerts.</p>
+      </div>
+      <div class="b-feat-card">
+        <div class="b-feat-icon">👥</div>
+        <h3>Customer Profiles</h3>
+        <p>Every customer who orders through Dry. builds a profile at your location — visit count, lifetime spend, last visit, and top service. Know your regulars automatically.</p>
+      </div>
+      <div class="b-feat-card">
+        <div class="b-feat-icon">🔄</div>
+        <h3>Live Profile Updates</h3>
+        <p>Update your hours, services, features, or pricing in your dashboard and the consumer app reflects the change immediately. No waiting for approval.</p>
+      </div>
+      <div class="b-feat-card">
+        <div class="b-feat-icon">💧</div>
+        <h3>Hang Dry Tracking</h3>
+        <p>Orders with hang dry requests are automatically flagged in your dashboard so staff know before touching the garment. Air dry only — the system keeps track so you don't have to.</p>
+      </div>
     </div>
   </section>
 
+  <!-- DASHBOARD PREVIEW -->
   <section class="b-dash">
     <div class="lbl">The dashboard</div>
     <h2 class="sec-title">Your business at a glance.</h2>
     <p class="sec-sub">A clean, purpose-built interface. Everything your staff needs, nothing they don't.</p>
     <div class="b-dash-preview">
-      <div class="b-dash-bar"><div class="b-dash-dots"><span></span><span></span><span></span></div><div class="b-dash-title">dry. Business Portal &#x2014; Dashboard</div></div>
+      <div class="b-dash-bar">
+        <div class="b-dash-dots"><span></span><span></span><span></span></div>
+        <div class="b-dash-title">dry. Business Portal — Dashboard</div>
+      </div>
       <div class="b-dash-body">
         <div class="b-dash-metric"><div class="b-dash-metric-val">12</div><div class="b-dash-metric-lbl">Orders Today</div></div>
         <div class="b-dash-metric"><div class="b-dash-metric-val">3</div><div class="b-dash-metric-lbl">Ready for Pickup</div></div>
         <div class="b-dash-metric"><div class="b-dash-metric-val">$384</div><div class="b-dash-metric-lbl">Revenue Today</div></div>
-        <div class="b-dash-metric"><div class="b-dash-metric-val">4.9&#x2605;</div><div class="b-dash-metric-lbl">Your Rating</div></div>
+        <div class="b-dash-metric"><div class="b-dash-metric-val">4.9★</div><div class="b-dash-metric-lbl">Your Rating</div></div>
       </div>
       <div style="padding:0 24px 24px;display:flex;flex-direction:column;gap:12px">
-        <div style="background:#EBF7F1;border:1px solid #5BA87A;border-radius:12px;padding:14px 18px;font-size:14px;color:#5BA87A">&#x2705; 3 orders ready for pickup &#x2014; customers notified automatically</div>
-        <div style="background:#EDF4FF;border:1px solid #A0BEF0;border-radius:12px;padding:14px 18px;font-size:14px;color:#3A6EC8">&#x1F4A7; 2 orders have hang dry requested &#x2014; air dry only, no heat</div>
+        <div style="background:var(--green-lt);border:1px solid var(--green);border-radius:12px;padding:14px 18px;font-size:14px;color:var(--green)">✅ 3 orders ready for pickup — customers notified automatically</div>
+        <div style="background:#EDF4FF;border:1px solid #A0BEF0;border-radius:12px;padding:14px 18px;font-size:14px;color:#3A6EC8">💧 2 orders have hang dry requested — air dry only, no heat</div>
       </div>
     </div>
   </section>
 
+  <!-- HOW IT WORKS FOR BUSINESS -->
   <section class="b-how" id="b-how">
     <div class="lbl">Getting started</div>
     <h2 class="sec-title">You're live in under a day.</h2>
     <p class="sec-sub">We handle the setup. You handle the cleaning.</p>
     <div class="b-how-steps">
-      <div class="b-how-step"><div class="b-how-num">1</div><h3>Sign up below</h3><p>Fill out the form with your business details, services, and preferred plan. Takes five minutes.</p></div>
-      <div class="b-how-step"><div class="b-how-num">2</div><h3>Check your email</h3><p>You'll receive a login link immediately. Click it to set your password and access your dashboard.</p></div>
-      <div class="b-how-step"><div class="b-how-num">3</div><h3>Complete setup</h3><p>A short onboarding flow walks you through setting your hours, pricing, and profile. Takes two minutes.</p></div>
-      <div class="b-how-step"><div class="b-how-num">4</div><h3>Go live</h3><p>Your listing is active immediately. Customers in your area can find and book you right away.</p></div>
+      <div class="b-how-step">
+        <div class="b-how-num">1</div>
+        <h3>Apply below</h3>
+        <p>Fill out the form with your business details, services, and preferred plan. Takes five minutes.</p>
+      </div>
+      <div class="b-how-step">
+        <div class="b-how-num">2</div>
+        <h3>We set you up</h3>
+        <p>We review your application and create your dashboard login within one business day.</p>
+      </div>
+      <div class="b-how-step">
+        <div class="b-how-num">3</div>
+        <h3>Go live</h3>
+        <p>Your listing appears in the Dry. app immediately. Customers in your area can find and book you right away.</p>
+      </div>
+      <div class="b-how-step">
+        <div class="b-how-num">4</div>
+        <h3>Manage orders</h3>
+        <p>Every order shows in your dashboard. Advance statuses, customers are notified, you get paid directly.</p>
+      </div>
     </div>
   </section>
 
+  <!-- PRICING -->
   <section class="b-pricing" id="b-pricing">
     <div style="text-align:center">
       <div class="lbl">Straightforward pricing</div>
       <h2 class="sec-title">Flat monthly. No surprises.</h2>
-      <p class="sec-sub" style="margin:0 auto">No transaction fees. No commissions. You keep every dollar your customers pay you. 14-day free trial on all plans.</p>
+      <p class="sec-sub" style="margin:0 auto">No transaction fees. No commissions. You keep every dollar your customers pay you.</p>
     </div>
     <div class="b-pricing-grid">
       <div class="b-plan-card">
         <div class="b-plan-price">$149<span style="font-size:16px;color:var(--ink-lt)">/month</span></div>
         <div class="b-plan-name">Basic Plan</div>
         <ul class="b-plan-features">
-          <li>Unlimited orders</li><li>Full order management dashboard</li><li>Automatic customer notifications</li><li>Basic analytics</li><li>Consumer app listing</li><li>Hang dry tracking</li><li>Live profile updates</li>
+          <li>Unlimited orders</li>
+          <li>Full order management dashboard</li>
+          <li>Automatic customer notifications</li>
+          <li>Basic analytics</li>
+          <li>Consumer app listing</li>
+          <li>Hang dry tracking</li>
+          <li>Live profile updates</li>
         </ul>
-        <button class="btn btn-outline" style="width:100%" data-scroll="b-signup" data-plan="basic">Get Started with Basic</button>
+        <button class="btn btn-outline" style="width:100%" onclick="goTo('b-signup');setBizPlan('basic')">Get Started with Basic</button>
       </div>
       <div class="b-plan-card featured">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
@@ -508,33 +776,60 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
         </div>
         <div class="b-plan-name">Pro Plan</div>
         <ul class="b-plan-features">
-          <li>Everything in Basic</li><li>Priority + featured listing in app</li><li>Advanced analytics &amp; insights</li><li>Zip code &amp; demographic reports</li><li>At-risk customer alerts</li><li>Customer visit frequency tracking</li><li>Dedicated onboarding support</li>
+          <li>Everything in Basic</li>
+          <li>Priority + featured listing in app</li>
+          <li>Advanced analytics & insights</li>
+          <li>Zip code & demographic reports</li>
+          <li>At-risk customer alerts</li>
+          <li>Customer visit frequency tracking</li>
+          <li>Dedicated onboarding support</li>
         </ul>
-        <button class="btn btn-white" style="width:100%" data-scroll="b-signup" data-plan="pro">Start with Pro</button>
+        <button class="btn btn-white" style="width:100%" onclick="goTo('b-signup');setBizPlan('pro')">Start with Pro</button>
       </div>
     </div>
-    <p style="text-align:center;margin-top:24px;font-size:14px;color:var(--ink-lt);font-style:italic">Enterprise pricing available for multi-location businesses. Use the contact form to get in touch.</p>
+    <p style="text-align:center;margin-top:24px;font-size:14px;color:var(--ink-lt);font-style:italic">Enterprise pricing available for multi-location businesses. Contact us via the contact form</p>
   </section>
 
+  <!-- BUSINESS FAQ -->
   <section class="b-faq" id="b-faq">
     <div class="lbl">Common questions</div>
-    <h2 class="sec-title">Before you sign up.</h2>
+    <h2 class="sec-title">Before you apply.</h2>
     <div class="b-faq-grid">
-      <div class="b-faq-item"><div class="b-faq-q">Do you take a cut of my orders?</div><div class="b-faq-a">No. You keep 100% of what customers pay you for services. Dry. charges customers a separate 5% booking fee on their end. You pay only the flat monthly subscription.</div></div>
-      <div class="b-faq-item"><div class="b-faq-q">How quickly can I go live?</div><div class="b-faq-a">Immediately. When you sign up, you receive a login link by email. After completing the 4-step onboarding flow in your dashboard, your listing is live and customers can book you.</div></div>
-      <div class="b-faq-item"><div class="b-faq-q">Can I set my own prices?</div><div class="b-faq-a">Yes, entirely. You set your own per-item and per-service pricing in your dashboard. You can update pricing at any time and changes reflect in the app immediately.</div></div>
-      <div class="b-faq-item"><div class="b-faq-q">What if I want to cancel?</div><div class="b-faq-a">Cancel anytime from your dashboard settings. You retain access through the end of your paid period. No cancellation fees, no partial refunds, no penalties.</div></div>
-      <div class="b-faq-item"><div class="b-faq-q">What's the difference between Basic and Pro?</div><div class="b-faq-a">Basic gives you everything you need to run daily operations. Pro adds priority placement in consumer search results, advanced analytics, zip code reports, and at-risk customer alerts.</div></div>
-      <div class="b-faq-item"><div class="b-faq-q">Do I need any hardware or equipment?</div><div class="b-faq-a">No hardware required. The business dashboard runs in any web browser on any device — tablet, laptop, or desktop. You can manage everything from an iPad at the counter.</div></div>
+      <div class="b-faq-item">
+        <div class="b-faq-q">Do you take a cut of my orders?</div>
+        <div class="b-faq-a">No. You keep 100% of what customers pay you for services. Dry. charges customers a separate 5% booking fee on their end. You pay only the flat monthly subscription.</div>
+      </div>
+      <div class="b-faq-item">
+        <div class="b-faq-q">How quickly can I go live?</div>
+        <div class="b-faq-a">We review applications within one business day. Once approved, your dashboard login is created and your listing goes live in the app immediately.</div>
+      </div>
+      <div class="b-faq-item">
+        <div class="b-faq-q">Can I set my own prices?</div>
+        <div class="b-faq-a">Yes, entirely. You set your own per-item and per-service pricing directly in your dashboard. You can update pricing at any time and changes reflect in the app immediately.</div>
+      </div>
+      <div class="b-faq-item">
+        <div class="b-faq-q">What if I want to cancel?</div>
+        <div class="b-faq-a">Cancel anytime from your dashboard. You retain access through the end of your paid period. No cancellation fees, no partial refunds, no penalties.</div>
+      </div>
+      <div class="b-faq-item">
+        <div class="b-faq-q">What's the difference between Basic and Pro?</div>
+        <div class="b-faq-a">Basic gives you everything you need to run daily operations — orders, notifications, analytics, and your listing. Pro adds priority placement in consumer search results, advanced analytics, zip code reports, and at-risk customer alerts.</div>
+      </div>
+      <div class="b-faq-item">
+        <div class="b-faq-q">Do I need any hardware or equipment?</div>
+        <div class="b-faq-a">No hardware required. The business dashboard runs in any web browser on any device — tablet, laptop, or desktop. You can manage everything from an iPad at the counter.</div>
+      </div>
     </div>
   </section>
 
+  <!-- SIGNUP FORM -->
   <section class="b-signup" id="b-signup">
     <div class="b-signup-inner">
       <div class="lbl" style="color:rgba(255,255,255,.65)">Get started today</div>
       <h2 class="sec-title" style="color:#fff">Create your account.</h2>
-      <p class="sec-sub" style="color:rgba(255,255,255,.78)">Set up your profile, choose your plan, and go live on the platform. Takes about five minutes. 14-day free trial — no credit card required.</p>
+      <p class="sec-sub" style="color:rgba(255,255,255,.78)">Set up your profile, choose your plan, and go live on the platform. Takes about five minutes.</p>
       <div class="b-form">
+        <!-- Step indicator -->
         <div class="b-step-indicator">
           <div id="bdot1" class="b-step-dot active">1</div>
           <div id="bline1" class="b-step-line"></div>
@@ -543,94 +838,105 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
           <div id="bdot3" class="b-step-dot">3</div>
         </div>
 
+        <!-- Step 1: Business info -->
         <div id="bfs1">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:20px">Step 1 of 3 &#x2014; Your Business Details</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:20px">Step 1 of 3 — Your Business Details</div>
           <div class="b-field-row">
-            <div class="b-field"><label>Business Name *</label><input id="bf-name" placeholder="Your business name"/></div>
+            <div class="b-field"><label>Business Name *</label><input id="bf-name" placeholder="Prestige Cleaners"/></div>
             <div class="b-field"><label>Owner / Contact Name *</label><input id="bf-owner" placeholder="Your name"/></div>
           </div>
           <div class="b-field-row">
             <div class="b-field"><label>Email Address *</label><input id="bf-email" type="email" placeholder="your business email"/></div>
-            <div class="b-field"><label>Phone Number *</label><input id="bf-phone" placeholder="(212) 555-0000"/></div>
+            <div class="b-field"><label>Phone Number</label><input id="bf-phone" placeholder="(212) 555-0000"/></div>
           </div>
-          <div class="b-field"><label>Business Address *</label><input id="bf-address" placeholder="Street address, City, State"/></div>
+          <div class="b-field"><label>Business Address *</label><input id="bf-address" placeholder="142 W 36th St, New York, NY"/></div>
           <div class="b-field"><label>Zip Code</label><input id="bf-zip" placeholder="10018"/></div>
           <div style="display:flex;justify-content:flex-end;margin-top:8px">
-            <button class="btn btn-primary" id="bf-next1">Continue &#x2192;</button>
+            <button class="btn btn-primary" onclick="bfNext(2)">Continue →</button>
           </div>
         </div>
 
+        <!-- Step 2: Services -->
         <div id="bfs2" class="hidden">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:8px">Step 2 of 3 &#x2014; Your Services</div>
-          <div style="font-size:13px;color:var(--ink-lt);font-style:italic;margin-bottom:20px">Check all services your location offers. Update anytime from your dashboard.</div>
-          <div class="b-field"><label>Services Offered</label>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:8px">Step 2 of 3 — Your Services</div>
+          <div style="font-size:13px;color:var(--ink-lt);font-style:italic;margin-bottom:20px">Check all services your location offers. You can update these anytime from your dashboard.</div>
+          <div class="b-field">
+            <label>Services Offered</label>
             <div class="b-svc-grid">
-              <label class="b-svc-check"><input type="checkbox" value="dry_clean" checked/> &#x2728; Dry Clean</label>
-              <label class="b-svc-check"><input type="checkbox" value="launder"/> &#x1F455; Launder &amp; Press</label>
-              <label class="b-svc-check"><input type="checkbox" value="wash_fold"/> &#x1F9FA; Wash &amp; Fold</label>
-              <label class="b-svc-check"><input type="checkbox" value="press_only"/> &#x1F454; Press Only</label>
-              <label class="b-svc-check"><input type="checkbox" value="alterations"/> &#x1FAA1; Repairs &amp; Alterations</label>
-              <label class="b-svc-check"><input type="checkbox" value="bedding"/> &#x1F6CF;&#xFE0F; Bedding &amp; Linens</label>
-              <label class="b-svc-check"><input type="checkbox" value="leather"/> &#x1F9E5; Leather &amp; Suede</label>
-              <label class="b-svc-check"><input type="checkbox" value="pickup"/> &#x1F697; Pickup &amp; Delivery</label>
+              <label class="b-svc-check"><input type="checkbox" value="dry_clean" checked/> ✨ Dry Clean</label>
+              <label class="b-svc-check"><input type="checkbox" value="launder"/> 👕 Launder & Press</label>
+              <label class="b-svc-check"><input type="checkbox" value="wash_fold"/> 🧺 Wash & Fold</label>
+              <label class="b-svc-check"><input type="checkbox" value="press_only"/> 👔 Press Only</label>
+              <label class="b-svc-check"><input type="checkbox" value="alterations"/> 🪡 Repairs & Alterations</label>
+              <label class="b-svc-check"><input type="checkbox" value="bedding"/> 🛏️ Bedding & Linens</label>
+              <label class="b-svc-check"><input type="checkbox" value="leather"/> 🧥 Leather & Suede</label>
+              <label class="b-svc-check"><input type="checkbox" value="pickup"/> 🚗 Pickup & Delivery</label>
             </div>
           </div>
-          <div class="b-field" style="margin-top:16px"><label>Special Features</label>
+          <div class="b-field" style="margin-top:16px">
+            <label>Special Features</label>
             <div class="b-svc-grid">
-              <label class="b-svc-check"><input type="checkbox" id="bf-nontoxic"/> &#x1F33F; Non-Toxic / GreenEarth</label>
-              <label class="b-svc-check"><input type="checkbox" id="bf-express"/> &#x26A1; Express Same-Day</label>
-              <label class="b-svc-check"><input type="checkbox" id="bf-luxury"/> &#x2728; Luxury Garment Specialist</label>
+              <label class="b-svc-check"><input type="checkbox" id="bf-nontoxic"/> 🌿 Non-Toxic / GreenEarth</label>
+              <label class="b-svc-check"><input type="checkbox" id="bf-express"/> ⚡ Express Same-Day</label>
+              <label class="b-svc-check"><input type="checkbox" id="bf-luxury"/> ✨ Luxury Garment Specialist</label>
             </div>
           </div>
           <div style="display:flex;justify-content:space-between;margin-top:20px">
-            <button class="btn btn-outline" id="bf-back2">&#x2190; Back</button>
-            <button class="btn btn-primary" id="bf-next2">Continue &#x2192;</button>
+            <button class="btn btn-outline" onclick="bfNext(1)">← Back</button>
+            <button class="btn btn-primary" onclick="bfNext(3)">Continue →</button>
           </div>
         </div>
 
+        <!-- Step 3: Plan & submit -->
         <div id="bfs3" class="hidden">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:8px">Step 3 of 3 &#x2014; Choose Your Plan</div>
-          <div style="font-size:13px;color:var(--ink-lt);font-style:italic;margin-bottom:20px">14-day free trial on both plans. Upgrade or downgrade anytime.</div>
-          <div class="b-plan-select">
-            <div id="bpo-basic" class="b-plan-opt" data-plan-opt="basic">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:8px">Step 3 of 3 — Choose Your Plan</div>
+          <div style="font-size:13px;color:var(--ink-lt);font-style:italic;margin-bottom:20px">Upgrade or downgrade anytime from your dashboard.</div>
+          <div class="b-plan-select" id="plan-select">
+            <div id="bpo-basic" class="b-plan-opt" onclick="selectBizPlan('basic')">
               <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--lav-deep);margin-bottom:4px">$149<span style="font-size:13px;color:var(--ink-lt)">/mo</span></div>
               <div style="font-size:14px;color:var(--ink);margin-bottom:8px">Basic</div>
               <div style="font-size:12px;color:var(--ink-mid);font-style:italic;line-height:1.6">Orders, dashboard, notifications, analytics, app listing</div>
             </div>
-            <div id="bpo-pro" class="b-plan-opt selected" data-plan-opt="pro">
+            <div id="bpo-pro" class="b-plan-opt selected" onclick="selectBizPlan('pro')">
               <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--lav-deep);margin-bottom:4px">$299<span style="font-size:13px;color:var(--ink-lt)">/mo</span></div>
-              <div style="font-size:14px;color:var(--ink);margin-bottom:8px">Pro &#x2B50;</div>
+              <div style="font-size:14px;color:var(--ink);margin-bottom:8px">Pro ⭐</div>
               <div style="font-size:12px;color:var(--ink-mid);font-style:italic;line-height:1.6">Everything in Basic + priority listing, advanced analytics, insights</div>
             </div>
           </div>
-          <div class="b-field" style="margin-top:20px"><label>How did you hear about Dry.?</label>
+          <div class="b-field" style="margin-top:20px">
+            <label>How did you hear about Dry.?</label>
             <select id="bf-heard">
-              <option value="">Select one&#x2026;</option>
+              <option value="">Select one…</option>
               <option>Word of mouth / another cleaner</option>
               <option>Google search</option>
               <option>Social media</option>
               <option>A Dry. customer told me</option>
+              <option>Cold outreach from Dry.</option>
               <option>Other</option>
             </select>
           </div>
-          <div class="b-field"><label>Anything else you'd like us to know?</label><textarea id="bf-notes" rows="3" placeholder="Additional services, certifications, questions&#x2026;"></textarea></div>
+          <div class="b-field">
+            <label>Anything else you'd like us to know?</label>
+            <textarea id="bf-notes" rows="3" placeholder="Additional services, certifications, questions…"></textarea>
+          </div>
           <div id="bf-err" class="hidden" style="font-size:13px;color:#c0392b;padding:12px 16px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
           <div style="font-size:12px;color:var(--ink-lt);font-style:italic;margin-bottom:16px">By creating an account you agree to the Dry. Business Partner Terms of Service.</div>
           <div style="display:flex;justify-content:space-between;align-items:center">
-            <button class="btn btn-outline" id="bf-back3">&#x2190; Back</button>
-            <button id="bf-submit" class="btn btn-primary">Create My Account &#x2192;</button>
+            <button class="btn btn-outline" onclick="bfNext(2)">← Back</button>
+            <button id="bf-submit" class="btn btn-primary" onclick="bfSubmit()">Create My Account →</button>
           </div>
         </div>
 
+        <!-- Success -->
         <div id="bfs-done" class="hidden" style="text-align:center;padding:20px 0">
-          <div style="font-size:52px;margin-bottom:16px">&#x1F33F;</div>
+          <div style="font-size:52px;margin-bottom:16px">🌿</div>
           <div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--ink);margin-bottom:10px">Account created!</div>
-          <div id="bfs-done-msg" style="font-size:15px;color:var(--ink-mid);font-style:italic;line-height:1.7;max-width:420px;margin:0 auto 24px">Check your email for a login link. Click it to set your password and complete your setup.</div>
+          <div id="bfs-done-msg" style="font-size:15px;color:var(--ink-mid);font-style:italic;line-height:1.7;max-width:420px;margin:0 auto 24px">Check your email for a login link. Click it to set your password and complete your setup — takes about two minutes.</div>
           <div style="background:var(--lav-glow);border:1.5px solid var(--lav-soft);border-radius:16px;padding:16px 20px;max-width:420px;margin:0 auto 24px;text-align:left">
             <div style="font-size:13px;color:var(--lav-deep);font-family:'Cormorant Garamond',serif;margin-bottom:8px">What happens next</div>
-            <div style="font-size:13px;color:var(--ink-mid);font-style:italic;line-height:1.8">1. Check your inbox for an email from Dry.<br>2. Click the login link to set your password<br>3. Complete your 4-step setup in the dashboard<br>4. Your 14-day free trial starts immediately</div>
+            <div style="font-size:13px;color:var(--ink-mid);font-style:italic;line-height:1.8">1. Check your inbox for an email from Dry.<br>2. Click the login link to set your password<br>3. Complete your 4-step setup in the dashboard<br>4. Your listing goes live immediately — 14-day free trial starts now</div>
           </div>
-          <button class="btn btn-outline" data-scroll="b-hero">Back to Top</button>
+          <button class="btn btn-outline" onclick="goTo('b-hero')">Back to Top</button>
         </div>
       </div>
     </div>
@@ -639,379 +945,365 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
   <footer>
     <div class="ft">
       <div><div class="ft-logo">dry.</div><p class="ft-tagline">Your grandmother's dry cleaner, with your efficiency.</p></div>
-      <div class="ft-col"><h4>Platform</h4><a data-scroll="b-features">Features</a><a data-scroll="b-pricing">Pricing</a><a data-scroll="b-how">How It Works</a><a data-scroll="b-faq">FAQ</a></div>
-      <div class="ft-col"><h4>For Customers</h4><a data-action="show-customer">Consumer App</a><a data-action="show-customer">Find a Cleaner</a></div>
-      <div class="ft-col"><h4>Contact</h4><a data-action="show-customer" data-scroll="c-contact">Get Support</a><a data-scroll="b-signup">Partner Inquiries</a></div>
+      <div class="ft-col"><h4>Platform</h4><a onclick="goTo('b-features')">Features</a><a onclick="goTo('b-pricing')">Pricing</a><a onclick="goTo('b-how')">How It Works</a><a onclick="goTo('b-faq')">FAQ</a></div>
+      <div class="ft-col"><h4>For Customers</h4><a onclick="showCustomer()">Consumer App</a><a onclick="showCustomer()">Find a Cleaner</a></div>
+      <div class="ft-col"><h4>Contact</h4><a onclick="goTo('b-signup')">Partner Inquiries</a><a onclick="showCustomer();goTo('c-contact')">Support</a><a onclick="showCustomer();goTo('c-contact')">Legal</a></div>
     </div>
-    <div class="ft-bottom"><div>&#x00A9; 2026 Dry Technologies, LLC. All rights reserved.</div><div><a data-action="show-customer" data-after-scroll="c-contact">Privacy</a>&nbsp;&nbsp;<a data-action="show-customer" data-after-scroll="c-contact">Terms</a></div></div>
+    <div class="ft-bottom"><div>© 2026 Dry. LLC. All rights reserved.</div><div><a onclick="goTo('c-contact')">Privacy</a>&nbsp;&nbsp;<a onclick="goTo('c-contact')">Terms</a></div></div>
   </footer>
 </div>
 
-<script type="module">
-// ══ CONFIG ══════════════════════════════════════════════
-const SB_URL  = 'https://ftaqabwiqnuzoyjjkipj.supabase.co';
+<!-- ══ ORDER MODAL (customer side) ══ -->
+<div id="order-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">Select Services</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span id="modal-step-info" style="font-size:12px;color:var(--ink-lt)">Step 1 of 4</span>
+        <button class="modal-close" onclick="closeOrderModal()">✕</button>
+      </div>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer">
+      <button id="modal-back" class="btn btn-outline btn-sm" onclick="modalBack()" style="visibility:hidden">← Back</button>
+      <button id="modal-next" class="btn btn-primary btn-sm" onclick="modalNext()">Continue →</button>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script data-cfasync="false">
+// ══ SUPABASE CONFIG ══
+const SB_URL  = 'https://https://ftaqabwiqnuzoyjjkipj.supabase.co';
 const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0YXFhYndpcW51em95ampraXBqIiwicm9sZSI6ImFub24iLCJpYXQiOj';
-window._SB_URL  = SB_URL;
-window._SB_ANON = SB_ANON;
 
-// ══ NAVIGATION ══════════════════════════════════════════
-function showSection(id) {
-  document.getElementById('entry').style.display    = 'none';
-  document.getElementById('customer').style.display = 'none';
-  document.getElementById('business').style.display = 'none';
-  document.getElementById(id).style.display = 'block';
-  window.scrollTo(0, 0);
-  document.dispatchEvent(new CustomEvent('sectionShown', { detail: id }));
-}
 
-function scrollToId(id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// Single event listener handles ALL clicks — no inline onclick needed
-document.addEventListener('click', (e) => {
-  const t = e.target.closest('[data-action],[data-scroll],[data-plan-opt],[data-plan],[data-filter]');
-  if (!t) return;
-
-  const action = t.dataset.action;
-  const scroll = t.dataset.scroll;
-  const planOpt = t.dataset.planOpt;
-  const plan = t.dataset.plan;
-  const filter = t.dataset.filter;
-
-  if (action === 'show-customer') { showSection('customer'); if (scroll) setTimeout(() => scrollToId(scroll), 100); }
-  if (action === 'show-business') { showSection('business'); }
-  if (action === 'go-home') { showSection('entry'); }
-  if (scroll && !action) { scrollToId(scroll); if (plan) selectBizPlan(plan); }
-  if (planOpt) selectBizPlan(planOpt);
-  if (filter) scrollToId('c-find');
-});
-
-// Entry cards
-document.querySelectorAll('.entry-card').forEach(card => {
-  card.addEventListener('click', () => {
-    if (card.dataset.action === 'show-customer') showSection('customer');
-    if (card.dataset.action === 'show-business') showSection('business');
-  });
-});
-
-// Business dashboard login button
-document.getElementById('biz-login-btn')?.addEventListener('click', () => {
-  window.open('https://drybusinessdashboard.vercel.app', '_blank');
-});
-
-// ══ WAITLIST / NOTIFY ME ════════════════════════════════
-document.getElementById('notify-btn')?.addEventListener('click', async () => {
-  const email = document.getElementById('notify-email')?.value?.trim();
-  if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
-  try {
-    await fetch(SB_URL + '/rest/v1/waitlist', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Prefer': 'return=minimal' },
-      body: JSON.stringify({ email })
-    });
-  } catch(e) {}
-  document.getElementById('notify-thanks').classList.remove('hidden');
-  document.getElementById('notify-email').style.display = 'none';
-  document.getElementById('notify-btn').style.display = 'none';
-});
-
-document.getElementById('search-btn')?.addEventListener('click', () => scrollToId('c-find'));
-
-// ══ CONTACT FORM ════════════════════════════════════════
-document.getElementById('contact-submit-btn')?.addEventListener('click', async () => {
-  const name    = document.getElementById('cf-name')?.value?.trim();
-  const email   = document.getElementById('cf-email')?.value?.trim();
-  const topic   = document.getElementById('cf-topic')?.value;
-  const message = document.getElementById('cf-message')?.value?.trim();
+// ── Contact Form ────────────────────────────────────────
+async function submitContact() {
+  const name    = document.getElementById('cf-name').value.trim();
+  const email   = document.getElementById('cf-email').value.trim();
+  const topic   = document.getElementById('cf-topic').value;
+  const message = document.getElementById('cf-message').value.trim();
   const err     = document.getElementById('cf-err');
-  const btn     = document.getElementById('contact-submit-btn');
-  err.classList.add('hidden');
+  err.style.display = 'none';
 
   if (!name || !email || !topic || !message) {
     err.textContent = 'Please fill in all fields.';
-    err.classList.remove('hidden');
+    err.style.display = 'block';
     return;
   }
 
+  const btn = document.querySelector('[onclick="submitContact()"]');
   btn.disabled = true;
   btn.textContent = 'Sending…';
 
   try {
     await fetch(SB_URL + '/rest/v1/feedback', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Prefer': 'return=minimal' },
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SB_ANON,
+        'Authorization': 'Bearer ' + SB_ANON,
+        'Prefer': 'return=minimal'
+      },
       body: JSON.stringify({ category: topic, message: name + ' (' + email + '): ' + message })
     });
   } catch(e) {}
 
-  document.getElementById('contact-form-inner').classList.add('hidden');
-  document.getElementById('contact-success').classList.remove('hidden');
-});
+  document.getElementById('contact-form-wrap').style.display = 'none';
+  document.getElementById('contact-success').style.display = 'block';
+}
+// ══ NAVIGATION ══
+function goHome() {
+  hide('customer'); hide('business');
+  show('entry');
+  window.scrollTo(0,0);
+}
+function showCustomer() {
+  hide('entry'); hide('business');
+  show('customer');
+  window.scrollTo(0,0);
+}
+function showBusiness() {
+  hide('entry'); hide('customer');
+  show('business');
+  window.scrollTo(0,0);
+}
+function show(id){ document.getElementById(id).style.display='block'; }
+function hide(id){ document.getElementById(id).style.display='none'; }
+function goTo(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function setBizPlan(plan){ selectBizPlan(plan); }
 
-// ══ BUSINESS SIGNUP FORM ════════════════════════════════
-let _bizPlan = 'pro';
-
-function selectBizPlan(plan) {
-  _bizPlan = plan;
-  const basic = document.getElementById('bpo-basic');
-  const pro   = document.getElementById('bpo-pro');
-  if (!basic || !pro) return;
-  basic.classList.toggle('selected', plan === 'basic');
-  pro.classList.toggle('selected',   plan === 'pro');
+// ══ CUSTOMER — FIND ══
+function doSearch(){
+  const q = document.getElementById('find-input').value.trim();
+  if(!q) return;
+  // scroll to the coming soon box — real cleaner search once live
+  document.getElementById('c-find').scrollIntoView({behavior:'smooth'});
+}
+function filterSearch(type){
+  document.getElementById('c-find').scrollIntoView({behavior:'smooth'});
 }
 
-function bfGo(step) {
-  [1, 2, 3].forEach(s => {
-    const el = document.getElementById('bfs' + s);
-    if (el) el.classList.toggle('hidden', s !== step);
+// ══ CUSTOMER — NOTIFY ME ══
+async function submitNotify(){
+  const email = document.getElementById('notify-email')?.value?.trim();
+  if(!email || !email.includes('@')){ alert('Please enter a valid email address.'); return; }
+  try {
+    await fetch(SB_URL+'/rest/v1/waitlist', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SB_ANON,'Authorization':'Bearer '+SB_ANON,'Prefer':'return=minimal'},
+      body: JSON.stringify({email})
+    });
+  } catch(e){}
+  document.getElementById('notify-thanks').classList.remove('hidden');
+  document.getElementById('notify-email').style.display='none';
+  document.querySelectorAll('[onclick="submitNotify()"]').forEach(b=>b.style.display='none');
+}
+
+// ══ BUSINESS SIGNUP ══
+let _bizPlan = 'pro';
+
+function bfNext(step){
+  if(step===2){
+    const n=document.getElementById('bf-name').value.trim();
+    const o=document.getElementById('bf-owner').value.trim();
+    const e=document.getElementById('bf-email').value.trim();
+    const a=document.getElementById('bf-address').value.trim();
+    if(!n||!o||!e||!a){ alert('Please fill in all required fields (marked *).'); return; }
+  }
+  [1,2,3].forEach(s=>{
+    const el=document.getElementById('bfs'+s);
+    if(el) el.classList.toggle('hidden', s!==step);
   });
   document.getElementById('bfs-done').classList.add('hidden');
-  for (let i = 1; i <= 3; i++) {
-    const dot  = document.getElementById('bdot' + i);
-    const line = document.getElementById('bline' + i);
-    if (dot) {
-      dot.classList.remove('active', 'done');
-      if (i < step) dot.classList.add('done');
-      else if (i === step) dot.classList.add('active');
+  // Update step indicator
+  for(let i=1;i<=3;i++){
+    const dot=document.getElementById('bdot'+i);
+    if(dot){
+      dot.classList.remove('active','done');
+      if(i<step) dot.classList.add('done');
+      else if(i===step) dot.classList.add('active');
     }
-    if (line && i < 3) line.classList.toggle('done', i < step);
+    if(i<3){
+      const line=document.getElementById('bline'+i);
+      if(line) line.classList.toggle('done', i<step);
+    }
   }
 }
 
-document.getElementById('bf-next1')?.addEventListener('click', () => {
-  const name    = document.getElementById('bf-name')?.value?.trim();
-  const owner   = document.getElementById('bf-owner')?.value?.trim();
-  const email   = document.getElementById('bf-email')?.value?.trim();
-  const address = document.getElementById('bf-address')?.value?.trim();
-  const phone = document.getElementById('bf-phone')?.value?.trim();
-  if (!name || !owner || !email || !address || !phone) { alert('Please fill in all required fields (marked *).'); return; }
-  bfGo(2);
-});
+function selectBizPlan(plan){
+  _bizPlan = plan;
+  const basic=document.getElementById('bpo-basic');
+  const pro=document.getElementById('bpo-pro');
+  if(!basic||!pro) return;
+  basic.classList.toggle('selected', plan==='basic');
+  pro.classList.toggle('selected', plan==='pro');
+}
 
-document.getElementById('bf-back2')?.addEventListener('click', () => bfGo(1));
-document.getElementById('bf-next2')?.addEventListener('click', () => bfGo(3));
-document.getElementById('bf-back3')?.addEventListener('click', () => bfGo(2));
-
-document.getElementById('bf-submit')?.addEventListener('click', async () => {
-  const btn = document.getElementById('bf-submit');
-  const err = document.getElementById('bf-err');
-  btn.disabled = true;
-  btn.textContent = 'Creating your account…';
+async function bfSubmit(){
+  const btn=document.getElementById('bf-submit');
+  const err=document.getElementById('bf-err');
+  btn.disabled=true; btn.textContent='Creating your account…';
   err.classList.add('hidden');
-
-  const services = Array.from(document.querySelectorAll('#bfs2 input[type=checkbox]:checked'))
-    .map(c => c.value).filter(v => v && v !== 'on');
-
-  const payload = {
-    business_name:    document.getElementById('bf-name')?.value?.trim(),
-    owner_name:       document.getElementById('bf-owner')?.value?.trim(),
-    email:            document.getElementById('bf-email')?.value?.trim(),
-    phone:            document.getElementById('bf-phone')?.value?.trim(),
-    address:          document.getElementById('bf-address')?.value?.trim(),
-    zip:              document.getElementById('bf-zip')?.value?.trim(),
+  const services=Array.from(document.querySelectorAll('#bfs2 input[type=checkbox]:checked')).map(c=>c.value).filter(v=>v&&v!=='on');
+  const payload={
+    business_name:    document.getElementById('bf-name').value.trim(),
+    owner_name:       document.getElementById('bf-owner').value.trim(),
+    email:            document.getElementById('bf-email').value.trim(),
+    phone:            document.getElementById('bf-phone').value.trim(),
+    address:          document.getElementById('bf-address').value.trim(),
+    zip:              document.getElementById('bf-zip').value.trim(),
     selected_plan:    _bizPlan,
     services_offered: services,
     feature_nontoxic: !!document.getElementById('bf-nontoxic')?.checked,
     feature_express:  !!document.getElementById('bf-express')?.checked,
     feature_luxury:   !!document.getElementById('bf-luxury')?.checked,
-    how_heard:        document.getElementById('bf-heard')?.value,
-    notes:            document.getElementById('bf-notes')?.value?.trim(),
+    how_heard:        document.getElementById('bf-heard').value,
+    notes:            document.getElementById('bf-notes').value.trim(),
   };
-
   try {
-    // Try edge function first
-    const res = await fetch(SB_URL + '/functions/v1/signup-business', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SB_ANON },
+    // Call the Supabase Edge Function which creates the auth account + business row
+    const res=await fetch(SB_URL+'/functions/v1/signup-business',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+SB_ANON},
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Server error');
-    [1, 2, 3].forEach(s => { const el = document.getElementById('bfs' + s); if (el) el.classList.add('hidden'); });
+    const data=await res.json();
+    if(!res.ok) throw new Error(data.error||'Server error '+res.status);
+    [1,2,3].forEach(s=>{ const el=document.getElementById('bfs'+s); if(el) el.classList.add('hidden'); });
     document.getElementById('bfs-done').classList.remove('hidden');
-    for (let i = 1; i <= 3; i++) {
-      const dot = document.getElementById('bdot' + i);
-      if (dot) { dot.classList.remove('active'); dot.classList.add('done'); }
+    for(let i=1;i<=3;i++){
+      const dot=document.getElementById('bdot'+i);
+      if(dot){ dot.classList.remove('active'); dot.classList.add('done'); }
     }
-  } catch(e) {
-    // Fallback: save to business_signups so no lead is lost
+  } catch(e){
+    // Fallback: save directly to business_signups so no lead is lost
     try {
-      await fetch(SB_URL + '/rest/v1/business_signups', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Prefer': 'return=minimal' },
+      await fetch(SB_URL+'/rest/v1/business_signups',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','apikey':SB_ANON,'Authorization':'Bearer '+SB_ANON,'Prefer':'return=minimal'},
         body: JSON.stringify(payload)
       });
-      [1, 2, 3].forEach(s => { const el = document.getElementById('bfs' + s); if (el) el.classList.add('hidden'); });
+      [1,2,3].forEach(s=>{ const el=document.getElementById('bfs'+s); if(el) el.classList.add('hidden'); });
       document.getElementById('bfs-done').classList.remove('hidden');
-      document.getElementById('bfs-done-msg').textContent = "We've received your details and will email your login within a few hours.";
-      for (let i = 1; i <= 3; i++) {
-        const dot = document.getElementById('bdot' + i);
-        if (dot) { dot.classList.remove('active'); dot.classList.add('done'); }
-      }
-    } catch(e2) {
-      err.textContent = 'Something went wrong. Please try again or reach out to us directly.';
+      document.getElementById('bfs-done-msg').textContent="We've received your signup. We'll email your login details within a few hours.";
+    } catch(e2){
+      err.textContent='Something went wrong. Please email hello [at] drytheapp.com and we\'ll get you set up right away.';
       err.classList.remove('hidden');
-      btn.disabled = false;
-      btn.textContent = 'Create My Account →';
+      btn.disabled=false; btn.textContent='Create My Account →';
     }
   }
-});
-</script>
-
-<!-- CONSUMER AUTH MODAL -->
-<div id="c-auth-modal" style="display:none;position:fixed;inset:0;background:rgba(44,31,61,.5);backdrop-filter:blur(6px);z-index:500;align-items:center;justify-content:center;padding:20px">
-  <div style="background:#fff;border-radius:28px;width:min(440px,95vw);overflow:hidden;box-shadow:0 32px 80px rgba(44,31,61,.28)">
-    <div style="background:linear-gradient(135deg,var(--lav-deep),var(--lav));padding:32px 36px 28px;text-align:center">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-style:italic;color:#fff;margin-bottom:4px">dry.</div>
-      <div style="font-size:12px;color:rgba(255,255,255,.7);letter-spacing:1.5px;text-transform:uppercase;font-family:'EB Garamond',Georgia">Your Account</div>
-    </div>
-    <div style="padding:32px 36px">
-      <!-- Tab switcher -->
-      <div style="display:flex;gap:0;margin-bottom:28px;border:1.5px solid var(--bdlt);border-radius:12px;overflow:hidden">
-        <button id="auth-tab-in" onclick="switchAuthTab('in')" style="flex:1;padding:10px;border:none;background:var(--lav);color:#fff;font-family:'EB Garamond',Georgia;font-size:14px;cursor:pointer">Sign In</button>
-        <button id="auth-tab-up" onclick="switchAuthTab('up')" style="flex:1;padding:10px;border:none;background:#fff;color:var(--ink-lt);font-family:'EB Garamond',Georgia;font-size:14px;cursor:pointer">Create Account</button>
-      </div>
-      <!-- Sign In form -->
-      <div id="auth-signin">
-        <div style="margin-bottom:16px">
-          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Email</label>
-          <input id="auth-in-email" type="email" placeholder="your email address" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
-        </div>
-        <div style="margin-bottom:24px">
-          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Password</label>
-          <input id="auth-in-pass" type="password" placeholder="••••••••" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
-        </div>
-        <div id="auth-in-err" class="hidden" style="font-size:13px;color:#c0392b;padding:10px 14px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
-        <button id="auth-signin-btn" class="btn btn-primary" style="width:100%">Sign In</button>
-        <div style="text-align:center;margin-top:16px;font-size:13px;color:var(--ink-lt);font-family:'EB Garamond',Georgia">Don't have an account? <span onclick="switchAuthTab('up')" style="color:var(--lav);cursor:pointer;text-decoration:underline">Create one</span></div>
-      </div>
-      <!-- Sign Up form -->
-      <div id="auth-signup" class="hidden">
-        <div style="margin-bottom:16px">
-          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Full Name</label>
-          <input id="auth-up-name" type="text" placeholder="Your name" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
-        </div>
-        <div style="margin-bottom:16px">
-          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Email</label>
-          <input id="auth-up-email" type="email" placeholder="your email address" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
-        </div>
-        <div style="margin-bottom:24px">
-          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Password</label>
-          <input id="auth-up-pass" type="password" placeholder="••••••••" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
-        </div>
-        <div id="auth-up-err" class="hidden" style="font-size:13px;color:#c0392b;padding:10px 14px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
-        <button id="auth-signup-btn" class="btn btn-primary" style="width:100%">Create Account</button>
-        <div style="text-align:center;margin-top:16px;font-size:12px;color:var(--ink-lt);font-family:'EB Garamond',Georgia;line-height:1.6">By creating an account you agree to the Dry. Terms of Service and Privacy Policy.</div>
-      </div>
-      <!-- Signed in state -->
-      <div id="auth-signedin" class="hidden" style="text-align:center">
-        <div style="font-size:44px;margin-bottom:12px">✓</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);margin-bottom:8px">You're signed in</div>
-        <div id="auth-user-name" style="font-size:14px;color:var(--ink-mid);font-style:italic;margin-bottom:24px"></div>
-        <button id="auth-signout-btn" class="btn btn-outline" style="width:100%;margin-bottom:12px">Sign Out</button>
-        <button onclick="closeAuthModal()" class="btn btn-primary" style="width:100%">Continue</button>
-      </div>
-    </div>
-    <button onclick="closeAuthModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
-  </div>
-</div>
-
-<script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-const SB_URL  = window._SB_URL  || 'https://ftaqabwiqnuzoyjjkipj.supabase.co';
-const SB_ANON = window._SB_ANON || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0YXFhYndpcW51em95ampraXBqIiwicm9sZSI6ImFub24iLCJpYXQiOj';
-const sb = createClient(SB_URL, SB_ANON);
-let _user = null;
-
-sb.auth.getSession().then(({data:{session}})=>{ if(session){_user=session.user;updateAuthUI();loadOrders();} });
-sb.auth.onAuthStateChange((_e,session)=>{ _user=session?.user||null; updateAuthUI(); if(_user) loadOrders(); });
-
-function updateAuthUI(){
-  const si=document.getElementById('c-signin-btn');
-  const gs=document.getElementById('c-getstarted-btn');
-  if(si) si.textContent=_user?'My Account':'Sign In';
-  if(gs) gs.textContent=_user?'My Orders':'Get Started';
-  document.getElementById('c-orders-section')?.classList.toggle('hidden',!_user);
 }
 
-window.openAuthModal=function(tab){
-  document.getElementById('c-auth-modal').style.display='flex';
-  if(_user){ showState('signedin'); document.getElementById('auth-user-name').textContent=_user.email; }
-  else switchTab(tab||'in');
-};
-window.closeAuthModal=function(){ document.getElementById('c-auth-modal').style.display='none'; };
-window.switchAuthTab=switchTab;
-function switchTab(tab){
-  document.getElementById('auth-signin').classList.toggle('hidden',tab!=='in');
-  document.getElementById('auth-signup').classList.toggle('hidden',tab!=='up');
-  document.getElementById('auth-signedin').classList.add('hidden');
-  const ti=document.getElementById('auth-tab-in');
-  const tu=document.getElementById('auth-tab-up');
-  ti.style.background=tab==='in'?'var(--lav)':'#fff'; ti.style.color=tab==='in'?'#fff':'var(--ink-lt)';
-  tu.style.background=tab==='up'?'var(--lav)':'#fff'; tu.style.color=tab==='up'?'#fff':'var(--ink-lt)';
+// ══ ORDER MODAL ══
+const SVCS=[
+  {id:'dry_clean', icon:'✨',name:'Dry Clean',         desc:'Solvent-based care for structured pieces',price:0,avail:true},
+  {id:'launder',   icon:'👕',name:'Launder & Press',   desc:'Wash, dry, and crisp press',              price:5,avail:true},
+  {id:'wash_fold', icon:'🧺',name:'Wash & Fold',       desc:'Everyday laundry washed and folded',      price:4,avail:true},
+  {id:'press_only',icon:'👔',name:'Press Only',        desc:'Steam press — no cleaning cycle',          price:3,avail:true},
+  {id:'alterations',icon:'🪡',name:'Repairs & Alterations',desc:'Expert tailoring and repairs',        price:0,avail:true},
+  {id:'bedding',   icon:'🛏️',name:'Bedding & Linens',  desc:'Duvets, comforters, and delicate linens', price:22,avail:true},
+  {id:'leather',   icon:'🧥',name:'Leather & Suede',   desc:'Specialist leather cleaning',              price:0,avail:false},
+  {id:'pickup',    icon:'🚗',name:'Pickup & Delivery', desc:'We come to you — free within 1 mile',     price:0,avail:true},
+];
+const GARMS=[
+  {id:'shirts',icon:'👔',name:'Dress Shirts',price:5},
+  {id:'suits', icon:'🤵',name:'Suits',       price:18},
+  {id:'dresses',icon:'👗',name:'Dresses',   price:14},
+  {id:'pants', icon:'👖',name:'Trousers',    price:8},
+  {id:'coats', icon:'🧥',name:'Coats',       price:20},
+  {id:'everyday',icon:'👚',name:'Everyday Clothes',price:4},
+  {id:'other', icon:'📦',name:'Other',       price:10},
+];
+const DAYS=['Mon Apr 14','Tue Apr 15','Wed Apr 16','Thu Apr 17','Fri Apr 18'];
+const TIMES=['8:00 AM','9:00 AM','10:00 AM','11:00 AM','1:00 PM','2:00 PM','3:00 PM','5:00 PM'];
+const HANG_DRY_SVCS=['launder','wash_fold'];
+
+let mStep=0;
+let mData={services:[],garments:{},hangDry:{},rush:false,day:null,time:null};
+
+function openOrderModal(){
+  mStep=0; mData={services:[],garments:{},hangDry:{},rush:false,day:null,time:null};
+  document.getElementById('order-modal').classList.add('open');
+  renderModal();
 }
-function showState(s){
-  document.getElementById('auth-signin').classList.toggle('hidden',s!=='in');
-  document.getElementById('auth-signup').classList.toggle('hidden',s!=='up');
-  document.getElementById('auth-signedin').classList.toggle('hidden',s!=='signedin');
+function closeOrderModal(){
+  document.getElementById('order-modal').classList.remove('open');
 }
-
-document.getElementById('c-signin-btn')?.addEventListener('click',()=>window.openAuthModal('in'));
-document.getElementById('c-getstarted-btn')?.addEventListener('click',()=>window.openAuthModal(_user?'in':'up'));
-document.getElementById('c-auth-modal')?.addEventListener('click',e=>{ if(e.target.id==='c-auth-modal') window.closeAuthModal(); });
-
-document.getElementById('auth-signin-btn')?.addEventListener('click',async()=>{
-  const email=document.getElementById('auth-in-email').value.trim();
-  const pass=document.getElementById('auth-in-pass').value;
-  const err=document.getElementById('auth-in-err');
-  const btn=document.getElementById('auth-signin-btn');
-  err.classList.add('hidden');
-  if(!email||!pass){err.textContent='Please enter your email and password.';err.classList.remove('hidden');return;}
-  btn.disabled=true;btn.textContent='Signing in…';
-  const{error}=await sb.auth.signInWithPassword({email,password:pass});
-  if(error){err.textContent=error.message;err.classList.remove('hidden');btn.disabled=false;btn.textContent='Sign In';return;}
-  showState('signedin');
-  document.getElementById('auth-user-name').textContent=email;
-  setTimeout(()=>window.closeAuthModal(),800);
-  btn.disabled=false;btn.textContent='Sign In';
-});
-
-document.getElementById('auth-signup-btn')?.addEventListener('click',async()=>{
-  const name=document.getElementById('auth-up-name').value.trim();
-  const email=document.getElementById('auth-up-email').value.trim();
-  const pass=document.getElementById('auth-up-pass').value;
-  const err=document.getElementById('auth-up-err');
-  const btn=document.getElementById('auth-signup-btn');
-  err.classList.add('hidden');
-  if(!name||!email||!pass){err.textContent='Please fill in all fields.';err.classList.remove('hidden');return;}
-  if(pass.length<6){err.textContent='Password must be at least 6 characters.';err.classList.remove('hidden');return;}
-  btn.disabled=true;btn.textContent='Creating account…';
-  const{data,error}=await sb.auth.signUp({email,password:pass});
-  if(error){err.textContent=error.message;err.classList.remove('hidden');btn.disabled=false;btn.textContent='Create Account';return;}
-  if(data.user) await sb.from('users').upsert({id:data.user.id,full_name:name,email});
-  showState('signedin');
-  document.getElementById('auth-user-name').textContent=name+' — welcome to Dry.!';
-  setTimeout(()=>window.closeAuthModal(),800);
-  btn.disabled=false;btn.textContent='Create Account';
-});
-
-document.getElementById('auth-signout-btn')?.addEventListener('click',async()=>{
-  await sb.auth.signOut();
-  window.closeAuthModal();
-});
-
-async function loadOrders(){
-  if(!_user)return;
-  const list=document.getElementById('c-orders-list');
-  if(!list)return;
-  const{data:orders}=await sb.from('orders').select('*,businesses(name)').eq('user_id',_user.id).order('created_at',{ascending:false}).limit(10);
-  if(!orders?.length){list.innerHTML='<div style="text-align:center;padding:40px;color:var(--ink-lt);font-style:italic">No orders yet.</div>';return;}
-  const SC={scheduled:'var(--lav)',received:'#C97B2A',in_cleaning:'#3A6EC8',qc:'#B8860B',ready:'#5BA87A',completed:'var(--ink-lt)'};
-  const SL={scheduled:'Scheduled',received:'Received',in_cleaning:'In Cleaning',qc:'Quality Check',ready:'Ready for Pickup',completed:'Completed'};
-  list.innerHTML=orders.map(o=>`<div style="background:var(--off);border:1px solid var(--bdlt);border-radius:16px;padding:18px 20px;margin-bottom:12px;display:flex;align-items:center;gap:16px"><div style="flex:1"><div style="font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:4px">${o.businesses?.name||'Your Cleaner'}</div><div style="font-size:13px;color:var(--ink-lt)">${o.garments_summary||''} · $${o.total||'—'}</div><div style="font-size:12px;color:var(--ink-lt);margin-top:2px">${new Date(o.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div></div><div style="display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;background:${SC[o.status]||'var(--lav)'}22;flex-shrink:0"><div style="width:6px;height:6px;border-radius:50%;background:${SC[o.status]||'var(--lav)'}"></div><span style="font-size:11px;color:${SC[o.status]||'var(--lav)'}">${SL[o.status]||o.status}</span></div></div>`).join('');
+function renderModal(){
+  const titles=['Select Services','Assign Garments','Schedule Drop-off','Review & Confirm'];
+  document.getElementById('modal-title').textContent=titles[mStep];
+  document.getElementById('modal-back').style.visibility=mStep>0?'visible':'hidden';
+  document.getElementById('modal-next').textContent=mStep===3?'Place Order ✓':'Continue →';
+  document.getElementById('modal-step-info').textContent=`Step ${mStep+1} of 4`;
+  const body=document.getElementById('modal-body');
+  let prog='<div class="step-prog">';
+  for(let i=0;i<4;i++) prog+=`<div class="step-prog-item ${i<mStep?'done':i===mStep?'active':''}"></div>`;
+  prog+='</div>';
+  if(mStep===0){
+    let html=prog+'<div class="svc-opts">';
+    SVCS.forEach(s=>{
+      const sel=mData.services.includes(s.id);
+      html+=`<div class="svc-opt${sel?' selected':''}${!s.avail?' unavailable':''}" onclick="toggleSvc('${s.id}',this)">
+        <div style="font-size:22px;flex-shrink:0">${s.icon}</div>
+        <div><div class="svc-opt-name">${s.name}${!s.avail?' <span style="font-size:10px;color:var(--ink-lt)">(unavailable)</span>':''}</div>
+        <div class="svc-opt-desc">${s.desc}</div>
+        ${s.price>0?`<div style="font-size:12px;color:var(--lav);margin-top:4px">from $${s.price}/item</div>`:''}
+        </div></div>`;
+    });
+    html+='</div>';
+    body.innerHTML=html;
+  } else if(mStep===1){
+    let html=prog;
+    const svcs=mData.services.filter(id=>id!=='pickup');
+    if(svcs.length===0){body.innerHTML=html+`<div style="text-align:center;padding:40px;color:var(--ink-lt);font-style:italic">No services selected that require garments.</div>`;return;}
+    if(!window._activeSvc||!svcs.includes(window._activeSvc)) window._activeSvc=svcs[0];
+    html+=`<div style="display:flex;gap:8px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px">`;
+    svcs.forEach(id=>{
+      const s=SVCS.find(x=>x.id===id);
+      const cnt=Object.values(mData.garments[id]||{}).reduce((a,b)=>a+b,0);
+      html+=`<button onclick="setActiveSvc('${id}')" style="flex-shrink:0;padding:8px 14px;border-radius:12px;border:1.5px solid ${window._activeSvc===id?'var(--lav)':'var(--bdlt)'};background:${window._activeSvc===id?'var(--lav-mist)':'#fff'};color:${window._activeSvc===id?'var(--lav)':'var(--ink-lt)'};font-family:'EB Garamond',Georgia;font-size:13px;cursor:pointer">${s.icon} ${s.name}${cnt>0?` (${cnt})`:''}</button>`;
+    });
+    html+='</div>';
+    const curId=window._activeSvc||svcs[0];
+    if(!mData.garments[curId]) mData.garments[curId]={};
+    html+=`<div class="card" style="margin-bottom:16px">`;
+    GARMS.forEach(g=>{
+      const cnt=mData.garments[curId][g.id]||0;
+      html+=`<div class="garment-row"><div style="font-size:20px;margin-right:8px">${g.icon}</div>
+        <div style="flex:1"><div style="font-size:14px;color:var(--ink)">${g.name}</div><div style="font-size:12px;color:var(--ink-lt)">$${g.price}/item</div></div>
+        <div class="g-counter">
+          <button class="g-btn" onclick="adjGarm('${curId}','${g.id}',-1)">−</button>
+          <div class="g-count">${cnt}</div>
+          <button class="g-btn" onclick="adjGarm('${curId}','${g.id}',1)">+</button>
+        </div></div>`;
+    });
+    html+='</div>';
+    if(HANG_DRY_SVCS.includes(curId)){
+      const on=!!mData.hangDry[curId];
+      const total=Object.values(mData.garments[curId]||{}).reduce((a,b)=>a+b,0);
+      if(total>0){
+        html+=`<div class="card" style="padding:16px 20px;border:1.5px solid ${on?'var(--lav)':'var(--bdlt)'};background:${on?'var(--lav-glow)':'#fff'}">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-size:14px;color:var(--ink)">💧 Add Hang Dry</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic;margin-top:2px">Air dry only — no heat. For wool, cashmere, silk. +$3/item</div></div>
+            <button class="tog" style="background:${on?'var(--lav)':'var(--bdlt)'}" onclick="toggleHangDry('${curId}',this)"><div class="tog-knob" style="left:${on?21:3}px"></div></button>
+          </div></div>`;
+      }
+    }
+    body.innerHTML=html;
+  } else if(mStep===2){
+    let html=prog;
+    html+=`<div style="font-size:11px;letter-spacing:1.5px;color:var(--ink-lt);text-transform:uppercase;margin-bottom:14px">Select a day</div><div class="day-row">`;
+    DAYS.forEach(d=>{
+      const p=d.split(' ');
+      html+=`<div class="day-btn${mData.day===d?' selected':''}" onclick="pickDay('${d}')"><div class="day-name">${p[0].toUpperCase()}</div><div class="day-num">${p[1].replace(/\D/g,'')}</div></div>`;
+    });
+    html+=`</div><div style="font-size:11px;letter-spacing:1.5px;color:var(--ink-lt);text-transform:uppercase;margin:20px 0 14px">Select a time</div><div class="time-grid">`;
+    TIMES.forEach(t=>{
+      html+=`<div class="time-btn${mData.time===t?' selected':''}" onclick="pickTime('${t}')">${t}</div>`;
+    });
+    html+=`</div><div class="card" style="margin-top:20px;padding:16px 20px;border:1.5px solid ${mData.rush?'var(--lav)':'var(--bdlt)'};background:${mData.rush?'var(--lav-glow)':'#fff'}">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div><div style="font-size:14px;color:var(--ink)">Rush Order</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic;margin-top:2px">Ready in 24 hours · +$12 fee</div></div>
+        <button class="tog" style="background:${mData.rush?'var(--lav)':'var(--bdlt)'}" onclick="toggleRush(this)"><div class="tog-knob" style="left:${mData.rush?21:3}px"></div></button>
+      </div></div>`;
+    body.innerHTML=html;
+  } else if(mStep===3){
+    let html=prog;
+    html+=`<div class="card" style="padding:24px;margin-bottom:16px"><div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);margin-bottom:16px">Order Summary</div>`;
+    let subtotal=0;
+    mData.services.forEach(id=>{
+      if(id==='pickup') return;
+      const s=SVCS.find(x=>x.id===id);
+      const garms=mData.garments[id]||{};
+      const cnt=Object.entries(garms).filter(([,v])=>v>0);
+      if(cnt.length===0) return;
+      const st=cnt.reduce((sum,[gid,n])=>{const g=GARMS.find(x=>x.id===gid);return sum+(g?g.price*n:0);},0);
+      const hdFee=mData.hangDry[id]?cnt.reduce((s,[,n])=>s+n,0)*3:0;
+      subtotal+=st+hdFee;
+      html+=`<div class="summary-line"><span>${s.icon} ${s.name}${mData.hangDry[id]?' + Hang Dry':''}</span><span style="color:var(--lav)">$${st+hdFee}</span></div>`;
+    });
+    if(mData.rush) { html+=`<div class="summary-line"><span>⚡ Rush Fee</span><span style="color:var(--warn)">$12</span></div>`; subtotal+=12; }
+    const fee=Math.round(subtotal*0.05*100)/100;
+    html+=`<div class="summary-line"><span style="color:var(--ink-lt)">5% Booking Fee</span><span style="color:var(--ink-lt)">$${fee}</span></div>`;
+    html+=`<div class="summary-total"><span>Total</span><span>$${(subtotal+fee).toFixed(2)}</span></div></div>`;
+    if(mData.day&&mData.time){
+      html+=`<div class="card" style="padding:18px 20px;font-size:14px;color:var(--ink-mid)">Drop-off: <span style="color:var(--ink)">${mData.day} at ${mData.time}</span></div>`;
+    }
+    body.innerHTML=html;
+  }
 }
-</script>
-</body>
-</html>
+function toggleSvc(id,el){
+  const i=mData.services.indexOf(id);
+  if(i>-1) mData.services.splice(i,1);
+  else mData.services.push(id);
+  el.classList.toggle('selected');
+}
+function setActiveSvc(id){ window._activeSvc=id; renderModal(); }
+function adjGarm(svc,gid,delta){
+  if(!mData.garments[svc]) mData.garments[svc]={};
+  mData.garments[svc][gid]=Math.max(0,(mData.garments[svc][gid]||0)+de
