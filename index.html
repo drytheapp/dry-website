@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Dry. — Your grandmother's dry cleaner, with your efficiency.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --lav:#7B5EA7;--lav-deep:#5C3D8F;--lav-mid:#9B7EC8;
+  --lav-soft:#C4A8E0;--lav-mist:#EDE6F5;--lav-glow:#F7F3FC;
+  --white:#FFFFFF;--off:#FAF8FD;
+  --ink:#2A1F3D;--ink-mid:#5A4A72;--ink-lt:#8A7A9A;
+  --green:#5BA87A;--green-lt:#EBF7F1;--gold:#F5B942;
+  --border:#DDD3ED;--bdlt:#EDE6F5;
+}
+html{scroll-behavior:smooth}
+body{font-family:'EB Garamond',Georgia,serif;background:var(--off);color:var(--ink);line-height:1.6;overflow-x:hidden}
+.hidden{display:none!important}
+.lbl{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--lav);margin-bottom:12px;font-family:'EB Garamond',Georgia}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:300;color:var(--ink);line-height:1.1;margin-bottom:14px}
+.sec-sub{font-size:17px;color:var(--ink-mid);font-style:italic;max-width:540px;line-height:1.6}
+.card{background:#fff;border-radius:20px;border:1px solid var(--bdlt);box-shadow:0 2px 16px rgba(123,94,167,.07)}
+.tag{display:inline-block;background:var(--lav-mist);color:var(--lav);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:20px;font-family:'EB Garamond',Georgia}
+.btn{padding:13px 28px;border:none;border-radius:15px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;cursor:pointer;transition:transform .15s,box-shadow .15s;display:inline-block;text-decoration:none;letter-spacing:0.2px}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:linear-gradient(135deg,var(--lav-deep),var(--lav));color:#fff;box-shadow:0 6px 20px rgba(123,94,167,.35)}
+.btn-primary:hover{box-shadow:0 10px 28px rgba(123,94,167,.45)}
+.btn-white{background:#fff;color:var(--lav-deep);box-shadow:0 8px 28px rgba(0,0,0,.14)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.btn-outline{background:transparent;color:var(--lav);border:1.5px solid var(--lav-soft)}
+.btn-sm{padding:9px 18px;font-size:14px;border-radius:12px}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* NAV */
+nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,248,253,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--bdlt);padding:0 5%;display:flex;align-items:center;height:66px;gap:0}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-style:italic;font-weight:300;color:var(--lav-deep);text-decoration:none;flex-shrink:0}
+.nav-links{display:flex;align-items:center;gap:18px;flex:1;justify-content:center}
+.nav-links a{font-size:14px;color:var(--ink-mid);text-decoration:none;transition:color .2s;cursor:pointer}
+.nav-links a:hover{color:var(--lav)}
+.nav-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.nav-back{font-size:13px;color:var(--ink-lt);cursor:pointer;text-decoration:none}
+.nav-back:hover{color:var(--lav)}
+
+/* ENTRY */
+#entry{min-height:100vh;background:linear-gradient(160deg,var(--lav-deep) 0%,var(--lav) 60%,var(--lav-mid) 100%);display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.entry-inner{text-align:center;max-width:640px;width:100%}
+.entry-logo{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;font-style:italic;color:#fff;letter-spacing:-2px;margin-bottom:10px;line-height:1}
+.entry-tagline{font-size:16px;color:rgba(255,255,255,.72);font-style:italic;margin-bottom:56px}
+.entry-q{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#fff;margin-bottom:32px}
+.entry-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:520px;margin:0 auto}
+.entry-card{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.25);border-radius:24px;padding:36px 28px;cursor:pointer;transition:all .2s;backdrop-filter:blur(8px)}
+.entry-card:hover{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.5);transform:translateY(-4px);box-shadow:0 20px 48px rgba(0,0,0,.2)}
+.entry-card-icon{font-size:44px;margin-bottom:16px}
+.entry-card-title{font-family:'Cormorant Garamond',serif;font-size:24px;color:#fff;margin-bottom:8px;font-weight:300}
+.entry-card-sub{font-size:13px;color:rgba(255,255,255,.7);font-style:italic;line-height:1.6}
+
+/* CUSTOMER */
+#customer{display:none}
+.c-hero{min-height:100vh;background:linear-gradient(160deg,var(--lav-deep) 0%,var(--lav) 55%,var(--lav-mid) 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 6% 80px;position:relative;overflow:hidden}
+.c-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(46px,8vw,84px);font-weight:300;font-style:italic;color:#fff;line-height:1.04;letter-spacing:-1px;margin-bottom:22px}
+.c-hero-sub{font-size:clamp(15px,2.2vw,19px);color:rgba(255,255,255,.78);font-style:italic;margin-bottom:44px;line-height:1.55}
+.c-hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.c-how{background:#fff;padding:96px 6%}
+.c-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px;margin-top:56px}
+.c-step{background:var(--lav-glow);border:1px solid var(--bdlt);border-radius:22px;padding:30px 26px;transition:transform .2s,box-shadow .2s}
+.c-step:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(123,94,167,.11)}
+.c-step-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--lav-deep),var(--lav));color:#fff;font-family:'Cormorant Garamond',serif;font-size:16px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;box-shadow:0 4px 12px rgba(123,94,167,.4)}
+.c-step-icon{font-size:24px;margin-bottom:10px}
+.c-step h3{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ink);margin-bottom:7px}
+.c-step p{font-size:14px;color:var(--ink-mid);line-height:1.65;font-style:italic}
+.c-svc{background:var(--off);padding:96px 6%}
+.c-svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:52px}
+.c-svc-card{background:#fff;border:1px solid var(--bdlt);border-radius:18px;padding:26px;transition:transform .2s,box-shadow .2s}
+.c-svc-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(123,94,167,.11)}
+.c-svc-icon{width:48px;height:48px;border-radius:14px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
+.c-svc-card h3{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ink);margin-bottom:7px}
+.c-svc-card p{font-size:14px;color:var(--ink-mid);line-height:1.65;font-style:italic}
+.c-find{background:#fff;padding:96px 6%}
+.c-find-inner{max-width:760px;margin:0 auto;text-align:center}
+.c-find-box{background:var(--lav-glow);border:1.5px solid var(--lav-soft);border-radius:24px;padding:48px 40px;margin-top:48px}
+.c-find-search{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.c-find-search input{flex:1;min-width:220px;padding:14px 20px;border-radius:14px;border:1.5px solid var(--bdlt);font-size:15px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;background:#fff}
+.c-find-search input:focus{border-color:var(--lav)}
+.c-find-filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:28px}
+.c-testi{background:var(--off);padding:96px 6%}
+.c-testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;margin-top:52px}
+.c-t-card{background:#fff;border:1px solid var(--bdlt);border-radius:18px;padding:26px}
+.c-t-stars{color:var(--gold);font-size:13px;letter-spacing:2px;margin-bottom:12px}
+.c-t-text{font-size:15px;color:var(--ink-mid);font-style:italic;line-height:1.7;margin-bottom:16px}
+.c-t-name{font-size:13px;color:var(--ink-lt)}
+.c-faq{background:#fff;padding:96px 6%}
+.c-faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:52px}
+.c-faq-item{background:var(--lav-glow);border:1px solid var(--bdlt);border-radius:16px;padding:22px 24px}
+.c-faq-q{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:8px}
+.c-faq-a{font-size:14px;color:var(--ink-mid);line-height:1.7;font-style:italic}
+.c-cta{background:linear-gradient(135deg,var(--lav-deep),var(--lav));padding:96px 6%;text-align:center}
+.c-cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,54px);font-weight:300;font-style:italic;color:#fff;margin-bottom:16px}
+.c-cta p{font-size:17px;color:rgba(255,255,255,.78);font-style:italic;margin-bottom:36px}
+.c-contact{background:var(--off);padding:80px 6%}
+
+/* BUSINESS */
+#business{display:none}
+.b-hero{min-height:100vh;background:linear-gradient(160deg,var(--lav-deep) 0%,#3d2875 40%,var(--lav) 100%);display:flex;align-items:center;justify-content:center;padding:120px 6% 80px;position:relative;overflow:hidden}
+.b-hero-inner{position:relative;z-index:1;max-width:1060px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.b-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,68px);font-weight:300;font-style:italic;color:#fff;line-height:1.06;margin-bottom:20px}
+.b-hero-sub{font-size:17px;color:rgba(255,255,255,.78);font-style:italic;margin-bottom:36px;line-height:1.6}
+.b-hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.b-hero-card{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:24px;padding:28px;backdrop-filter:blur(10px)}
+.b-hero-stat{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.15)}
+.b-hero-stat:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.b-hero-stat-val{font-family:'Cormorant Garamond',serif;font-size:32px;color:#fff;margin-bottom:4px}
+.b-hero-stat-lbl{font-size:13px;color:rgba(255,255,255,.65);font-style:italic}
+.b-features{background:#fff;padding:96px 6%}
+.b-feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:52px}
+.b-feat-card{background:var(--lav-glow);border:1px solid var(--bdlt);border-radius:20px;padding:28px}
+.b-feat-icon{font-size:28px;margin-bottom:14px}
+.b-feat-card h3{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:8px}
+.b-feat-card p{font-size:14px;color:var(--ink-mid);font-style:italic;line-height:1.7}
+.b-dash{background:var(--off);padding:96px 6%}
+.b-dash-preview{background:#fff;border-radius:24px;border:1px solid var(--bdlt);overflow:hidden;margin-top:48px;box-shadow:0 8px 32px rgba(123,94,167,.1)}
+.b-dash-bar{background:linear-gradient(135deg,var(--lav-deep),var(--lav));padding:16px 28px;display:flex;align-items:center;gap:16px}
+.b-dash-dots{display:flex;gap:6px}
+.b-dash-dots span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.3)}
+.b-dash-title{font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(255,255,255,.8);font-style:italic}
+.b-dash-body{padding:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.b-dash-metric{background:var(--lav-glow);border:1px solid var(--bdlt);border-radius:14px;padding:16px}
+.b-dash-metric-val{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--lav-deep)}
+.b-dash-metric-lbl{font-size:11px;color:var(--ink-lt);margin-top:3px}
+.b-how{background:#fff;padding:96px 6%}
+.b-how-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;margin-top:52px}
+.b-how-step{padding:28px 24px;text-align:center}
+.b-how-num{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--lav-deep),var(--lav));color:#fff;font-family:'Cormorant Garamond',serif;font-size:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 6px 16px rgba(123,94,167,.4)}
+.b-how-step h3{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);margin-bottom:8px}
+.b-how-step p{font-size:13px;color:var(--ink-mid);font-style:italic;line-height:1.6}
+.b-pricing{background:var(--off);padding:96px 6%}
+.b-pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:860px;margin:52px auto 0}
+.b-plan-card{border-radius:24px;padding:36px;border:1.5px solid var(--bdlt);background:#fff}
+.b-plan-card.featured{background:linear-gradient(135deg,var(--lav-deep),var(--lav));border-color:transparent}
+.b-plan-price{font-family:'Cormorant Garamond',serif;font-size:44px;color:var(--lav-deep);margin-bottom:4px}
+.b-plan-card.featured .b-plan-price{color:#fff}
+.b-plan-name{font-size:14px;color:var(--ink-lt);margin-bottom:24px}
+.b-plan-card.featured .b-plan-name{color:rgba(255,255,255,.7)}
+.b-plan-features{list-style:none;margin-bottom:28px}
+.b-plan-features li{font-size:14px;color:var(--ink-mid);font-style:italic;padding:7px 0;border-bottom:1px solid var(--bdlt);display:flex;align-items:center;gap:8px}
+.b-plan-card.featured .b-plan-features li{color:rgba(255,255,255,.82);border-color:rgba(255,255,255,.15)}
+.b-plan-features li::before{content:"✓";color:var(--lav);flex-shrink:0;font-style:normal;font-weight:bold}
+.b-plan-card.featured .b-plan-features li::before{color:rgba(255,255,255,.8)}
+.b-faq{background:#fff;padding:96px 6%}
+.b-faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:52px}
+.b-faq-item{background:var(--off);border:1px solid var(--bdlt);border-radius:16px;padding:22px 24px}
+.b-faq-q{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:8px}
+.b-faq-a{font-size:14px;color:var(--ink-mid);line-height:1.7;font-style:italic}
+.b-signup{background:linear-gradient(135deg,var(--lav-deep),var(--lav));padding:96px 6%}
+.b-signup-inner{max-width:680px;margin:0 auto}
+.b-form{background:#fff;border-radius:28px;padding:40px;margin-top:40px;box-shadow:0 32px 80px rgba(0,0,0,.15)}
+.b-field{margin-bottom:18px}
+.b-field label{display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px}
+.b-field input,.b-field select,.b-field textarea{width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off);transition:border-color .2s}
+.b-field input:focus,.b-field select:focus,.b-field textarea:focus{border-color:var(--lav)}
+.b-field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.b-svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.b-svc-check{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink);font-family:'EB Garamond',Georgia;cursor:pointer;padding:9px 12px;border-radius:10px;border:1px solid var(--bdlt);background:var(--off)}
+.b-svc-check input{accent-color:var(--lav);width:15px;height:15px;cursor:pointer;flex-shrink:0}
+.b-plan-select{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+.b-plan-opt{border:2px solid var(--bdlt);border-radius:14px;padding:16px;cursor:pointer;transition:all .15s}
+.b-plan-opt.selected{border-color:var(--lav);background:var(--lav-glow)}
+.b-step-indicator{display:flex;align-items:center;gap:8px;margin-bottom:28px}
+.b-step-dot{width:28px;height:28px;border-radius:50%;background:var(--lav-mist);color:var(--lav);font-size:12px;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia;flex-shrink:0;transition:all .2s}
+.b-step-dot.active{background:var(--lav);color:#fff}
+.b-step-dot.done{background:var(--lav-deep);color:#fff}
+.b-step-line{flex:1;height:2px;background:var(--bdlt)}
+.b-step-line.done{background:var(--lav)}
+
+/* FOOTER */
+footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.65)}
+.ft{display:flex;justify-content:space-between;flex-wrap:wrap;gap:36px;margin-bottom:44px}
+.ft-logo{font-family:'Cormorant Garamond',serif;font-size:30px;font-style:italic;color:#fff;margin-bottom:10px}
+.ft-tagline{font-size:13px;line-height:1.7;font-style:italic;max-width:260px}
+.ft-col h4{font-family:'Cormorant Garamond',serif;font-size:15px;color:#fff;margin-bottom:14px}
+.ft-col a{display:block;font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;margin-bottom:9px;transition:color .2s;cursor:pointer}
+.ft-col a:hover{color:#fff}
+.ft-bottom{border-top:1px solid rgba(255,255,255,.14);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px}
+
+/* CONTACT FORM */
+.contact-form-wrap{max-width:680px;margin:40px auto 0}
+.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.cf-field{margin-bottom:16px}
+.cf-field label{display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px}
+.cf-field input,.cf-field select,.cf-field textarea{width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:#fff;transition:border-color .2s}
+.cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{border-color:var(--lav)}
+
+@media(max-width:900px){
+  .entry-cards{grid-template-columns:1fr}
+  .b-hero-inner{grid-template-columns:1fr}
+  .b-pricing-grid{grid-template-columns:1fr}
+  .c-faq-grid,.b-faq-grid{grid-template-columns:1fr}
+  .b-dash-body{grid-template-columns:1fr 1fr}
+  .b-field-row{grid-template-columns:1fr}
+  .b-plan-select{grid-template-columns:1fr}
+  nav.top-nav .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ENTRY -->
+<div id="entry">
+  <div class="entry-inner">
+    <div class="entry-logo">dry.</div>
+    <div class="entry-tagline">your grandmother's dry cleaner, with your efficiency.</div>
+    <div class="entry-q">Which are you?</div>
+    <div class="entry-cards">
+      <div class="entry-card" data-action="show-customer">
+        <div class="entry-card-icon">&#x1F9D1;</div>
+        <div class="entry-card-title">I'm a customer</div>
+      </div>
+      <div class="entry-card" data-action="show-business">
+        <div class="entry-card-icon">&#x1F3E2;</div>
+        <div class="entry-card-title">I'm a business owner</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CUSTOMER SIDE -->
+<div id="customer">
+  <nav class="top-nav">
+    <a class="nav-logo">dry.</a>
+    <div class="nav-links">
+      <a data-scroll="c-how">How It Works</a>
+      <a data-scroll="c-svc">Services</a>
+      <a data-scroll="c-find">Find a Cleaner</a>
+      <a data-scroll="c-faq">FAQ</a>
+      <a data-scroll="c-contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-back" data-action="go-home">&#8592; Change</span>
+      <button class="btn btn-outline btn-sm" data-scroll="c-find">Sign In</button>
+      <button class="btn btn-primary btn-sm" style="color:#fff" data-scroll="c-find">Get Started</button>
+    </div>
+  </nav>
+
+  <section class="c-hero" id="c-hero">
+    <svg style="position:absolute;pointer-events:none;opacity:.15;top:7%;right:5%" width="130" height="190" viewBox="0 0 40 60">
+      <line x1="20" y1="60" x2="20" y2="10" stroke="white" stroke-width="1.5"/>
+      <ellipse cx="14" cy="18" rx="6" ry="3.5" fill="white" transform="rotate(-25 14 18)"/>
+      <ellipse cx="26" cy="26" rx="6" ry="3.5" fill="white" transform="rotate(25 26 26)"/>
+      <ellipse cx="14" cy="34" rx="6" ry="3.5" fill="white" transform="rotate(-25 14 34)"/>
+      <ellipse cx="20" cy="10" rx="5" ry="3" fill="white"/>
+    </svg>
+    <div style="position:relative;z-index:1;max-width:740px;text-align:center">
+      <div class="lbl" style="color:rgba(255,255,255,.65)">New York City</div>
+      <h1>Clean clothes,<br>zero effort.</h1>
+      <p class="c-hero-sub">Find trusted local dry cleaners, book in two minutes, track your order live, and pay automatically. No calls. No guessing. No waiting.</p>
+      <div class="c-hero-btns">
+        <button class="btn btn-white" data-scroll="c-find">Find a Cleaner Near Me</button>
+        <button class="btn btn-ghost" data-scroll="c-how">See How It Works</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-how" id="c-how">
+    <div class="lbl">Simple by design</div>
+    <h2 class="sec-title">Clean clothes in four steps.</h2>
+    <p class="sec-sub">We replaced everything complicated about dry cleaning with something that just works.</p>
+    <div class="c-steps">
+      <div class="c-step"><div class="c-step-icon">&#x1F50D;</div><div class="c-step-num">1</div><h3>Find a cleaner</h3><p>Browse local dry cleaners by rating, services, and chemical type. Filter for non-toxic, express, or pickup. Read real reviews before you book.</p></div>
+      <div class="c-step"><div class="c-step-icon">&#x1F4F1;</div><div class="c-step-num">2</div><h3>Book online</h3><p>Select your services, assign garments, photograph any stains, choose hang dry if needed, and schedule — all in under two minutes.</p></div>
+      <div class="c-step"><div class="c-step-icon">&#x25CE;</div><div class="c-step-num">3</div><h3>Track live</h3><p>Watch your order move through each stage in real time. You get notified the moment your items are ready for pickup.</p></div>
+      <div class="c-step"><div class="c-step-icon">&#x2728;</div><div class="c-step-num">4</div><h3>Pick up &amp; pay</h3><p>Show your QR code, collect your clothes, and go. Your card is charged automatically. No cash, no fumbling at the counter.</p></div>
+    </div>
+  </section>
+
+  <section class="c-svc" id="c-svc">
+    <div class="lbl">What we handle</div>
+    <h2 class="sec-title">Every service, one platform.</h2>
+    <p class="sec-sub">Every cleaner sets their own menu. You always know exactly what's available before you walk in.</p>
+    <div class="c-svc-grid">
+      <div class="c-svc-card"><div class="c-svc-icon">&#x2728;</div><h3>Dry Clean</h3><p>Solvent-based care for structured pieces and delicates. Filter for non-toxic GreenEarth solvents.</p><span class="tag" style="margin-top:12px">Most Popular</span></div>
+      <div class="c-svc-card"><div class="c-svc-icon">&#x1F455;</div><h3>Launder &amp; Press</h3><p>Full wash, dry, and crisp press. Add the hang dry option for wool, cashmere, or silk — air only, no heat — for $3 per item.</p></div>
+      <div class="c-svc-card"><div class="c-svc-icon">&#x1F9FA;</div><h3>Wash &amp; Fold</h3><p>Everyday laundry washed, dried, and folded. Set your preferences once and they apply to every order.</p></div>
+      <div class="c-svc-card"><div class="c-svc-icon">&#x1F454;</div><h3>Press Only</h3><p>Steam press without a cleaning cycle. Perfect for freshening pieces before a meeting or event.</p></div>
+      <div class="c-svc-card"><div class="c-svc-icon">&#x1FAA1;</div><h3>Repairs &amp; Alterations</h3><p>Expert tailoring, hemming, and repairs. Photograph the damage during booking so the tailor knows exactly what to fix.</p></div>
+      <div class="c-svc-card"><div class="c-svc-icon">&#x1F9E5;</div><h3>Leather &amp; Suede</h3><p>Specialist cleaning for leather, suede, and fur. Filter for it when you search — clearly marked on every profile that offers it.</p></div>
+    </div>
+  </section>
+
+  <section class="c-find" id="c-find">
+    <div class="c-find-inner">
+      <div class="lbl">New York City</div>
+      <h2 class="sec-title">Find your cleaner.</h2>
+      <p class="sec-sub" style="margin:0 auto">Search by neighborhood, name, or service. Every profile shows real ratings, exact services, hours, and pricing before you book.</p>
+      <div class="c-find-box">
+        <div class="c-find-search">
+          <input id="find-input" placeholder="Search by name, neighborhood, or zip code&#x2026;" />
+          <button class="btn btn-primary" id="search-btn">Search</button>
+        </div>
+        <div class="c-find-filters">
+          <button class="btn btn-outline btn-sm" data-filter="Non-Toxic">&#x1F33F; Non-Toxic</button>
+          <button class="btn btn-outline btn-sm" data-filter="Express">&#x26A1; Express</button>
+          <button class="btn btn-outline btn-sm" data-filter="Pickup">&#x1F697; Pickup &amp; Delivery</button>
+          <button class="btn btn-outline btn-sm" data-filter="Alterations">&#x1FAA1; Alterations</button>
+        </div>
+        <div style="text-align:center;padding:32px 0">
+          <div style="font-size:40px;margin-bottom:16px">&#x1F33F;</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);margin-bottom:10px">We're onboarding cleaners in New York City now.</div>
+          <div style="font-size:15px;color:var(--ink-mid);font-style:italic;line-height:1.7;max-width:460px;margin:0 auto 24px">Sign up to be notified the moment a cleaner in your neighborhood joins the platform.</div>
+          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+            <input id="notify-email" placeholder="Your email address" style="padding:12px 18px;border-radius:14px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;background:#fff;min-width:240px"/>
+            <button class="btn btn-primary" id="notify-btn">Notify Me</button>
+          </div>
+          <div id="notify-thanks" class="hidden" style="margin-top:16px;font-size:14px;color:var(--lav);font-style:italic">&#x2713; You're on the list. We'll email you when a cleaner near you goes live.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="c-testi">
+    <div class="lbl">Real customers</div>
+    <h2 class="sec-title">What people are saying.</h2>
+    <div class="c-testi-grid">
+      <div class="c-t-card"><div class="c-t-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div><p class="c-t-text">"I've been going to the same dry cleaner for years but never knew they had express service until I found them on Dry. Live tracking alone is worth it."</p><div class="c-t-name">Sandra K., Midtown</div></div>
+      <div class="c-t-card"><div class="c-t-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div><p class="c-t-text">"Finally an app that treats laundry like a real service. Booked, dropped off, got a notification, picked up. My dry cleaner has been there forever — now I just interact smarter."</p><div class="c-t-name">David L., Chelsea</div></div>
+      <div class="c-t-card"><div class="c-t-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div><p class="c-t-text">"The photo documentation for stains is genius. I photographed the wine stain before drop-off and they treated it perfectly."</p><div class="c-t-name">Priya M., Upper East Side</div></div>
+      <div class="c-t-card"><div class="c-t-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div><p class="c-t-text">"Quick Drop is a game changer. Three kids, zero time. Scan the QR code, drop the bag, approve the charge, done."</p><div class="c-t-name">Marcus W., Upper West Side</div></div>
+    </div>
+  </section>
+
+  <section class="c-faq" id="c-faq">
+    <div class="lbl">Good questions</div>
+    <h2 class="sec-title">Everything you need to know.</h2>
+    <div class="c-faq-grid">
+      <div class="c-faq-item"><div class="c-faq-q">Is there a fee to use Dry?</div><div class="c-faq-a">A 5% booking fee applies to every order — shown at checkout before you confirm. Dry cleaners pay a flat monthly subscription and keep 100% of their order revenue.</div></div>
+      <div class="c-faq-item"><div class="c-faq-q">What is Quick Drop?</div><div class="c-faq-a">After a few orders at a location, Quick Drop unlocks automatically. Drop your bag with just a QR code — staff logs every item and sends you an itemized estimate to approve before anything is charged.</div></div>
+      <div class="c-faq-item"><div class="c-faq-q">How does payment work?</div><div class="c-faq-a">Add a card once in your account. Standard orders are charged at confirmation. Quick Drop orders are charged only after you approve the itemized estimate from the cleaner.</div></div>
+      <div class="c-faq-item"><div class="c-faq-q">What is hang dry?</div><div class="c-faq-a">An add-on for Launder &amp; Press and Wash &amp; Fold orders. Air dry only — no heat, no dryer. Recommended for wool, cashmere, silk, and delicate knits. +$3 per item.</div></div>
+      <div class="c-faq-item"><div class="c-faq-q">Can I document stains before drop-off?</div><div class="c-faq-a">Yes — photograph any stains or damage during the order flow. Photos go directly to the cleaner so they know exactly what to treat before touching your garment.</div></div>
+      <div class="c-faq-item"><div class="c-faq-q">How do I get support?</div><div class="c-faq-a">Use the contact form below or tap Help &amp; Support inside the app under your Profile tab. We typically reply within a few hours.</div></div>
+      <div class="c-faq-item"><div class="c-faq-q">Can I save my laundry preferences?</div><div class="c-faq-a">Yes — set preferences like always hang dry knitwear, no fabric softener, or cold wash, and they apply to every order automatically. Find them under Profile in the app.</div></div>
+      <div class="c-faq-item"><div class="c-faq-q">Are the chemicals safe?</div><div class="c-faq-a">It depends on the cleaner. Some use non-toxic GreenEarth solvents. Every profile states exactly what they use. Filter for non-toxic when you search.</div></div>
+    </div>
+  </section>
+
+  <section class="c-cta">
+    <h2>Ready to try it?</h2>
+    <p>Find your first cleaner in under a minute.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-white" data-scroll="c-find">Find a Cleaner</button>
+      <button class="btn btn-ghost" data-scroll="c-find">Join the Waitlist</button>
+    </div>
+  </section>
+
+  <section class="c-contact" id="c-contact">
+    <div style="text-align:center;margin-bottom:48px">
+      <div class="lbl">Get in touch</div>
+      <h2 class="sec-title">We're here when you need us.</h2>
+      <p class="sec-sub" style="margin:0 auto">Real people, real responses. We typically reply within a few hours.</p>
+    </div>
+    <div class="contact-form-wrap">
+      <div class="card" style="padding:36px 40px">
+        <div id="contact-form-inner">
+          <div class="cf-grid">
+            <div class="cf-field"><label>Your Name</label><input id="cf-name" placeholder="Your name"/></div>
+            <div class="cf-field"><label>Your Email</label><input id="cf-email" type="email" placeholder="your email address"/></div>
+          </div>
+          <div class="cf-field"><label>Topic</label>
+            <select id="cf-topic">
+              <option value="">Select a topic&#x2026;</option>
+              <option value="support">Customer Support &#x2014; order issue or account question</option>
+              <option value="business">Business Inquiry &#x2014; joining the platform</option>
+              <option value="legal">Legal &amp; Privacy &#x2014; terms or data request</option>
+              <option value="other">General &#x2014; something else</option>
+            </select>
+          </div>
+          <div class="cf-field"><label>Message</label><textarea id="cf-message" rows="5" placeholder="Tell us how we can help&#x2026;"></textarea></div>
+          <div id="cf-err" class="hidden" style="font-size:13px;color:#c0392b;padding:12px 16px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
+          <button class="btn btn-primary" style="width:100%" id="contact-submit-btn">Send Message &#x2192;</button>
+          <div style="font-size:12px;color:var(--ink-lt);font-style:italic;text-align:center;margin-top:14px">We typically reply within a few hours.</div>
+        </div>
+        <div id="contact-success" class="hidden" style="text-align:center;padding:20px 0">
+          <div style="font-size:44px;margin-bottom:16px">&#x1F4AC;</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--ink);margin-bottom:10px">Message sent!</div>
+          <div style="font-size:14px;color:var(--ink-mid);font-style:italic;line-height:1.7">We'll get back to you within a few hours.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ft">
+      <div><div class="ft-logo">dry.</div><p class="ft-tagline">Your grandmother's dry cleaner, with your efficiency.</p></div>
+      <div class="ft-col"><h4>Product</h4><a data-scroll="c-how">How It Works</a><a data-scroll="c-svc">Services</a><a data-scroll="c-find">Find a Cleaner</a><a data-scroll="c-faq">FAQ</a></div>
+      <div class="ft-col"><h4>For Businesses</h4><a data-action="show-business">Get Started Free</a><a data-action="show-business">Pricing</a><a data-action="show-business">Business Dashboard</a></div>
+      <div class="ft-col"><h4>Contact</h4><a data-scroll="c-contact">Customer Support</a><a data-scroll="c-contact">General Inquiries</a><a data-scroll="c-contact">Legal &amp; Privacy</a></div>
+    </div>
+    <div class="ft-bottom"><div>&#x00A9; 2026 Dry Technologies, LLC. All rights reserved.</div><div><a data-scroll="c-faq">FAQ</a>&nbsp;&nbsp;<a data-scroll="c-contact">Privacy</a>&nbsp;&nbsp;<a data-scroll="c-contact">Terms</a></div></div>
+  </footer>
+</div>
+
+<!-- BUSINESS SIDE -->
+<div id="business">
+  <nav class="top-nav">
+    <a class="nav-logo">dry.</a>
+    <div class="nav-links">
+      <a data-scroll="b-features">Features</a>
+      <a data-scroll="b-how">How It Works</a>
+      <a data-scroll="b-pricing">Pricing</a>
+      <a data-scroll="b-faq">FAQ</a>
+      <a data-scroll="b-signup">Get Started</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-back" data-action="go-home">&#8592; Change</span>
+      <button class="btn btn-outline btn-sm" id="biz-login-btn">Log In</button>
+      <button class="btn btn-primary btn-sm" style="color:#fff" data-scroll="b-signup">Get Started Free</button>
+    </div>
+  </nav>
+
+  <section class="b-hero" id="b-hero">
+    <svg style="position:absolute;pointer-events:none;opacity:.15;top:7%;right:5%" width="130" height="190" viewBox="0 0 40 60">
+      <line x1="20" y1="60" x2="20" y2="10" stroke="white" stroke-width="1.5"/>
+      <ellipse cx="14" cy="18" rx="6" ry="3.5" fill="white" transform="rotate(-25 14 18)"/>
+      <ellipse cx="26" cy="26" rx="6" ry="3.5" fill="white" transform="rotate(25 26 26)"/>
+      <ellipse cx="14" cy="34" rx="6" ry="3.5" fill="white" transform="rotate(-25 14 34)"/>
+      <ellipse cx="20" cy="10" rx="5" ry="3" fill="white"/>
+    </svg>
+    <div class="b-hero-inner">
+      <div>
+        <div class="lbl" style="color:rgba(255,255,255,.65)">For dry cleaners</div>
+        <h1>Grow your business.<br>Keep every dollar.</h1>
+        <p class="b-hero-sub">Dry. puts your location in front of customers already looking for a cleaner. You set your own prices, offer your own services, and keep 100% of your order revenue. We charge a flat monthly subscription — no commissions, no transaction cuts.</p>
+        <div class="b-hero-btns">
+          <button class="btn btn-white" data-scroll="b-signup">Get Started Free</button>
+          <button class="btn btn-ghost" data-scroll="b-pricing">See Pricing</button>
+        </div>
+      </div>
+      <div class="b-hero-card">
+        <div class="b-hero-stat"><div class="b-hero-stat-val">100%</div><div class="b-hero-stat-lbl">of order revenue goes directly to you — no commission</div></div>
+        <div class="b-hero-stat"><div class="b-hero-stat-val">Real-time</div><div class="b-hero-stat-lbl">order management — customers notified automatically</div></div>
+        <div class="b-hero-stat"><div class="b-hero-stat-val">14 days</div><div class="b-hero-stat-lbl">free trial — no credit card required to get started</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="b-features" id="b-features">
+    <div class="lbl">What you get</div>
+    <h2 class="sec-title">Everything you need to run a modern dry cleaner.</h2>
+    <p class="sec-sub">Built specifically for dry cleaning businesses. Not a generic booking tool.</p>
+    <div class="b-feat-grid">
+      <div class="b-feat-card"><div class="b-feat-icon">&#x1F4CB;</div><h3>Order Management Dashboard</h3><p>Every order in one place. Advance statuses with a tap — received, in cleaning, QC, ready. Customers notified automatically at each stage. No calls required.</p></div>
+      <div class="b-feat-card"><div class="b-feat-icon">&#x25CE;</div><h3>Live Order Tracking</h3><p>Customers see their order status in real time. When you mark an order ready, they get a notification instantly. No more "is it done?" phone calls.</p></div>
+      <div class="b-feat-card"><div class="b-feat-icon">&#x1F4CA;</div><h3>Analytics &amp; Insights</h3><p>See your revenue by day and week, service mix, busiest days, and customer return rates. Pro members get zip code reports and at-risk customer alerts.</p></div>
+      <div class="b-feat-card"><div class="b-feat-icon">&#x1F465;</div><h3>Customer Profiles</h3><p>Every customer builds a profile at your location — visit count, lifetime spend, last visit, top service. Know your regulars automatically.</p></div>
+      <div class="b-feat-card"><div class="b-feat-icon">&#x1F504;</div><h3>Live Profile Updates</h3><p>Update your hours, services, or pricing in your dashboard and the consumer app reflects it immediately. No waiting for approval.</p></div>
+      <div class="b-feat-card"><div class="b-feat-icon">&#x1F4A7;</div><h3>Hang Dry Tracking</h3><p>Orders with hang dry requests are automatically flagged in your dashboard so staff know before touching the garment. Air dry only — tracked automatically.</p></div>
+    </div>
+  </section>
+
+  <section class="b-dash">
+    <div class="lbl">The dashboard</div>
+    <h2 class="sec-title">Your business at a glance.</h2>
+    <p class="sec-sub">A clean, purpose-built interface. Everything your staff needs, nothing they don't.</p>
+    <div class="b-dash-preview">
+      <div class="b-dash-bar"><div class="b-dash-dots"><span></span><span></span><span></span></div><div class="b-dash-title">dry. Business Portal &#x2014; Dashboard</div></div>
+      <div class="b-dash-body">
+        <div class="b-dash-metric"><div class="b-dash-metric-val">12</div><div class="b-dash-metric-lbl">Orders Today</div></div>
+        <div class="b-dash-metric"><div class="b-dash-metric-val">3</div><div class="b-dash-metric-lbl">Ready for Pickup</div></div>
+        <div class="b-dash-metric"><div class="b-dash-metric-val">$384</div><div class="b-dash-metric-lbl">Revenue Today</div></div>
+        <div class="b-dash-metric"><div class="b-dash-metric-val">4.9&#x2605;</div><div class="b-dash-metric-lbl">Your Rating</div></div>
+      </div>
+      <div style="padding:0 24px 24px;display:flex;flex-direction:column;gap:12px">
+        <div style="background:#EBF7F1;border:1px solid #5BA87A;border-radius:12px;padding:14px 18px;font-size:14px;color:#5BA87A">&#x2705; 3 orders ready for pickup &#x2014; customers notified automatically</div>
+        <div style="background:#EDF4FF;border:1px solid #A0BEF0;border-radius:12px;padding:14px 18px;font-size:14px;color:#3A6EC8">&#x1F4A7; 2 orders have hang dry requested &#x2014; air dry only, no heat</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="b-how" id="b-how">
+    <div class="lbl">Getting started</div>
+    <h2 class="sec-title">You're live in under a day.</h2>
+    <p class="sec-sub">We handle the setup. You handle the cleaning.</p>
+    <div class="b-how-steps">
+      <div class="b-how-step"><div class="b-how-num">1</div><h3>Sign up below</h3><p>Fill out the form with your business details, services, and preferred plan. Takes five minutes.</p></div>
+      <div class="b-how-step"><div class="b-how-num">2</div><h3>Check your email</h3><p>You'll receive a login link immediately. Click it to set your password and access your dashboard.</p></div>
+      <div class="b-how-step"><div class="b-how-num">3</div><h3>Complete setup</h3><p>A short onboarding flow walks you through setting your hours, pricing, and profile. Takes two minutes.</p></div>
+      <div class="b-how-step"><div class="b-how-num">4</div><h3>Go live</h3><p>Your listing is active immediately. Customers in your area can find and book you right away.</p></div>
+    </div>
+  </section>
+
+  <section class="b-pricing" id="b-pricing">
+    <div style="text-align:center">
+      <div class="lbl">Straightforward pricing</div>
+      <h2 class="sec-title">Flat monthly. No surprises.</h2>
+      <p class="sec-sub" style="margin:0 auto">No transaction fees. No commissions. You keep every dollar your customers pay you. 14-day free trial on all plans.</p>
+    </div>
+    <div class="b-pricing-grid">
+      <div class="b-plan-card">
+        <div class="b-plan-price">$149<span style="font-size:16px;color:var(--ink-lt)">/month</span></div>
+        <div class="b-plan-name">Basic Plan</div>
+        <ul class="b-plan-features">
+          <li>Unlimited orders</li><li>Full order management dashboard</li><li>Automatic customer notifications</li><li>Basic analytics</li><li>Consumer app listing</li><li>Hang dry tracking</li><li>Live profile updates</li>
+        </ul>
+        <button class="btn btn-outline" style="width:100%" data-scroll="b-signup" data-plan="basic">Get Started with Basic</button>
+      </div>
+      <div class="b-plan-card featured">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+          <div class="b-plan-price" style="color:#fff">$299<span style="font-size:16px;color:rgba(255,255,255,.7)">/month</span></div>
+          <span style="font-size:10px;background:#fff;color:var(--lav-deep);padding:4px 10px;border-radius:20px;letter-spacing:1px">MOST POPULAR</span>
+        </div>
+        <div class="b-plan-name">Pro Plan</div>
+        <ul class="b-plan-features">
+          <li>Everything in Basic</li><li>Priority + featured listing in app</li><li>Advanced analytics &amp; insights</li><li>Zip code &amp; demographic reports</li><li>At-risk customer alerts</li><li>Customer visit frequency tracking</li><li>Dedicated onboarding support</li>
+        </ul>
+        <button class="btn btn-white" style="width:100%" data-scroll="b-signup" data-plan="pro">Start with Pro</button>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:24px;font-size:14px;color:var(--ink-lt);font-style:italic">Enterprise pricing available for multi-location businesses. Use the contact form to get in touch.</p>
+  </section>
+
+  <section class="b-faq" id="b-faq">
+    <div class="lbl">Common questions</div>
+    <h2 class="sec-title">Before you sign up.</h2>
+    <div class="b-faq-grid">
+      <div class="b-faq-item"><div class="b-faq-q">Do you take a cut of my orders?</div><div class="b-faq-a">No. You keep 100% of what customers pay you for services. Dry. charges customers a separate 5% booking fee on their end. You pay only the flat monthly subscription.</div></div>
+      <div class="b-faq-item"><div class="b-faq-q">How quickly can I go live?</div><div class="b-faq-a">Immediately. When you sign up, you receive a login link by email. After completing the 4-step onboarding flow in your dashboard, your listing is live and customers can book you.</div></div>
+      <div class="b-faq-item"><div class="b-faq-q">Can I set my own prices?</div><div class="b-faq-a">Yes, entirely. You set your own per-item and per-service pricing in your dashboard. You can update pricing at any time and changes reflect in the app immediately.</div></div>
+      <div class="b-faq-item"><div class="b-faq-q">What if I want to cancel?</div><div class="b-faq-a">Cancel anytime from your dashboard settings. You retain access through the end of your paid period. No cancellation fees, no partial refunds, no penalties.</div></div>
+      <div class="b-faq-item"><div class="b-faq-q">What's the difference between Basic and Pro?</div><div class="b-faq-a">Basic gives you everything you need to run daily operations. Pro adds priority placement in consumer search results, advanced analytics, zip code reports, and at-risk customer alerts.</div></div>
+      <div class="b-faq-item"><div class="b-faq-q">Do I need any hardware or equipment?</div><div class="b-faq-a">No hardware required. The business dashboard runs in any web browser on any device — tablet, laptop, or desktop. You can manage everything from an iPad at the counter.</div></div>
+    </div>
+  </section>
+
+  <section class="b-signup" id="b-signup">
+    <div class="b-signup-inner">
+      <div class="lbl" style="color:rgba(255,255,255,.65)">Get started today</div>
+      <h2 class="sec-title" style="color:#fff">Create your account.</h2>
+      <p class="sec-sub" style="color:rgba(255,255,255,.78)">Set up your profile, choose your plan, and go live on the platform. Takes about five minutes. 14-day free trial — no credit card required.</p>
+      <div class="b-form">
+        <div class="b-step-indicator">
+          <div id="bdot1" class="b-step-dot active">1</div>
+          <div id="bline1" class="b-step-line"></div>
+          <div id="bdot2" class="b-step-dot">2</div>
+          <div id="bline2" class="b-step-line"></div>
+          <div id="bdot3" class="b-step-dot">3</div>
+        </div>
+
+        <div id="bfs1">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:20px">Step 1 of 3 &#x2014; Your Business Details</div>
+          <div class="b-field-row">
+            <div class="b-field"><label>Business Name *</label><input id="bf-name" placeholder="Your business name"/></div>
+            <div class="b-field"><label>Owner / Contact Name *</label><input id="bf-owner" placeholder="Your name"/></div>
+          </div>
+          <div class="b-field-row">
+            <div class="b-field"><label>Email Address *</label><input id="bf-email" type="email" placeholder="your business email"/></div>
+            <div class="b-field"><label>Phone Number</label><input id="bf-phone" placeholder="(212) 555-0000"/></div>
+          </div>
+          <div class="b-field"><label>Business Address *</label><input id="bf-address" placeholder="Street address, New York, NY"/></div>
+          <div class="b-field"><label>Zip Code</label><input id="bf-zip" placeholder="10018"/></div>
+          <div style="display:flex;justify-content:flex-end;margin-top:8px">
+            <button class="btn btn-primary" id="bf-next1">Continue &#x2192;</button>
+          </div>
+        </div>
+
+        <div id="bfs2" class="hidden">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:8px">Step 2 of 3 &#x2014; Your Services</div>
+          <div style="font-size:13px;color:var(--ink-lt);font-style:italic;margin-bottom:20px">Check all services your location offers. Update anytime from your dashboard.</div>
+          <div class="b-field"><label>Services Offered</label>
+            <div class="b-svc-grid">
+              <label class="b-svc-check"><input type="checkbox" value="dry_clean" checked/> &#x2728; Dry Clean</label>
+              <label class="b-svc-check"><input type="checkbox" value="launder"/> &#x1F455; Launder &amp; Press</label>
+              <label class="b-svc-check"><input type="checkbox" value="wash_fold"/> &#x1F9FA; Wash &amp; Fold</label>
+              <label class="b-svc-check"><input type="checkbox" value="press_only"/> &#x1F454; Press Only</label>
+              <label class="b-svc-check"><input type="checkbox" value="alterations"/> &#x1FAA1; Repairs &amp; Alterations</label>
+              <label class="b-svc-check"><input type="checkbox" value="bedding"/> &#x1F6CF;&#xFE0F; Bedding &amp; Linens</label>
+              <label class="b-svc-check"><input type="checkbox" value="leather"/> &#x1F9E5; Leather &amp; Suede</label>
+              <label class="b-svc-check"><input type="checkbox" value="pickup"/> &#x1F697; Pickup &amp; Delivery</label>
+            </div>
+          </div>
+          <div class="b-field" style="margin-top:16px"><label>Special Features</label>
+            <div class="b-svc-grid">
+              <label class="b-svc-check"><input type="checkbox" id="bf-nontoxic"/> &#x1F33F; Non-Toxic / GreenEarth</label>
+              <label class="b-svc-check"><input type="checkbox" id="bf-express"/> &#x26A1; Express Same-Day</label>
+              <label class="b-svc-check"><input type="checkbox" id="bf-luxury"/> &#x2728; Luxury Garment Specialist</label>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:20px">
+            <button class="btn btn-outline" id="bf-back2">&#x2190; Back</button>
+            <button class="btn btn-primary" id="bf-next2">Continue &#x2192;</button>
+          </div>
+        </div>
+
+        <div id="bfs3" class="hidden">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:8px">Step 3 of 3 &#x2014; Choose Your Plan</div>
+          <div style="font-size:13px;color:var(--ink-lt);font-style:italic;margin-bottom:20px">14-day free trial on both plans. Upgrade or downgrade anytime.</div>
+          <div class="b-plan-select">
+            <div id="bpo-basic" class="b-plan-opt" data-plan-opt="basic">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--lav-deep);margin-bottom:4px">$149<span style="font-size:13px;color:var(--ink-lt)">/mo</span></div>
+              <div style="font-size:14px;color:var(--ink);margin-bottom:8px">Basic</div>
+              <div style="font-size:12px;color:var(--ink-mid);font-style:italic;line-height:1.6">Orders, dashboard, notifications, analytics, app listing</div>
+            </div>
+            <div id="bpo-pro" class="b-plan-opt selected" data-plan-opt="pro">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--lav-deep);margin-bottom:4px">$299<span style="font-size:13px;color:var(--ink-lt)">/mo</span></div>
+              <div style="font-size:14px;color:var(--ink);margin-bottom:8px">Pro &#x2B50;</div>
+              <div style="font-size:12px;color:var(--ink-mid);font-style:italic;line-height:1.6">Everything in Basic + priority listing, advanced analytics, insights</div>
+            </div>
+          </div>
+          <div class="b-field" style="margin-top:20px"><label>How did you hear about Dry.?</label>
+            <select id="bf-heard">
+              <option value="">Select one&#x2026;</option>
+              <option>Word of mouth / another cleaner</option>
+              <option>Google search</option>
+              <option>Social media</option>
+              <option>A Dry. customer told me</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="b-field"><label>Anything else you'd like us to know?</label><textarea id="bf-notes" rows="3" placeholder="Additional services, certifications, questions&#x2026;"></textarea></div>
+          <div id="bf-err" class="hidden" style="font-size:13px;color:#c0392b;padding:12px 16px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
+          <div style="font-size:12px;color:var(--ink-lt);font-style:italic;margin-bottom:16px">By creating an account you agree to the Dry. Business Partner Terms of Service.</div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <button class="btn btn-outline" id="bf-back3">&#x2190; Back</button>
+            <button id="bf-submit" class="btn btn-primary">Create My Account &#x2192;</button>
+          </div>
+        </div>
+
+        <div id="bfs-done" class="hidden" style="text-align:center;padding:20px 0">
+          <div style="font-size:52px;margin-bottom:16px">&#x1F33F;</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--ink);margin-bottom:10px">Account created!</div>
+          <div id="bfs-done-msg" style="font-size:15px;color:var(--ink-mid);font-style:italic;line-height:1.7;max-width:420px;margin:0 auto 24px">Check your email for a login link. Click it to set your password and complete your setup.</div>
+          <div style="background:var(--lav-glow);border:1.5px solid var(--lav-soft);border-radius:16px;padding:16px 20px;max-width:420px;margin:0 auto 24px;text-align:left">
+            <div style="font-size:13px;color:var(--lav-deep);font-family:'Cormorant Garamond',serif;margin-bottom:8px">What happens next</div>
+            <div style="font-size:13px;color:var(--ink-mid);font-style:italic;line-height:1.8">1. Check your inbox for an email from Dry.<br>2. Click the login link to set your password<br>3. Complete your 4-step setup in the dashboard<br>4. Your 14-day free trial starts immediately</div>
+          </div>
+          <button class="btn btn-outline" data-scroll="b-hero">Back to Top</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ft">
+      <div><div class="ft-logo">dry.</div><p class="ft-tagline">Your grandmother's dry cleaner, with your efficiency.</p></div>
+      <div class="ft-col"><h4>Platform</h4><a data-scroll="b-features">Features</a><a data-scroll="b-pricing">Pricing</a><a data-scroll="b-how">How It Works</a><a data-scroll="b-faq">FAQ</a></div>
+      <div class="ft-col"><h4>For Customers</h4><a data-action="show-customer">Consumer App</a><a data-action="show-customer">Find a Cleaner</a></div>
+      <div class="ft-col"><h4>Contact</h4><a data-action="show-customer" data-scroll="c-contact">Get Support</a><a data-scroll="b-signup">Partner Inquiries</a></div>
+    </div>
+    <div class="ft-bottom"><div>&#x00A9; 2026 Dry Technologies, LLC. All rights reserved.</div><div><a data-action="show-customer" data-after-scroll="c-contact">Privacy</a>&nbsp;&nbsp;<a data-action="show-customer" data-after-scroll="c-contact">Terms</a></div></div>
+  </footer>
+</div>
+
+<script type="module">
+// ══ CONFIG ══════════════════════════════════════════════
+const SB_URL  = 'SUPABASE_URL_PLACEHOLDER';
+const SB_ANON = 'SUPABASE_ANON_PLACEHOLDER';
+
+// ══ NAVIGATION ══════════════════════════════════════════
+function showSection(id) {
+  document.getElementById('entry').style.display    = 'none';
+  document.getElementById('customer').style.display = 'none';
+  document.getElementById('business').style.display = 'none';
+  document.getElementById(id).style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+function scrollToId(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Single event listener handles ALL clicks — no inline onclick needed
+document.addEventListener('click', (e) => {
+  const t = e.target.closest('[data-action],[data-scroll],[data-plan-opt],[data-plan],[data-filter]');
+  if (!t) return;
+
+  const action = t.dataset.action;
+  const scroll = t.dataset.scroll;
+  const planOpt = t.dataset.planOpt;
+  const plan = t.dataset.plan;
+  const filter = t.dataset.filter;
+
+  if (action === 'show-customer') { showSection('customer'); if (scroll) setTimeout(() => scrollToId(scroll), 100); }
+  if (action === 'show-business') { showSection('business'); }
+  if (action === 'go-home') { showSection('entry'); }
+  if (scroll && !action) { scrollToId(scroll); if (plan) selectBizPlan(plan); }
+  if (planOpt) selectBizPlan(planOpt);
+  if (filter) scrollToId('c-find');
+});
+
+// Entry cards
+document.querySelectorAll('.entry-card').forEach(card => {
+  card.addEventListener('click', () => {
+    if (card.dataset.action === 'show-customer') showSection('customer');
+    if (card.dataset.action === 'show-business') showSection('business');
+  });
+});
+
+// Business dashboard login button
+document.getElementById('biz-login-btn')?.addEventListener('click', () => {
+  window.open('https://drybusinessdashboard.vercel.app', '_blank');
+});
+
+// ══ WAITLIST / NOTIFY ME ════════════════════════════════
+document.getElementById('notify-btn')?.addEventListener('click', async () => {
+  const email = document.getElementById('notify-email')?.value?.trim();
+  if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+  try {
+    await fetch(SB_URL + '/rest/v1/waitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ email })
+    });
+  } catch(e) {}
+  document.getElementById('notify-thanks').classList.remove('hidden');
+  document.getElementById('notify-email').style.display = 'none';
+  document.getElementById('notify-btn').style.display = 'none';
+});
+
+document.getElementById('search-btn')?.addEventListener('click', () => scrollToId('c-find'));
+
+// ══ CONTACT FORM ════════════════════════════════════════
+document.getElementById('contact-submit-btn')?.addEventListener('click', async () => {
+  const name    = document.getElementById('cf-name')?.value?.trim();
+  const email   = document.getElementById('cf-email')?.value?.trim();
+  const topic   = document.getElementById('cf-topic')?.value;
+  const message = document.getElementById('cf-message')?.value?.trim();
+  const err     = document.getElementById('cf-err');
+  const btn     = document.getElementById('contact-submit-btn');
+  err.classList.add('hidden');
+
+  if (!name || !email || !topic || !message) {
+    err.textContent = 'Please fill in all fields.';
+    err.classList.remove('hidden');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  try {
+    await fetch(SB_URL + '/rest/v1/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ category: topic, message: name + ' (' + email + '): ' + message })
+    });
+  } catch(e) {}
+
+  document.getElementById('contact-form-inner').classList.add('hidden');
+  document.getElementById('contact-success').classList.remove('hidden');
+});
+
+// ══ BUSINESS SIGNUP FORM ════════════════════════════════
+let _bizPlan = 'pro';
+
+function selectBizPlan(plan) {
+  _bizPlan = plan;
+  const basic = document.getElementById('bpo-basic');
+  const pro   = document.getElementById('bpo-pro');
+  if (!basic || !pro) return;
+  basic.classList.toggle('selected', plan === 'basic');
+  pro.classList.toggle('selected',   plan === 'pro');
+}
+
+function bfGo(step) {
+  [1, 2, 3].forEach(s => {
+    const el = document.getElementById('bfs' + s);
+    if (el) el.classList.toggle('hidden', s !== step);
+  });
+  document.getElementById('bfs-done').classList.add('hidden');
+  for (let i = 1; i <= 3; i++) {
+    const dot  = document.getElementById('bdot' + i);
+    const line = document.getElementById('bline' + i);
+    if (dot) {
+      dot.classList.remove('active', 'done');
+      if (i < step) dot.classList.add('done');
+      else if (i === step) dot.classList.add('active');
+    }
+    if (line && i < 3) line.classList.toggle('done', i < step);
+  }
+}
+
+document.getElementById('bf-next1')?.addEventListener('click', () => {
+  const name    = document.getElementById('bf-name')?.value?.trim();
+  const owner   = document.getElementById('bf-owner')?.value?.trim();
+  const email   = document.getElementById('bf-email')?.value?.trim();
+  const address = document.getElementById('bf-address')?.value?.trim();
+  if (!name || !owner || !email || !address) { alert('Please fill in all required fields (marked *).'); return; }
+  bfGo(2);
+});
+
+document.getElementById('bf-back2')?.addEventListener('click', () => bfGo(1));
+document.getElementById('bf-next2')?.addEventListener('click', () => bfGo(3));
+document.getElementById('bf-back3')?.addEventListener('click', () => bfGo(2));
+
+document.getElementById('bf-submit')?.addEventListener('click', async () => {
+  const btn = document.getElementById('bf-submit');
+  const err = document.getElementById('bf-err');
+  btn.disabled = true;
+  btn.textContent = 'Creating your account…';
+  err.classList.add('hidden');
+
+  const services = Array.from(document.querySelectorAll('#bfs2 input[type=checkbox]:checked'))
+    .map(c => c.value).filter(v => v && v !== 'on');
+
+  const payload = {
+    business_name:    document.getElementById('bf-name')?.value?.trim(),
+    owner_name:       document.getElementById('bf-owner')?.value?.trim(),
+    email:            document.getElementById('bf-email')?.value?.trim(),
+    phone:            document.getElementById('bf-phone')?.value?.trim(),
+    address:          document.getElementById('bf-address')?.value?.trim(),
+    zip:              document.getElementById('bf-zip')?.value?.trim(),
+    selected_plan:    _bizPlan,
+    services_offered: services,
+    feature_nontoxic: !!document.getElementById('bf-nontoxic')?.checked,
+    feature_express:  !!document.getElementById('bf-express')?.checked,
+    feature_luxury:   !!document.getElementById('bf-luxury')?.checked,
+    how_heard:        document.getElementById('bf-heard')?.value,
+    notes:            document.getElementById('bf-notes')?.value?.trim(),
+  };
+
+  try {
+    // Try edge function first
+    const res = await fetch(SB_URL + '/functions/v1/signup-business', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SB_ANON },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Server error');
+    [1, 2, 3].forEach(s => { const el = document.getElementById('bfs' + s); if (el) el.classList.add('hidden'); });
+    document.getElementById('bfs-done').classList.remove('hidden');
+    for (let i = 1; i <= 3; i++) {
+      const dot = document.getElementById('bdot' + i);
+      if (dot) { dot.classList.remove('active'); dot.classList.add('done'); }
+    }
+  } catch(e) {
+    // Fallback: save to business_signups so no lead is lost
+    try {
+      await fetch(SB_URL + '/rest/v1/business_signups', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Prefer': 'return=minimal' },
+        body: JSON.stringify(payload)
+      });
+      [1, 2, 3].forEach(s => { const el = document.getElementById('bfs' + s); if (el) el.classList.add('hidden'); });
+      document.getElementById('bfs-done').classList.remove('hidden');
+      document.getElementById('bfs-done-msg').textContent = "We've received your details and will email your login within a few hours.";
+      for (let i = 1; i <= 3; i++) {
+        const dot = document.getElementById('bdot' + i);
+        if (dot) { dot.classList.remove('active'); dot.classList.add('done'); }
+      }
+    } catch(e2) {
+      err.textContent = 'Something went wrong. Please try again or reach out to us directly.';
+      err.classList.remove('hidden');
+      btn.disabled = false;
+      btn.textContent = 'Create My Account →';
+    }
+  }
+});
+</script>
+</body>
+</html>
