@@ -276,10 +276,10 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
 
       <!-- Profile header -->
       <div style="background:linear-gradient(135deg,var(--lav-deep),var(--lav));border-radius:24px;padding:28px 32px;margin-bottom:24px;display:flex;align-items:center;gap:20px">
-        <div id="acct-avatar" style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;font-family:Cormorant Garamond,serif;flex-shrink:0">J</div>
+        <div id="acct-avatar" style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;font-family:Cormorant Garamond,serif;flex-shrink:0"></div>
         <div>
-          <div id="acct-profile-name" style="font-size:22px;color:#fff;font-family:Cormorant Garamond,serif;margin-bottom:2px">Loading...</div>
-          <div id="acct-member-since" style="font-size:13px;color:rgba(255,255,255,.7);font-style:italic">Member since...</div>
+          <div id="acct-profile-name" style="font-size:22px;color:#fff;font-family:Cormorant Garamond,serif;margin-bottom:2px"></div>
+          <div id="acct-member-since" style="font-size:13px;color:rgba(255,255,255,.7);font-style:italic"></div>
         </div>
       </div>
 
@@ -1312,6 +1312,11 @@ document.getElementById('c-signin-btn')?.addEventListener('click', () => {
   if (_user) {
     showAcctPage('home');
     document.getElementById('c-orders-section')?.scrollIntoView({behavior:'smooth'});
+    // Always refresh header and fetch latest profile when My Account is opened
+    sb.from('users').select('full_name,phone').eq('id', _user.id).single().then(function(res) {
+      if (res.data) { _userProfile = res.data; }
+      updateProfileHeader();
+    });
   } else {
     openAuthModal('in');
   }
@@ -1450,20 +1455,16 @@ window.showAcctPage = function(page) {
 
   if (page === 'details') {
     title.textContent = 'Account Details';
-    // Show form immediately with whatever we have, then populate
-    var pf = _userProfile && _userProfile.full_name ? _userProfile.full_name.split(' ') : ['',''];
-    var first = (pf[0]||'').replace(/"/g,'&quot;');
-    var last  = pf.slice(1).join(' ').replace(/"/g,'&quot;');
-    var phone = (_userProfile && _userProfile.phone ? _userProfile.phone : '').replace(/"/g,'&quot;');
     var email = (_user ? _user.email : '').replace(/"/g,'&quot;');
+    // Always render form with loading state first, then fetch fresh from Supabase
     body.innerHTML =
       '<div style="'+card+'">'
       +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">'
-      +'<div>'+L('First Name')+'<input id="sp-first" type="text" value="'+first+'"'+s+'></div>'
-      +'<div>'+L('Last Name')+'<input id="sp-last" type="text" value="'+last+'"'+s+'></div>'
+      +'<div>'+L('First Name')+'<input id="sp-first" type="text" placeholder="Loading..." '+s+'></div>'
+      +'<div>'+L('Last Name')+'<input id="sp-last" type="text" placeholder="" '+s+'></div>'
       +'</div>'
-      +'<div style="margin-bottom:12px">'+L('Phone')+'<input id="sp-phone" type="tel" value="'+phone+'"'+s+'></div>'
-      +'<div style="margin-bottom:16px">'+L('Email')+' <input type="email" value="'+email+'" disabled style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;color:var(--ink-lt);outline:none;box-sizing:border-box;background:#f0ecf7"><div style="font-size:11px;color:var(--ink-lt);font-style:italic;margin-top:4px">Email cannot be changed</div></div>'
+      +'<div style="margin-bottom:12px">'+L('Phone')+'<input id="sp-phone" type="tel" placeholder="Loading..." '+s+'></div>'
+      +'<div style="margin-bottom:16px">'+L('Email')+'<input type="email" value="'+email+'" disabled style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;color:var(--ink-lt);outline:none;box-sizing:border-box;background:#f0ecf7"><div style="font-size:11px;color:var(--ink-lt);font-style:italic;margin-top:4px">Email cannot be changed</div></div>'
       +'<div id="sp-det-msg" style="display:none;padding:10px 14px;border-radius:10px;margin-bottom:14px;font-size:13px"></div>'
       +'<button id="sp-det-btn" class="btn btn-primary" style="width:100%" onclick="saveSpDetails()">Save Changes</button>'
       +'</div>'
@@ -1473,16 +1474,15 @@ window.showAcctPage = function(page) {
       +'<div id="sp-pw-sent" style="display:none;padding:10px 14px;border-radius:10px;background:var(--green-lt);color:var(--green);font-size:13px;margin-bottom:12px">Reset link sent — check your email.</div>'
       +'<button id="sp-pw-btn" class="btn btn-outline" style="width:100%" onclick="sendSpPwReset()">Send Password Reset Email</button>'
       +'</div>';
-    // Fetch fresh profile data and populate fields
+    // Always fetch fresh — never rely on cached _userProfile
     sb.from('users').select('full_name,phone').eq('id', _user.id).single().then(function(res) {
-      if (!res.data) return;
-      _userProfile = res.data;
-      updateProfileHeader();
-      var parts = (res.data.full_name||'').split(' ');
+      var data = res.data || {};
+      var parts = (data.full_name||'').split(' ');
       var el;
-      el = document.getElementById('sp-first'); if(el) el.value = parts[0]||'';
-      el = document.getElementById('sp-last');  if(el) el.value = parts.slice(1).join(' ')||'';
-      el = document.getElementById('sp-phone'); if(el) el.value = res.data.phone||'';
+      el = document.getElementById('sp-first'); if(el) el.value = parts[0]||''; if(el) el.placeholder='First name';
+      el = document.getElementById('sp-last');  if(el) el.value = parts.slice(1).join(' ')||''; if(el) el.placeholder='Last name';
+      el = document.getElementById('sp-phone'); if(el) el.value = data.phone||''; if(el) el.placeholder='Phone number';
+      if (data.full_name) { _userProfile = data; updateProfileHeader(); }
     });
   }
 
