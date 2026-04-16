@@ -283,55 +283,55 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
         </div>
       </div>
 
-      <!-- Menu items matching app -->
-      <div style="background:#fff;border-radius:20px;border:1px solid var(--bdlt);overflow:hidden;margin-bottom:24px">
-        <div id="open-account-btn" onclick="document.getElementById('acct-modal').style.display='flex';loadAccountModal()" style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt);transition:background .15s" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
-          <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F464;</div>
-          <div style="flex:1"><div style="font-size:15px;color:var(--ink)">Account Details</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">Name, email, phone, address</div></div>
-          <div style="color:var(--ink-lt);font-size:16px">&#x203A;</div>
+      <!-- Sub-page container -->
+      <div id="acct-subpage" class="hidden">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+          <button onclick="showAcctPage('home')" style="background:none;border:none;color:var(--lav);font-size:14px;cursor:pointer;padding:6px 0">&#x2190; Back</button>
+          <div id="acct-subpage-title" style="font-family:Cormorant Garamond,serif;font-size:22px;color:var(--ink)"></div>
         </div>
-        <div onclick="document.getElementById('c-orders-tab').scrollIntoView({behavior:'smooth'})" style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt);transition:background .15s" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
-          <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F9FA;</div>
-          <div style="flex:1"><div style="font-size:15px;color:var(--ink)">My Orders</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">View order history &amp; track status</div></div>
-          <div style="color:var(--ink-lt);font-size:16px">&#x203A;</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt);transition:background .15s" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
-          <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F381;</div>
-          <div style="flex:1"><div style="font-size:15px;color:var(--ink)">Give $20, Get $20</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">Refer a friend &middot; Earn $20 per referral</div></div>
-          <div style="color:var(--ink-lt);font-size:16px">&#x203A;</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt);transition:background .15s" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
-          <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F514;</div>
-          <div style="flex:1"><div style="font-size:15px;color:var(--ink)">Notifications</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">Tap to customize</div></div>
-          <div style="color:var(--ink-lt);font-size:16px">&#x203A;</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt);transition:background .15s" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
-          <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x2754;</div>
-          <div style="flex:1"><div style="font-size:15px;color:var(--ink)">Help &amp; Support</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">FAQ &amp; contact</div></div>
-          <div style="color:var(--ink-lt);font-size:16px">&#x203A;</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt);transition:background .15s" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
-          <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F4AC;</div>
-          <div style="flex:1"><div style="font-size:15px;color:var(--ink)">Give Feedback</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">Help us improve</div></div>
-          <div style="color:var(--ink-lt);font-size:16px">&#x203A;</div>
-        </div>
-        <div id="acct-signout-row" style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;transition:background .15s" onmouseover="this.style.background='#fdf5f5'" onmouseout="this.style.background='#fff'">
-          <div style="width:36px;height:36px;border-radius:10px;background:#fde8e8;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F6AA;</div>
-          <div style="flex:1"><div style="font-size:15px;color:#c0392b">Sign Out</div></div>
-        </div>
+        <div id="acct-subpage-body"></div>
       </div>
 
-      <!-- Orders section -->
-      <div id="c-orders-tab">
-        <div class="lbl">Order history</div>
-        <h3 style="font-family:Cormorant Garamond,serif;font-size:26px;font-weight:300;color:var(--ink);margin-bottom:20px">My Orders</h3>
-        <div id="c-orders-list">
-          <div style="text-align:center;padding:48px;color:var(--ink-lt);font-style:italic">Loading your orders&#x2026;</div>
+      <!-- Home page (menu) -->
+      <div id="acct-home">
+        <div style="background:#fff;border-radius:20px;border:1px solid var(--bdlt);overflow:hidden;margin-bottom:24px">
+          <div onclick="showAcctPage('details')" style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt)" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
+            <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F464;</div>
+            <div style="flex:1"><div style="font-size:15px;color:var(--ink)">Account Details</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">Name, email, phone, address</div></div>
+            <div style="color:var(--ink-lt);font-size:18px">&#x203A;</div>
+          </div>
+          <div onclick="showAcctPage('orders')" style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt)" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
+            <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F9FA;</div>
+            <div style="flex:1"><div style="font-size:15px;color:var(--ink)">My Orders</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">View order history &amp; track status</div></div>
+            <div style="color:var(--ink-lt);font-size:18px">&#x203A;</div>
+          </div>
+          <div onclick="showAcctPage('referral')" style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt)" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
+            <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F381;</div>
+            <div style="flex:1"><div style="font-size:15px;color:var(--ink)">Give $20, Get $20</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">Refer a friend &middot; Earn $20 per referral</div></div>
+            <div style="color:var(--ink-lt);font-size:18px">&#x203A;</div>
+          </div>
+          <div onclick="showAcctPage('notifications')" style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt)" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
+            <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F514;</div>
+            <div style="flex:1"><div style="font-size:15px;color:var(--ink)">Notifications</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">Tap to customize</div></div>
+            <div style="color:var(--ink-lt);font-size:18px">&#x203A;</div>
+          </div>
+          <div onclick="showAcctPage('help')" style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt)" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
+            <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x2754;</div>
+            <div style="flex:1"><div style="font-size:15px;color:var(--ink)">Help &amp; Support</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">FAQ &amp; contact</div></div>
+            <div style="color:var(--ink-lt);font-size:18px">&#x203A;</div>
+          </div>
+          <div onclick="showAcctPage('feedback')" style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt)" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
+            <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F4AC;</div>
+            <div style="flex:1"><div style="font-size:15px;color:var(--ink)">Give Feedback</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">Help us improve</div></div>
+            <div style="color:var(--ink-lt);font-size:18px">&#x203A;</div>
+          </div>
+          <div id="acct-signout-row" style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer" onmouseover="this.style.background='#fdf5f5'" onmouseout="this.style.background='#fff'">
+            <div style="width:36px;height:36px;border-radius:10px;background:#fde8e8;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F6AA;</div>
+            <div style="flex:1"><div style="font-size:15px;color:#c0392b">Sign Out</div></div>
+          </div>
         </div>
+        <div style="text-align:center;font-size:12px;color:var(--ink-lt);font-style:italic">dry. &middot; version 1.0 &middot; drytheapp.com</div>
       </div>
-
-      <!-- Footer note -->
-      <div style="text-align:center;margin-top:32px;font-size:12px;color:var(--ink-lt);font-style:italic">dry. &middot; version 1.0 &middot; drytheapp.com</div>
     </div>
   </section>
 
@@ -971,18 +971,24 @@ async function onSignedIn() {
     await sb.from('users').insert({ id: _user.id, full_name: name });
     _userProfile = { full_name: name };
   }
-  // Populate profile header
-  const fn = (_userProfile && _userProfile.full_name) ? _userProfile.full_name : _user.email;
-  const avatar = fn ? fn.charAt(0).toUpperCase() : '?';
-  if (document.getElementById('acct-avatar'))       document.getElementById('acct-avatar').textContent = avatar;
-  if (document.getElementById('acct-profile-name')) document.getElementById('acct-profile-name').textContent = fn || '';
-  // Member since
-  const created = _user.created_at ? new Date(_user.created_at) : new Date();
-  const since = created.toLocaleDateString('en-US', {month:'long', year:'numeric'});
-  if (document.getElementById('acct-member-since')) document.getElementById('acct-member-since').textContent = 'Member since ' + since;
+  // Populate profile header (called after profile loaded)
+  updateProfileHeader();
   // Wire sign out row
   const sor = document.getElementById('acct-signout-row');
   if (sor) sor.onclick = async function() { await sb.auth.signOut(); };
+}
+
+function updateProfileHeader() {
+  var fn = (_userProfile && _userProfile.full_name) ? _userProfile.full_name : (_user ? _user.email : '');
+  var avatar = fn ? fn.charAt(0).toUpperCase() : '?';
+  var el;
+  el = document.getElementById('acct-avatar');       if (el) el.textContent = avatar;
+  el = document.getElementById('acct-profile-name'); if (el) el.textContent = fn || '';
+  if (_user) {
+    var created = _user.created_at ? new Date(_user.created_at) : new Date();
+    var since = created.toLocaleDateString('en-US', {month:'long', year:'numeric'});
+    el = document.getElementById('acct-member-since'); if (el) el.textContent = 'Member since ' + since;
+  }
 }
 
 window.loadAccountModal = function() {
@@ -1007,10 +1013,15 @@ function onSignedOut() {
   _userProfile = null;
 }
 function updateNavBtns() {
-  const si = document.getElementById('c-signin-btn');
-  const gs = document.getElementById('c-getstarted-btn');
-  if (si) si.textContent = _user ? 'My Account' : 'Sign In';
-  if (gs) gs.textContent = _user ? 'My Orders' : 'Get Started';
+  var si = document.getElementById('c-signin-btn');
+  var gs = document.getElementById('c-getstarted-btn');
+  if (_user) {
+    if (si) { si.textContent = 'My Account'; si.style.display = ''; }
+    if (gs) { gs.style.display = 'none'; } // hide Get Started when signed in
+  } else {
+    if (si) { si.textContent = 'Sign In'; si.style.display = ''; }
+    if (gs) { gs.textContent = 'Get Started'; gs.style.display = ''; }
+  }
 }
 
 // ── Load cleaners ────────────────────────────────────────────────────────────
@@ -1294,10 +1305,16 @@ window.openAuthModal = openAuthModal;
 window.closeAuthModal = closeAuthModal;
 window.switchAuthTab = switchAuthTab;
 
-document.getElementById('c-signin-btn')?.addEventListener('click', () => openAuthModal('in'));
+document.getElementById('c-signin-btn')?.addEventListener('click', () => {
+  if (_user) {
+    showAcctPage('home');
+    document.getElementById('c-orders-section')?.scrollIntoView({behavior:'smooth'});
+  } else {
+    openAuthModal('in');
+  }
+});
 document.getElementById('c-getstarted-btn')?.addEventListener('click', () => {
-  if (_user) { document.getElementById('c-orders-section')?.scrollIntoView({behavior:'smooth'}); }
-  else openAuthModal('up');
+  openAuthModal('up');
 });
 document.getElementById('c-auth-modal')?.addEventListener('click', e => { if (e.target.id === 'c-auth-modal') closeAuthModal(); });
 
@@ -1354,6 +1371,12 @@ document.getElementById('auth-signout-btn')?.addEventListener('click', async () 
   await sb.auth.signOut();
   closeAuthModal();
 });
+// Account page sign out row - wired in onSignedIn, but also wire here as fallback
+document.addEventListener('click', async function(e) {
+  if (e.target.closest('#acct-signout-row')) {
+    await sb.auth.signOut();
+  }
+});
 
 document.getElementById('auth-forgot-btn')?.addEventListener('click', async () => {
   const email = document.getElementById('auth-forgot-email').value.trim();
@@ -1392,58 +1415,205 @@ document.getElementById('auth-reset-btn')?.addEventListener('click', async () =>
   }
 })();
 
-// ── Account details modal ────────────────────────────────────────────────────
-document.getElementById('open-account-btn')?.addEventListener('click', () => {
-  if (!_user) return;
-  document.getElementById('acct-modal').style.display = 'flex';
-  document.getElementById('acct-email').value = _user.email || '';
-  document.getElementById('acct-pw').value = '';
-  document.getElementById('acct-msg').classList.add('hidden');
-  sb.from('users').select('full_name,phone').eq('id', _user.id).single().then(({data}) => {
-    if (data) {
-      const parts = (data.full_name||'').split(' ');
-      if (document.getElementById('acct-firstname')) document.getElementById('acct-firstname').value = parts[0]||'';
-      if (document.getElementById('acct-lastname'))  document.getElementById('acct-lastname').value  = parts.slice(1).join(' ')||'';
-      if (document.getElementById('acct-phone'))     document.getElementById('acct-phone').value     = data.phone||'';
-    }
-  });
-});
-document.getElementById('acct-modal-close')?.addEventListener('click', () => {
-  document.getElementById('acct-modal').style.display = 'none';
-});
-document.getElementById('acct-modal')?.addEventListener('click', e => {
-  if (e.target.id === 'acct-modal') document.getElementById('acct-modal').style.display = 'none';
-});
-document.getElementById('acct-save-btn')?.addEventListener('click', async () => {
-  const name = document.getElementById('acct-name').value.trim();
-  const pw   = document.getElementById('acct-pw').value;
-  const msg  = document.getElementById('acct-msg');
-  const btn  = document.getElementById('acct-save-btn');
-  msg.classList.add('hidden');
-  btn.disabled = true; btn.textContent = 'Saving…';
-  try {
-    const acctFirst = document.getElementById('acct-firstname')?.value.trim() || '';
-    const acctLast  = document.getElementById('acct-lastname')?.value.trim() || '';
-    const acctPhone = document.getElementById('acct-phone')?.value.trim() || '';
-    const acctFullName = (acctFirst + ' ' + acctLast).trim();
-    if (acctFullName) await sb.from('users').upsert({ id: _user.id, full_name: acctFullName, phone: acctPhone || null });
-    if (pw) {
-      if (pw.length < 6) { msg.textContent = 'Password must be at least 6 characters.'; msg.style.cssText = 'background:#fdf0f0;color:#c0392b;padding:10px 14px;border-radius:10px;font-family:Georgia'; msg.classList.remove('hidden'); btn.disabled = false; btn.textContent = 'Save Changes'; return; }
-      const { error } = await sb.auth.updateUser({ password: pw });
-      if (error) throw error;
-    }
-    msg.textContent = '✓ Saved successfully!';
-    msg.style.cssText = 'background:#EBF7F1;color:#5BA87A;padding:10px 14px;border-radius:10px;font-family:Georgia';
-    msg.classList.remove('hidden');
-    document.getElementById('acct-pw').value = '';
-  } catch(e) {
-    msg.textContent = e.message || 'Something went wrong.';
-    msg.style.cssText = 'background:#fdf0f0;color:#c0392b;padding:10px 14px;border-radius:10px;font-family:Georgia';
-    msg.classList.remove('hidden');
+// ── Account sub-pages (in-page, no modal) ─────────────────────────────────────
+window.showAcctPage = function(page) {
+  var home  = document.getElementById('acct-home');
+  var sub   = document.getElementById('acct-subpage');
+  var title = document.getElementById('acct-subpage-title');
+  var body  = document.getElementById('acct-subpage-body');
+
+  // Scroll account section into view
+  document.getElementById('c-orders-section')?.scrollIntoView({behavior:'smooth'});
+
+  if (page === 'home') {
+    if (home) home.classList.remove('hidden');
+    if (sub)  sub.classList.add('hidden');
+    return;
   }
-  btn.disabled = false; btn.textContent = 'Save Changes';
-});
+
+  if (home) home.classList.add('hidden');
+  if (sub)  sub.classList.remove('hidden');
+
+  var i = function(id) { return '<input id="'+id+'" '; };
+  var F = 'type="text"';
+  var s = ' style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"';
+  var L = function(t) { return '<label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);margin-bottom:6px">'+t+'</label>'; };
+  var card = 'background:#fff;border-radius:16px;border:1px solid var(--bdlt);padding:20px 22px;margin-bottom:16px';
+
+  if (page === 'details') {
+    title.textContent = 'Account Details';
+    var pf = _userProfile && _userProfile.full_name ? _userProfile.full_name.split(' ') : ['',''];
+    var first = (pf[0]||'').replace(/"/g,'&quot;');
+    var last  = pf.slice(1).join(' ').replace(/"/g,'&quot;');
+    var phone = (_userProfile && _userProfile.phone ? _userProfile.phone : '').replace(/"/g,'&quot;');
+    var email = (_user ? _user.email : '').replace(/"/g,'&quot;');
+    body.innerHTML =
+      '<div style="'+card+'">'
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">'
+      +'<div>'+L('First Name')+'<input id="sp-first" type="text" value="'+first+'"'+s+'></div>'
+      +'<div>'+L('Last Name')+'<input id="sp-last" type="text" value="'+last+'"'+s+'></div>'
+      +'</div>'
+      +'<div style="margin-bottom:12px">'+L('Phone')+'<input id="sp-phone" type="tel" value="'+phone+'"'+s+'></div>'
+      +'<div style="margin-bottom:16px">'+L('Email')+' <input type="email" value="'+email+'" disabled style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;color:var(--ink-lt);outline:none;box-sizing:border-box;background:#f0ecf7"><div style="font-size:11px;color:var(--ink-lt);font-style:italic;margin-top:4px">Email cannot be changed</div></div>'
+      +'<div id="sp-det-msg" style="display:none;padding:10px 14px;border-radius:10px;margin-bottom:14px;font-size:13px"></div>'
+      +'<button id="sp-det-btn" class="btn btn-primary" style="width:100%" onclick="saveSpDetails()">Save Changes</button>'
+      +'</div>'
+      +'<div style="'+card+'">'
+      +'<div style="font-size:16px;color:var(--ink);margin-bottom:4px">Change Password</div>'
+      +'<div style="font-size:13px;color:var(--ink-lt);font-style:italic;margin-bottom:14px">A secure reset link will be sent to '+email+'</div>'
+      +'<div id="sp-pw-sent" style="display:none;padding:10px 14px;border-radius:10px;background:var(--green-lt);color:var(--green);font-size:13px;margin-bottom:12px">Reset link sent — check your email.</div>'
+      +'<button id="sp-pw-btn" class="btn btn-outline" style="width:100%" onclick="sendSpPwReset()">Send Password Reset Email</button>'
+      +'</div>';
+  }
+
+  else if (page === 'orders') {
+    title.textContent = 'My Orders';
+    body.innerHTML = '<div id="sp-orders-list" style="padding:8px 0"><div style="text-align:center;padding:40px;color:var(--ink-lt);font-style:italic">Loading...</div></div>';
+    // Reuse loadOrders but point to sp-orders-list
+    if (!_user) return;
+    sb.from('orders').select('*').eq('user_id', _user.id).order('created_at', {ascending:false}).limit(20).then(function(res) {
+      var orders = res.data || [];
+      var list = document.getElementById('sp-orders-list');
+      if (!list) return;
+      if (!orders.length) { list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--ink-lt);font-style:italic">No orders yet.</div>'; return; }
+      var bizIds = [...new Set(orders.map(function(o){return o.business_id;}).filter(Boolean))];
+      sb.from('businesses').select('id,name').in('id', bizIds).then(function(bres) {
+        var bmap = {};
+        (bres.data||[]).forEach(function(b){bmap[b.id]=b.name;});
+        var SC = {scheduled:'var(--lav)',received:'#C97B2A',in_cleaning:'#3A6EC8',qc:'#B8860B',ready:'#5BA87A',completed:'#5BA87A'};
+        var SL = {scheduled:'Scheduled',received:'Received',in_cleaning:'In Cleaning',qc:'Quality Check',ready:'Ready for Pickup',completed:'Completed'};
+        list.innerHTML = orders.map(function(o) {
+          var sc = SC[o.status]||'var(--lav)';
+          var date = o.scheduled_date ? new Date(o.scheduled_date+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : new Date(o.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+          return '<div style="background:#fff;border:1px solid var(--bdlt);border-radius:14px;padding:16px 18px;margin-bottom:10px">'
+            +'<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">'
+            +'<div><div style="font-size:16px;color:var(--ink);margin-bottom:2px">'+(bmap[o.business_id]||'Your Cleaner')+'</div>'
+            +'<div style="font-size:12px;color:var(--ink-lt)">'+(o.garments_summary||'Order')+' &middot; $'+(o.total||'—')+' &middot; '+date+'</div></div>'
+            +'<div style="display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:16px;background:'+sc+'18;flex-shrink:0">'
+            +'<div style="width:6px;height:6px;border-radius:50%;background:'+sc+'"></div>'
+            +'<span style="font-size:11px;color:'+sc+'">'+(SL[o.status]||o.status)+'</span></div>'
+            +'</div></div>';
+        }).join('');
+      });
+    });
+  }
+
+  else if (page === 'referral') {
+    title.textContent = 'Give $20, Get $20';
+    var code = _user ? _user.id.slice(-6).toUpperCase() : '------';
+    body.innerHTML =
+      '<div style="'+card+';text-align:center">'
+      +'<div style="font-size:52px;margin-bottom:16px">&#x1F381;</div>'
+      +'<div style="font-size:20px;color:var(--ink);margin-bottom:8px">Share Dry. with friends</div>'
+      +'<div style="font-size:14px;color:var(--ink-lt);font-style:italic;line-height:1.7;margin-bottom:20px">When a friend signs up and places their first order, you both get <strong>$20 off</strong>.</div>'
+      +'<div style="background:var(--lav-glow);border:1.5px solid var(--lav-soft);border-radius:14px;padding:18px;margin-bottom:16px">'
+      +'<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--lav);margin-bottom:10px">Your Referral Code</div>'
+      +'<div style="font-size:32px;color:var(--lav-deep);letter-spacing:6px">'+code+'</div>'
+      +'</div>'
+      +'<button id="sp-copy-btn" class="btn btn-primary" style="width:100%" onclick="navigator.clipboard.writeText(\''+code+'\').then(function(){var b=document.getElementById(\'sp-copy-btn\');b.textContent=\'Copied!\';setTimeout(function(){b.textContent=\'Copy Code\'},2000)})">Copy Code</button>'
+      +'</div>';
+  }
+
+  else if (page === 'notifications') {
+    title.textContent = 'Notifications';
+    var mkToggle = function(id, label, sub2, checked) {
+      return '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--bdlt)">'
+        +'<div><div style="font-size:14px;color:var(--ink)">'+label+'</div>'
+        +(sub2?'<div style="font-size:12px;color:var(--ink-lt);font-style:italic">'+sub2+'</div>':'')+'</div>'
+        +'<div onclick="this.classList.toggle(\'on\');this.style.background=this.classList.contains(\'on\')?\'var(--lav)\':\''+'#DDD3ED\'" '
+        +'style="width:44px;height:24px;border-radius:12px;background:'+(checked?'var(--lav)':'#DDD3ED')+';position:relative;cursor:pointer;transition:background .2s;flex-shrink:0'+(checked?' on':'')+'" '
+        +'class="ntog'+(checked?' on':'')+'">'
+        +'<div style="width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:3px;'+(checked?'right:3px':'left:3px')+';transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,.2)"></div>'
+        +'</div></div>';
+    };
+    body.innerHTML =
+      '<div style="'+card+'">'
+      +mkToggle('n1','Order Updates','Get notified when your order status changes',true)
+      +mkToggle('n2','Ready for Pickup','Alert when your items are ready',true)
+      +mkToggle('n3','Promotions','Deals and offers from your cleaners',false)
+      +mkToggle('n4','Account Activity','Sign-ins and account changes',true)
+      +'</div>'
+      +'<div style="font-size:12px;color:var(--ink-lt);font-style:italic;text-align:center">Notification preferences are saved automatically.</div>';
+  }
+
+  else if (page === 'help') {
+    title.textContent = 'Help & Support';
+    var faq = [
+      ['How does booking work?','Find a cleaner, select your services, add garments, pick a drop-off time, and confirm. You\'ll get a drop-off code to show at the counter.'],
+      ['When will I be charged?','Your card is charged when you confirm your order. The total includes the cleaner\'s service price plus a 5% Dry. booking fee.'],
+      ['Can I cancel an order?','You can cancel before the cleaner receives your items. Once status moves to Received, contact the cleaner directly.'],
+      ['How do I track my order?','Once signed in, your order status updates in real time in My Orders. You\'ll see each stage from Received through Ready for Pickup.'],
+      ['What is the drop-off code?','A 4-digit code tied to your order. Show it at the counter when dropping off your items so the cleaner can match it to your order.'],
+      ['How do I contact support?','Email us at hello@drytheapp.com and we\'ll respond within one business day.']
+    ];
+    body.innerHTML = faq.map(function(q) {
+      return '<div style="'+card+'">'
+        +'<div style="font-size:15px;color:var(--ink);margin-bottom:6px">'+q[0]+'</div>'
+        +'<div style="font-size:13px;color:var(--ink-lt);font-style:italic;line-height:1.6">'+q[1]+'</div>'
+        +'</div>';
+    }).join('')
+    +'<div style="'+card+';text-align:center">'
+    +'<div style="font-size:14px;color:var(--ink);margin-bottom:8px">Still need help?</div>'
+    +'<a href="mailto:hello@drytheapp.com" class="btn btn-primary" style="display:inline-block">Email Us</a>'
+    +'</div>';
+  }
+
+  else if (page === 'feedback') {
+    title.textContent = 'Give Feedback';
+    body.innerHTML =
+      '<div style="'+card+'">'
+      +'<div style="font-size:15px;color:var(--ink);margin-bottom:16px">We read every piece of feedback. What\'s on your mind?</div>'
+      +'<div style="margin-bottom:12px">'+L('Category')
+      +'<select id="sp-fb-cat" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)">'
+      +'<option value="general">General</option>'
+      +'<option value="bug">Something is broken</option>'
+      +'<option value="feature">Feature request</option>'
+      +'<option value="cleaner">Feedback about a cleaner</option>'
+      +'</select></div>'
+      +'<div style="margin-bottom:16px">'+L('Message')
+      +'<textarea id="sp-fb-msg" rows="4" placeholder="Tell us what you think..." style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off);resize:none"></textarea></div>'
+      +'<div id="sp-fb-sent" style="display:none;padding:10px 14px;border-radius:10px;background:var(--green-lt);color:var(--green);font-size:13px;margin-bottom:12px">Thank you! We received your feedback.</div>'
+      +'<button id="sp-fb-btn" class="btn btn-primary" style="width:100%" onclick="sendSpFeedback()">Send Feedback</button>'
+      +'</div>';
+  }
+};
+
+window.saveSpDetails = async function() {
+  var first = (document.getElementById('sp-first')||{}).value||'';
+  var last  = (document.getElementById('sp-last')||{}).value||'';
+  var phone = (document.getElementById('sp-phone')||{}).value||'';
+  var btn   = document.getElementById('sp-det-btn');
+  var msg   = document.getElementById('sp-det-msg');
+  var full  = (first+' '+last).trim();
+  if (!full) { msg.textContent='Please enter your name.'; msg.style.cssText='background:#fdf0f0;color:#c0392b'; msg.style.display=''; return; }
+  btn.disabled=true; btn.textContent='Saving…';
+  await sb.from('users').upsert({id:_user.id, full_name:full, phone:phone||null});
+  _userProfile = {full_name:full, phone:phone};
+  updateProfileHeader();
+  msg.textContent='✓ Saved successfully!'; msg.style.cssText='background:var(--green-lt);color:var(--green)'; msg.style.display='';
+  btn.disabled=false; btn.textContent='Save Changes';
+};
+
+window.sendSpPwReset = async function() {
+  var btn = document.getElementById('sp-pw-btn');
+  var sent = document.getElementById('sp-pw-sent');
+  btn.disabled=true; btn.textContent='Sending…';
+  await sb.auth.resetPasswordForEmail(_user.email, {redirectTo:'https://drytheapp.com/?reset=1'});
+  btn.style.display='none'; sent.style.display='';
+};
+
+window.sendSpFeedback = async function() {
+  var cat = (document.getElementById('sp-fb-cat')||{}).value||'general';
+  var msg = (document.getElementById('sp-fb-msg')||{}).value||'';
+  var btn = document.getElementById('sp-fb-btn');
+  var sent = document.getElementById('sp-fb-sent');
+  if (!msg.trim()) return;
+  btn.disabled=true; btn.textContent='Sending…';
+  await sb.from('feedback').insert({category:cat, message:(_user?_user.email:'guest')+': '+msg});
+  btn.style.display='none'; sent.style.display='';
+};
 </script>
+
 
 <!-- CONSUMER AUTH MODAL -->
 <div id="c-auth-modal" style="display:none;position:fixed;inset:0;background:rgba(44,31,61,.5);backdrop-filter:blur(6px);z-index:500;align-items:center;justify-content:center;padding:20px">
