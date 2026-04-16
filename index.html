@@ -982,16 +982,16 @@ async function onSignedIn() {
 }
 
 function updateProfileHeader() {
-  var fn = (_userProfile && _userProfile.full_name) ? _userProfile.full_name : (_user ? _user.email : '');
-  var avatar = fn ? fn.charAt(0).toUpperCase() : '?';
+  if (!_user) return;
+  var fn = (_userProfile && _userProfile.full_name) ? _userProfile.full_name : '';
+  var display = fn || _user.email || '';
+  var avatar = display ? display.charAt(0).toUpperCase() : '?';
   var el;
   el = document.getElementById('acct-avatar');       if (el) el.textContent = avatar;
-  el = document.getElementById('acct-profile-name'); if (el) el.textContent = fn || '';
-  if (_user) {
-    var created = _user.created_at ? new Date(_user.created_at) : new Date();
-    var since = created.toLocaleDateString('en-US', {month:'long', year:'numeric'});
-    el = document.getElementById('acct-member-since'); if (el) el.textContent = 'Member since ' + since;
-  }
+  el = document.getElementById('acct-profile-name'); if (el) el.textContent = fn || _user.email || '';
+  var created = _user.created_at ? new Date(_user.created_at) : new Date();
+  var since = created.toLocaleDateString('en-US', {month:'long', year:'numeric'});
+  el = document.getElementById('acct-member-since'); if (el) el.textContent = 'Member since ' + since;
 }
 
 window.loadAccountModal = function() {
@@ -1317,6 +1317,8 @@ document.getElementById('c-signin-btn')?.addEventListener('click', () => {
       if (res.data) { _userProfile = res.data; }
       updateProfileHeader();
     });
+    // Show first letter of email immediately while fetch runs
+    updateProfileHeader();
   } else {
     openAuthModal('in');
   }
