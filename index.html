@@ -815,7 +815,7 @@ document.getElementById('bf-next1')?.addEventListener('click', () => {
   const email   = document.getElementById('bf-email')?.value?.trim();
   const address = document.getElementById('bf-address')?.value?.trim();
   const phone = document.getElementById('bf-phone')?.value?.trim();
-  if (!name || !owner || !email || !address || !phone) { alert('Please fill in all required fields (marked *).'); return; }
+  if (!name || !owner || !email || !address || !phone) { alert('Please fill in all required fields: Business Name, Owner Name, Email, Address, and Phone.'); return; }
   bfGo(2);
 });
 
@@ -1054,13 +1054,20 @@ function closeAuthModal() {
   if (modal) modal.style.display = 'none';
 }
 function switchAuthTab(tab) {
-  document.getElementById('auth-signin')?.classList.toggle('hidden', tab !== 'in');
-  document.getElementById('auth-signup')?.classList.toggle('hidden', tab !== 'up');
-  document.getElementById('auth-signedin')?.classList.add('hidden');
+  ['auth-signin','auth-signup','auth-signedin','auth-forgot','auth-reset'].forEach(id => {
+    document.getElementById(id)?.classList.add('hidden');
+  });
+  if (tab === 'in')     document.getElementById('auth-signin')?.classList.remove('hidden');
+  if (tab === 'up')     document.getElementById('auth-signup')?.classList.remove('hidden');
+  if (tab === 'signedin') document.getElementById('auth-signedin')?.classList.remove('hidden');
+  if (tab === 'forgot') document.getElementById('auth-forgot')?.classList.remove('hidden');
+  if (tab === 'reset')  document.getElementById('auth-reset')?.classList.remove('hidden');
+  // Tab bar highlight
   const ti = document.getElementById('auth-tab-in');
   const tu = document.getElementById('auth-tab-up');
-  if (ti) { ti.style.background = tab==='in'?'var(--lav)':'#fff'; ti.style.color = tab==='in'?'#fff':'var(--ink-lt)'; }
-  if (tu) { tu.style.background = tab==='up'?'var(--lav)':'#fff'; tu.style.color = tab==='up'?'#fff':'var(--ink-lt)'; }
+  const showTabs = tab === 'in' || tab === 'up';
+  if (ti) { ti.style.background = tab==='in'?'var(--lav)':'#fff'; ti.style.color = tab==='in'?'#fff':'var(--ink-lt)'; ti.style.display = showTabs?'':'none'; }
+  if (tu) { tu.style.background = tab==='up'?'var(--lav)':'#fff'; tu.style.color = tab==='up'?'#fff':'var(--ink-lt)'; tu.style.display = showTabs?'':'none'; }
 }
 function showAuthState(s) {
   document.getElementById('auth-signin')?.classList.toggle('hidden', s !== 'in');
@@ -1104,7 +1111,13 @@ document.getElementById('auth-signup-btn')?.addEventListener('click', async () =
   const err       = document.getElementById('auth-up-err');
   const btn       = document.getElementById('auth-signup-btn');
   err.classList.add('hidden');
-  if (!firstName || !email || !pass) { err.textContent = 'Please fill in first name, email, and password.'; err.classList.remove('hidden'); return; }
+  if (!firstName)      { err.textContent = 'Please enter your first name.'; err.classList.remove('hidden'); return; }
+  if (!lastName)       { err.textContent = 'Please enter your last name.'; err.classList.remove('hidden'); return; }
+  if (!phone)          { err.textContent = 'Please enter your phone number.'; err.classList.remove('hidden'); return; }
+  if (!document.getElementById('auth-up-dob').value.trim()) { err.textContent = 'Please enter your date of birth.'; err.classList.remove('hidden'); return; }
+  if (!document.getElementById('auth-up-address').value.trim()) { err.textContent = 'Please enter your address.'; err.classList.remove('hidden'); return; }
+  if (!email)          { err.textContent = 'Please enter your email.'; err.classList.remove('hidden'); return; }
+  if (!pass)           { err.textContent = 'Please enter a password.'; err.classList.remove('hidden'); return; }
   if (pass.length < 6) { err.textContent = 'Password must be at least 6 characters.'; err.classList.remove('hidden'); return; }
   btn.disabled = true; btn.textContent = 'Creating account…';
   const fullName = (firstName + ' ' + lastName).trim();
@@ -1125,6 +1138,52 @@ document.getElementById('auth-signout-btn')?.addEventListener('click', async () 
   await sb.auth.signOut();
   closeAuthModal();
 });
+
+// Forgot password
+document.getElementById('auth-forgot-btn')?.addEventListener('click', async () => {
+  const email = document.getElementById('auth-forgot-email').value.trim();
+  const err   = document.getElementById('auth-forgot-err');
+  const btn   = document.getElementById('auth-forgot-btn');
+  err.classList.add('hidden');
+  if (!email) { err.textContent = 'Please enter your email address.'; err.classList.remove('hidden'); return; }
+  btn.disabled = true; btn.textContent = 'Sending…';
+  const { error } = await sb.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://drytheapp.com/?reset=1',
+  });
+  btn.disabled = false; btn.textContent = 'Send Reset Link';
+  if (error) { err.textContent = error.message; err.classList.remove('hidden'); return; }
+  document.getElementById('auth-forgot-form').classList.add('hidden');
+  document.getElementById('auth-forgot-sent').classList.remove('hidden');
+});
+
+// Reset password (user landed from email link)
+document.getElementById('auth-reset-btn')?.addEventListener('click', async () => {
+  const pass = document.getElementById('auth-reset-pass').value;
+  const err  = document.getElementById('auth-reset-err');
+  const btn  = document.getElementById('auth-reset-btn');
+  err.classList.add('hidden');
+  if (!pass || pass.length < 6) { err.textContent = 'Password must be at least 6 characters.'; err.classList.remove('hidden'); return; }
+  btn.disabled = true; btn.textContent = 'Updating…';
+  const { error } = await sb.auth.updateUser({ password: pass });
+  btn.disabled = false; btn.textContent = 'Update Password';
+  if (error) { err.textContent = error.message; err.classList.remove('hidden'); return; }
+  document.getElementById('auth-reset-form').classList.add('hidden');
+  document.getElementById('auth-reset-done').classList.remove('hidden');
+  setTimeout(() => { closeAuthModal(); }, 2000);
+});
+
+// Detect if user arrived from a password reset link
+(async () => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('reset') === '1') {
+    // Supabase puts the session in the URL hash after clicking reset link
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) {
+      showSection('customer');
+      openAuthModal('reset');
+    }
+  }
+})();
 
 // ── Account details modal ────────────────────────────────────────────────────
 document.getElementById('open-account-btn')?.addEventListener('click', () => {
@@ -1205,7 +1264,8 @@ document.getElementById('acct-save-btn')?.addEventListener('click', async () => 
         </div>
         <div id="auth-in-err" class="hidden" style="font-size:13px;color:#c0392b;padding:10px 14px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
         <button id="auth-signin-btn" class="btn btn-primary" style="width:100%">Sign In</button>
-        <div style="text-align:center;margin-top:16px;font-size:13px;color:var(--ink-lt);font-family:'EB Garamond',Georgia">Don't have an account? <span onclick="switchAuthTab('up')" style="color:var(--lav);cursor:pointer;text-decoration:underline">Create one</span></div>
+        <div style="text-align:center;margin-top:12px;font-size:13px;color:var(--ink-lt);font-family:'EB Garamond',Georgia">Don't have an account? <span onclick="switchAuthTab('up')" style="color:var(--lav);cursor:pointer;text-decoration:underline">Create one</span></div>
+        <div style="text-align:center;margin-top:8px"><span onclick="switchAuthTab('forgot')" style="font-size:12px;color:var(--ink-lt);font-family:'EB Garamond',Georgia;cursor:pointer;text-decoration:underline">Forgot password?</span></div>
       </div>
       <!-- Sign Up form -->
       <div id="auth-signup" class="hidden" style="max-height:65vh;overflow-y:auto;padding-right:4px">
@@ -1215,20 +1275,20 @@ document.getElementById('acct-save-btn')?.addEventListener('click', async () => 
             <input id="auth-up-firstname" type="text" placeholder="First" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
           </div>
           <div>
-            <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Last Name</label>
+            <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Last Name *</label>
             <input id="auth-up-lastname" type="text" placeholder="Last" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
           </div>
         </div>
         <div style="margin-bottom:14px">
-          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Phone Number</label>
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Phone Number *</label>
           <input id="auth-up-phone" type="tel" placeholder="(555) 555-5555" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
         </div>
         <div style="margin-bottom:14px">
-          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Date of Birth</label>
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Date of Birth *</label>
           <input id="auth-up-dob" type="date" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
         </div>
         <div style="margin-bottom:14px">
-          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Address</label>
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Address *</label>
           <input id="auth-up-address" type="text" placeholder="123 Main St, City, State ZIP" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
         </div>
         <div style="margin-bottom:14px">
@@ -1242,6 +1302,44 @@ document.getElementById('acct-save-btn')?.addEventListener('click', async () => 
         <div id="auth-up-err" class="hidden" style="font-size:13px;color:#c0392b;padding:10px 14px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
         <button id="auth-signup-btn" class="btn btn-primary" style="width:100%">Create Account</button>
         <div style="text-align:center;margin-top:16px;font-size:12px;color:var(--ink-lt);font-family:'EB Garamond',Georgia;line-height:1.6">By creating an account you agree to the Dry. Terms of Service and Privacy Policy.</div>
+      </div>
+      <!-- Forgot password -->
+      <div id="auth-forgot" class="hidden">
+        <div style="margin-bottom:20px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:8px">Reset Password</div>
+          <div style="font-size:13px;color:var(--ink-lt);font-style:italic;line-height:1.6">Enter your email and we'll send you a reset link.</div>
+        </div>
+        <div id="auth-forgot-sent" class="hidden" style="background:var(--green-lt);border:1px solid #5BA87A40;border-radius:12px;padding:18px;text-align:center;margin-bottom:16px">
+          <div style="font-size:22px;margin-bottom:6px">✉️</div>
+          <div style="font-size:14px;color:var(--green);font-family:'EB Garamond',Georgia">Check your email for the reset link.</div>
+        </div>
+        <div id="auth-forgot-form">
+          <div style="margin-bottom:20px">
+            <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Email Address</label>
+            <input id="auth-forgot-email" type="email" placeholder="your email address" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+          </div>
+          <div id="auth-forgot-err" class="hidden" style="font-size:13px;color:#c0392b;padding:10px 14px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
+          <button id="auth-forgot-btn" class="btn btn-primary" style="width:100%">Send Reset Link</button>
+        </div>
+        <div style="text-align:center;margin-top:14px"><span onclick="switchAuthTab('in')" style="font-size:13px;color:var(--lav);cursor:pointer;text-decoration:underline;font-family:'EB Garamond',Georgia">← Back to sign in</span></div>
+      </div>
+      <!-- Reset password (from email link) -->
+      <div id="auth-reset" class="hidden">
+        <div style="margin-bottom:20px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:8px">Choose New Password</div>
+          <div style="font-size:13px;color:var(--ink-lt);font-style:italic;line-height:1.6">Enter your new password below.</div>
+        </div>
+        <div id="auth-reset-done" class="hidden" style="background:var(--green-lt);border:1px solid #5BA87A40;border-radius:12px;padding:18px;text-align:center;margin-bottom:16px">
+          <div style="font-size:14px;color:var(--green);font-family:'EB Garamond',Georgia">✓ Password updated — you're now signed in.</div>
+        </div>
+        <div id="auth-reset-form">
+          <div style="margin-bottom:20px">
+            <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">New Password</label>
+            <input id="auth-reset-pass" type="password" placeholder="At least 6 characters" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+          </div>
+          <div id="auth-reset-err" class="hidden" style="font-size:13px;color:#c0392b;padding:10px 14px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
+          <button id="auth-reset-btn" class="btn btn-primary" style="width:100%">Update Password</button>
+        </div>
       </div>
       <!-- Signed in state -->
       <div id="auth-signedin" class="hidden" style="text-align:center">
@@ -1269,12 +1367,12 @@ document.getElementById('acct-save-btn')?.addEventListener('click', async () => 
           <input id="acct-firstname" type="text" placeholder="First" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
         </div>
         <div>
-          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Last Name</label>
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Last Name *</label>
           <input id="acct-lastname" type="text" placeholder="Last" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
         </div>
       </div>
       <div style="margin-bottom:14px">
-        <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Phone Number</label>
+        <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Phone Number *</label>
         <input id="acct-phone" type="tel" placeholder="(555) 555-5555" style="width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
       </div>
       <div style="margin-bottom:16px">
