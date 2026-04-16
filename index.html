@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Dry. — Your grandmother's dry cleaner, with your efficiency.</title>
+<title>Dry. — Clean clothes, zero effort.</title>
 <meta name="description" content="Find trusted local dry cleaners, book in two minutes, track your order live."/>
-<meta property="og:title" content="Dry. — Your grandmother's dry cleaner, with your efficiency."/>
+<meta property="og:title" content="Dry. — Clean clothes, zero effort."/>
 <meta property="og:description" content="Find trusted local dry cleaners, book in two minutes, track your order live."/>
 <meta property="og:image" content="https://drytheapp.com/og-image.png"/>
 <meta property="og:url" content="https://drytheapp.com"/>
 <meta property="og:type" content="website"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Dry. — Your grandmother's dry cleaner, with your efficiency."/>
+<meta name="twitter:title" content="Dry. — Clean clothes, zero effort."/>
 <meta name="twitter:description" content="Find trusted local dry cleaners, book in two minutes, track your order live."/>
 <meta name="twitter:image" content="https://drytheapp.com/og-image.png"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
@@ -219,7 +219,7 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
 <div id="entry">
   <div class="entry-inner">
     <div class="entry-logo">dry.</div>
-    <div class="entry-tagline">your grandmother's dry cleaner, with your efficiency.</div>
+    <div class="entry-tagline">Clean clothes, zero effort.</div>
     <div class="entry-q">Which are you?</div>
     <div class="entry-cards">
       <div class="entry-card" data-action="show-customer">
@@ -270,19 +270,68 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
     </div>
   </section>
 
-  <!-- MY ORDERS — shown only when signed in -->
-  <section id="c-orders-section" class="hidden" style="background:var(--lav-glow);padding:80px 6%">
-    <div style="max-width:860px;margin:0 auto">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px">
+  <!-- MY ACCOUNT — shown only when signed in -->
+  <section id="c-orders-section" class="hidden" style="background:var(--lav-glow);padding:60px 6% 80px">
+    <div style="max-width:680px;margin:0 auto">
+
+      <!-- Profile header -->
+      <div style="background:linear-gradient(135deg,var(--lav-deep),var(--lav));border-radius:24px;padding:28px 32px;margin-bottom:24px;display:flex;align-items:center;gap:20px">
+        <div id="acct-avatar" style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;font-family:Cormorant Garamond,serif;flex-shrink:0">J</div>
         <div>
-          <div class="lbl">Your account</div>
-          <h2 class="sec-title" style="margin-bottom:0">My Orders</h2>
+          <div id="acct-profile-name" style="font-size:22px;color:#fff;font-family:Cormorant Garamond,serif;margin-bottom:2px">Loading...</div>
+          <div id="acct-member-since" style="font-size:13px;color:rgba(255,255,255,.7);font-style:italic">Member since...</div>
         </div>
-        <button class="btn btn-outline btn-sm" id="open-account-btn">Account Details</button>
       </div>
-      <div id="c-orders-list">
-        <div style="text-align:center;padding:48px;color:var(--ink-lt);font-style:italic">Loading your orders&#x2026;</div>
+
+      <!-- Menu items matching app -->
+      <div style="background:#fff;border-radius:20px;border:1px solid var(--bdlt);overflow:hidden;margin-bottom:24px">
+        <div id="open-account-btn" onclick="document.getElementById('acct-modal').style.display='flex';loadAccountModal()" style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt);transition:background .15s" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F464;</div>
+          <div style="flex:1"><div style="font-size:15px;color:var(--ink)">Account Details</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">Name, email, phone, address</div></div>
+          <div style="color:var(--ink-lt);font-size:16px">&#x203A;</div>
+        </div>
+        <div onclick="document.getElementById('c-orders-tab').scrollIntoView({behavior:'smooth'})" style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt);transition:background .15s" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F9FA;</div>
+          <div style="flex:1"><div style="font-size:15px;color:var(--ink)">My Orders</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">View order history &amp; track status</div></div>
+          <div style="color:var(--ink-lt);font-size:16px">&#x203A;</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt);transition:background .15s" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F381;</div>
+          <div style="flex:1"><div style="font-size:15px;color:var(--ink)">Give $20, Get $20</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">Refer a friend &middot; Earn $20 per referral</div></div>
+          <div style="color:var(--ink-lt);font-size:16px">&#x203A;</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt);transition:background .15s" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F514;</div>
+          <div style="flex:1"><div style="font-size:15px;color:var(--ink)">Notifications</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">Tap to customize</div></div>
+          <div style="color:var(--ink-lt);font-size:16px">&#x203A;</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt);transition:background .15s" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x2754;</div>
+          <div style="flex:1"><div style="font-size:15px;color:var(--ink)">Help &amp; Support</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">FAQ &amp; contact</div></div>
+          <div style="color:var(--ink-lt);font-size:16px">&#x203A;</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;border-bottom:1px solid var(--bdlt);transition:background .15s" onmouseover="this.style.background='var(--lav-glow)'" onmouseout="this.style.background='#fff'">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--lav-mist);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F4AC;</div>
+          <div style="flex:1"><div style="font-size:15px;color:var(--ink)">Give Feedback</div><div style="font-size:12px;color:var(--ink-lt);font-style:italic">Help us improve</div></div>
+          <div style="color:var(--ink-lt);font-size:16px">&#x203A;</div>
+        </div>
+        <div id="acct-signout-row" style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;transition:background .15s" onmouseover="this.style.background='#fdf5f5'" onmouseout="this.style.background='#fff'">
+          <div style="width:36px;height:36px;border-radius:10px;background:#fde8e8;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">&#x1F6AA;</div>
+          <div style="flex:1"><div style="font-size:15px;color:#c0392b">Sign Out</div></div>
+        </div>
       </div>
+
+      <!-- Orders section -->
+      <div id="c-orders-tab">
+        <div class="lbl">Order history</div>
+        <h3 style="font-family:Cormorant Garamond,serif;font-size:26px;font-weight:300;color:var(--ink);margin-bottom:20px">My Orders</h3>
+        <div id="c-orders-list">
+          <div style="text-align:center;padding:48px;color:var(--ink-lt);font-style:italic">Loading your orders&#x2026;</div>
+        </div>
+      </div>
+
+      <!-- Footer note -->
+      <div style="text-align:center;margin-top:32px;font-size:12px;color:var(--ink-lt);font-style:italic">dry. &middot; version 1.0 &middot; drytheapp.com</div>
     </div>
   </section>
 
@@ -419,7 +468,7 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
 
   <footer>
     <div class="ft">
-      <div><div class="ft-logo">dry.</div><p class="ft-tagline">Your grandmother's dry cleaner, with your efficiency.</p></div>
+      <div><div class="ft-logo">dry.</div><p class="ft-tagline">Clean clothes, zero effort.</p></div>
       <div class="ft-col"><h4>Product</h4><a data-scroll="c-how">How It Works</a><a data-scroll="c-svc">Services</a><a data-scroll="c-find">Find a Cleaner</a><a data-scroll="c-faq">FAQ</a></div>
       <div class="ft-col"><h4>For Businesses</h4><a data-action="show-business">Get Started</a><a data-action="show-business">Pricing</a><a data-action="show-business">Business Dashboard</a></div>
       <div class="ft-col"><h4>Contact</h4><a data-scroll="c-contact">Customer Support</a><a data-scroll="c-contact">General Inquiries</a><a data-scroll="c-contact">Legal &amp; Privacy</a></div>
@@ -669,7 +718,7 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
 
   <footer>
     <div class="ft">
-      <div><div class="ft-logo">dry.</div><p class="ft-tagline">Your grandmother's dry cleaner, with your efficiency.</p></div>
+      <div><div class="ft-logo">dry.</div><p class="ft-tagline">Clean clothes, zero effort.</p></div>
       <div class="ft-col"><h4>Platform</h4><a data-scroll="b-features">Features</a><a data-scroll="b-pricing">Pricing</a><a data-scroll="b-how">How It Works</a><a data-scroll="b-faq">FAQ</a></div>
       <div class="ft-col"><h4>For Customers</h4><a data-action="show-customer">Consumer App</a><a data-action="show-customer">Find a Cleaner</a></div>
       <div class="ft-col"><h4>Contact</h4><a data-action="show-customer" data-scroll="c-contact">Get Support</a><a data-scroll="b-signup">Partner Inquiries</a></div>
@@ -922,11 +971,40 @@ async function onSignedIn() {
     await sb.from('users').insert({ id: _user.id, full_name: name });
     _userProfile = { full_name: name };
   }
+  // Populate profile header
+  const fn = (_userProfile && _userProfile.full_name) ? _userProfile.full_name : _user.email;
+  const avatar = fn ? fn.charAt(0).toUpperCase() : '?';
+  if (document.getElementById('acct-avatar'))       document.getElementById('acct-avatar').textContent = avatar;
+  if (document.getElementById('acct-profile-name')) document.getElementById('acct-profile-name').textContent = fn || '';
+  // Member since
+  const created = _user.created_at ? new Date(_user.created_at) : new Date();
+  const since = created.toLocaleDateString('en-US', {month:'long', year:'numeric'});
+  if (document.getElementById('acct-member-since')) document.getElementById('acct-member-since').textContent = 'Member since ' + since;
+  // Wire sign out row
+  const sor = document.getElementById('acct-signout-row');
+  if (sor) sor.onclick = async function() { await sb.auth.signOut(); };
 }
+
+window.loadAccountModal = function() {
+  if (!_user) return;
+  document.getElementById('acct-email').value = _user.email || '';
+  document.getElementById('acct-pw').value = '';
+  document.getElementById('acct-msg').classList.add('hidden');
+  sb.from('users').select('full_name,phone').eq('id', _user.id).single().then(function(res) {
+    var data = res.data;
+    if (data) {
+      var parts = (data.full_name||'').split(' ');
+      if (document.getElementById('acct-firstname')) document.getElementById('acct-firstname').value = parts[0]||'';
+      if (document.getElementById('acct-lastname'))  document.getElementById('acct-lastname').value  = parts.slice(1).join(' ')||'';
+      if (document.getElementById('acct-phone'))     document.getElementById('acct-phone').value     = data.phone||'';
+    }
+  });
+};
 function onSignedOut() {
   updateNavBtns();
   loadCleaners();
   document.getElementById('c-orders-section')?.classList.add('hidden');
+  _userProfile = null;
 }
 function updateNavBtns() {
   const si = document.getElementById('c-signin-btn');
