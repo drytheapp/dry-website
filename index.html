@@ -32,6 +32,8 @@ body{font-family:'EB Garamond',Georgia,serif;background:var(--off);color:var(--i
 .btn-outline{background:transparent;color:var(--lav);border:1.5px solid var(--lav-soft)}
 .btn-sm{padding:9px 18px;font-size:14px;border-radius:12px}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* NAV */
 nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,248,253,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--bdlt);padding:0 5%;display:flex;align-items:center;height:66px;gap:0}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-style:italic;font-weight:300;color:var(--lav-deep);text-decoration:none;flex-shrink:0}
 .nav-links{display:flex;align-items:center;gap:18px;flex:1;justify-content:center}
@@ -40,6 +42,8 @@ nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,
 .nav-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
 .nav-back{font-size:13px;color:var(--ink-lt);cursor:pointer;text-decoration:none}
 .nav-back:hover{color:var(--lav)}
+
+/* ENTRY */
 #entry{min-height:100vh;background:linear-gradient(160deg,var(--lav-deep) 0%,var(--lav) 60%,var(--lav-mid) 100%);display:flex;align-items:center;justify-content:center;padding:40px 20px}
 .entry-inner{text-align:center;max-width:640px;width:100%}
 .entry-logo{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;font-style:italic;color:#fff;letter-spacing:-2px;margin-bottom:10px;line-height:1}
@@ -50,6 +54,9 @@ nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,
 .entry-card:hover{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.5);transform:translateY(-4px);box-shadow:0 20px 48px rgba(0,0,0,.2)}
 .entry-card-icon{font-size:44px;margin-bottom:16px}
 .entry-card-title{font-family:'Cormorant Garamond',serif;font-size:24px;color:#fff;margin-bottom:8px;font-weight:300}
+.entry-card-sub{font-size:13px;color:rgba(255,255,255,.7);font-style:italic;line-height:1.6}
+
+/* CUSTOMER */
 #customer{display:none}
 .c-hero{min-height:100vh;background:linear-gradient(160deg,var(--lav-deep) 0%,var(--lav) 55%,var(--lav-mid) 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 6% 80px;position:relative;overflow:hidden}
 .c-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(46px,8vw,84px);font-weight:300;font-style:italic;color:#fff;line-height:1.04;letter-spacing:-1px;margin-bottom:22px}
@@ -92,6 +99,8 @@ nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,
 .c-cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,54px);font-weight:300;font-style:italic;color:#fff;margin-bottom:16px}
 .c-cta p{font-size:17px;color:rgba(255,255,255,.78);font-style:italic;margin-bottom:36px}
 .c-contact{background:var(--off);padding:80px 6%}
+
+/* BUSINESS */
 #business{display:none}
 .b-hero{min-height:100vh;background:linear-gradient(160deg,var(--lav-deep) 0%,#3d2875 40%,var(--lav) 100%);display:flex;align-items:center;justify-content:center;padding:120px 6% 80px;position:relative;overflow:hidden}
 .b-hero-inner{position:relative;z-index:1;max-width:1060px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
@@ -163,6 +172,8 @@ nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,
 .b-step-dot.done{background:var(--lav-deep);color:#fff}
 .b-step-line{flex:1;height:2px;background:var(--bdlt)}
 .b-step-line.done{background:var(--lav)}
+
+/* FOOTER */
 footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.65)}
 .ft{display:flex;justify-content:space-between;flex-wrap:wrap;gap:36px;margin-bottom:44px}
 .ft-logo{font-family:'Cormorant Garamond',serif;font-size:30px;font-style:italic;color:#fff;margin-bottom:10px}
@@ -171,25 +182,15 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
 .ft-col a{display:block;font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;margin-bottom:9px;transition:color .2s;cursor:pointer}
 .ft-col a:hover{color:#fff}
 .ft-bottom{border-top:1px solid rgba(255,255,255,.14);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px}
+
+/* CONTACT FORM */
 .contact-form-wrap{max-width:680px;margin:40px auto 0}
 .cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .cf-field{margin-bottom:16px}
 .cf-field label{display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px}
 .cf-field input,.cf-field select,.cf-field textarea{width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:#fff;transition:border-color .2s}
 .cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{border-color:var(--lav)}
-/* Orders section */
-.orders-section{background:var(--lav-glow);padding:80px 6%}
-.order-card{background:#fff;border:1px solid var(--bdlt);border-radius:16px;padding:20px 24px;margin-bottom:12px;display:flex;align-items:center;gap:16px}
-.order-card-info{flex:1}
-.order-card-cleaner{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);margin-bottom:4px}
-.order-card-meta{font-size:13px;color:var(--ink-lt)}
-.order-status-pill{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;flex-shrink:0;font-size:11px}
-/* Account modal */
-.acct-field{margin-bottom:16px}
-.acct-field label{display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px}
-.acct-field input{width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)}
-.acct-field input:focus{border-color:var(--lav)}
-.acct-field input:disabled{background:#f0ecf7;color:var(--ink-lt)}
+
 @media(max-width:900px){
   .entry-cards{grid-template-columns:1fr}
   .b-hero-inner{grid-template-columns:1fr}
@@ -203,11 +204,6 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
 </style>
 </head>
 <body>
-
-<div id="sb-config" style="display:none"
-  data-url="https://ftaqabwiqnuzoyjjkipj.supabase.co"
-  data-anon="sb_publishable_mVpLiNGElB4QNu76cMfX7Q_GltdnrJh">
-</div>
 
 <!-- ENTRY -->
 <div id="entry">
@@ -247,6 +243,13 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
   </nav>
 
   <section class="c-hero" id="c-hero">
+    <svg style="position:absolute;pointer-events:none;opacity:.15;top:7%;right:5%" width="130" height="190" viewBox="0 0 40 60">
+      <line x1="20" y1="60" x2="20" y2="10" stroke="white" stroke-width="1.5"/>
+      <ellipse cx="14" cy="18" rx="6" ry="3.5" fill="white" transform="rotate(-25 14 18)"/>
+      <ellipse cx="26" cy="26" rx="6" ry="3.5" fill="white" transform="rotate(25 26 26)"/>
+      <ellipse cx="14" cy="34" rx="6" ry="3.5" fill="white" transform="rotate(-25 14 34)"/>
+      <ellipse cx="20" cy="10" rx="5" ry="3" fill="white"/>
+    </svg>
     <div style="position:relative;z-index:1;max-width:740px;text-align:center">
       <h1>Clean clothes,<br>zero effort.</h1>
       <p class="c-hero-sub">Find trusted local dry cleaners, book in two minutes, track your order live, and pay automatically. No calls. No guessing. No waiting.</p>
@@ -257,8 +260,8 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
     </div>
   </section>
 
-  <!-- MY ORDERS SECTION — shown only when signed in -->
-  <section class="orders-section hidden" id="c-orders-section">
+  <!-- MY ORDERS — shown only when signed in -->
+  <section id="c-orders-section" class="hidden" style="background:var(--lav-glow);padding:80px 6%">
     <div style="max-width:860px;margin:0 auto">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px">
         <div>
@@ -268,7 +271,7 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
         <button class="btn btn-outline btn-sm" id="open-account-btn">Account Details</button>
       </div>
       <div id="c-orders-list">
-        <div style="text-align:center;padding:48px;color:var(--ink-lt);font-style:italic">Loading your orders…</div>
+        <div style="text-align:center;padding:48px;color:var(--ink-lt);font-style:italic">Loading your orders&#x2026;</div>
       </div>
     </div>
   </section>
@@ -288,7 +291,7 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
   <section class="c-svc" id="c-svc">
     <div class="lbl">What we handle</div>
     <h2 class="sec-title">Every service, one platform.</h2>
-    <p class="sec-sub">Every cleaner sets their own menu. You always know exactly what's available before you book.</p>
+    <p class="sec-sub">Every cleaner sets their own menu. You always know exactly what's available before you walk in.</p>
     <div class="c-svc-grid">
       <div class="c-svc-card"><div class="c-svc-icon">&#x2728;</div><h3>Dry Clean</h3><p>Solvent-based care for structured pieces and delicates. Filter for non-toxic GreenEarth solvents.</p><span class="tag" style="margin-top:12px">Most Popular</span></div>
       <div class="c-svc-card"><div class="c-svc-icon">&#x1F455;</div><h3>Launder &amp; Press</h3><p>Full wash, dry, and crisp press. Add the hang dry option for wool, cashmere, or silk — air only, no heat — for $3 per item.</p></div>
@@ -316,10 +319,7 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
         </div>
         <!-- Live cleaner grid — populated from Supabase -->
         <div id="cleaners-grid">
-          <div style="text-align:center;padding:32px 0">
-            <div style="font-size:32px;margin-bottom:12px">&#x1F33F;</div>
-            <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:8px">Loading cleaners&#x2026;</div>
-          </div>
+          <div style="text-align:center;padding:32px 0;color:var(--ink-lt);font-style:italic">Loading cleaners&#x2026;</div>
         </div>
         <!-- Waitlist — shown if no cleaners found -->
         <div id="waitlist-box" class="hidden" style="text-align:center;padding:32px 0">
@@ -387,20 +387,21 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
           <div class="cf-field"><label>Topic</label>
             <select id="cf-topic">
               <option value="">Select a topic&#x2026;</option>
-              <option value="support">Customer Support</option>
-              <option value="business">Business Inquiry</option>
-              <option value="legal">Legal &amp; Privacy</option>
-              <option value="other">General</option>
+              <option value="support">Customer Support &#x2014; order issue or account question</option>
+              <option value="business">Business Inquiry &#x2014; joining the platform</option>
+              <option value="legal">Legal &amp; Privacy &#x2014; terms or data request</option>
+              <option value="other">General &#x2014; something else</option>
             </select>
           </div>
           <div class="cf-field"><label>Message</label><textarea id="cf-message" rows="5" placeholder="Tell us how we can help&#x2026;"></textarea></div>
           <div id="cf-err" class="hidden" style="font-size:13px;color:#c0392b;padding:12px 16px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
           <button class="btn btn-primary" style="width:100%" id="contact-submit-btn">Send Message &#x2192;</button>
+          <div style="font-size:12px;color:var(--ink-lt);font-style:italic;text-align:center;margin-top:14px">We typically reply within a few hours.</div>
         </div>
         <div id="contact-success" class="hidden" style="text-align:center;padding:20px 0">
           <div style="font-size:44px;margin-bottom:16px">&#x1F4AC;</div>
           <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--ink);margin-bottom:10px">Message sent!</div>
-          <div style="font-size:14px;color:var(--ink-mid);font-style:italic">We'll get back to you within a few hours.</div>
+          <div style="font-size:14px;color:var(--ink-mid);font-style:italic;line-height:1.7">We'll get back to you within a few hours.</div>
         </div>
       </div>
     </div>
@@ -410,10 +411,10 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
     <div class="ft">
       <div><div class="ft-logo">dry.</div><p class="ft-tagline">Your grandmother's dry cleaner, with your efficiency.</p></div>
       <div class="ft-col"><h4>Product</h4><a data-scroll="c-how">How It Works</a><a data-scroll="c-svc">Services</a><a data-scroll="c-find">Find a Cleaner</a><a data-scroll="c-faq">FAQ</a></div>
-      <div class="ft-col"><h4>For Businesses</h4><a data-action="show-business">Get Started</a><a data-action="show-business">Pricing</a><a data-action="show-business">Dashboard</a></div>
+      <div class="ft-col"><h4>For Businesses</h4><a data-action="show-business">Get Started</a><a data-action="show-business">Pricing</a><a data-action="show-business">Business Dashboard</a></div>
       <div class="ft-col"><h4>Contact</h4><a data-scroll="c-contact">Customer Support</a><a data-scroll="c-contact">General Inquiries</a><a data-scroll="c-contact">Legal &amp; Privacy</a></div>
     </div>
-    <div class="ft-bottom"><div>&#x00A9; 2026 Dry Technologies, LLC. All rights reserved.</div><div style="display:flex;gap:16px"><a data-scroll="c-faq">FAQ</a><a data-scroll="c-contact">Privacy</a><a data-scroll="c-contact">Terms</a></div></div>
+    <div class="ft-bottom"><div>&#x00A9; 2026 Dry Technologies, LLC. All rights reserved.</div><div><a data-scroll="c-faq">FAQ</a>&nbsp;&nbsp;<a data-scroll="c-contact">Privacy</a>&nbsp;&nbsp;<a data-scroll="c-contact">Terms</a></div></div>
   </footer>
 </div>
 
@@ -436,6 +437,13 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
   </nav>
 
   <section class="b-hero" id="b-hero">
+    <svg style="position:absolute;pointer-events:none;opacity:.15;top:7%;right:5%" width="130" height="190" viewBox="0 0 40 60">
+      <line x1="20" y1="60" x2="20" y2="10" stroke="white" stroke-width="1.5"/>
+      <ellipse cx="14" cy="18" rx="6" ry="3.5" fill="white" transform="rotate(-25 14 18)"/>
+      <ellipse cx="26" cy="26" rx="6" ry="3.5" fill="white" transform="rotate(25 26 26)"/>
+      <ellipse cx="14" cy="34" rx="6" ry="3.5" fill="white" transform="rotate(-25 14 34)"/>
+      <ellipse cx="20" cy="10" rx="5" ry="3" fill="white"/>
+    </svg>
     <div class="b-hero-inner">
       <div>
         <div class="lbl" style="color:rgba(255,255,255,.65)">For dry cleaners</div>
@@ -464,7 +472,7 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
       <div class="b-feat-card"><div class="b-feat-icon">&#x1F4CA;</div><h3>Analytics &amp; Insights</h3><p>See your revenue by day and week, service mix, busiest days, and customer return rates. Pro members get zip code reports and at-risk customer alerts.</p></div>
       <div class="b-feat-card"><div class="b-feat-icon">&#x1F465;</div><h3>Customer Profiles</h3><p>Every customer builds a profile at your location — visit count, lifetime spend, last visit, top service. Know your regulars automatically.</p></div>
       <div class="b-feat-card"><div class="b-feat-icon">&#x1F504;</div><h3>Live Profile Updates</h3><p>Update your hours, services, or pricing in your dashboard and the consumer app reflects it immediately. No waiting for approval.</p></div>
-      <div class="b-feat-card"><div class="b-feat-icon">&#x1F4A7;</div><h3>Hang Dry Tracking</h3><p>Orders with hang dry requests are automatically flagged in your dashboard so staff know before touching the garment.</p></div>
+      <div class="b-feat-card"><div class="b-feat-icon">&#x1F4A7;</div><h3>Hang Dry Tracking</h3><p>Orders with hang dry requests are automatically flagged in your dashboard so staff know before touching the garment. Air dry only — tracked automatically.</p></div>
     </div>
   </section>
 
@@ -473,7 +481,7 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
     <h2 class="sec-title">Your business at a glance.</h2>
     <p class="sec-sub">A clean, purpose-built interface. Everything your staff needs, nothing they don't.</p>
     <div class="b-dash-preview">
-      <div class="b-dash-bar"><div class="b-dash-dots"><span></span><span></span><span></span></div><div class="b-dash-title">dry. Business Portal — Dashboard</div></div>
+      <div class="b-dash-bar"><div class="b-dash-dots"><span></span><span></span><span></span></div><div class="b-dash-title">dry. Business Portal &#x2014; Dashboard</div></div>
       <div class="b-dash-body">
         <div class="b-dash-metric"><div class="b-dash-metric-val">12</div><div class="b-dash-metric-lbl">Orders Today</div></div>
         <div class="b-dash-metric"><div class="b-dash-metric-val">3</div><div class="b-dash-metric-lbl">Ready for Pickup</div></div>
@@ -481,8 +489,8 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
         <div class="b-dash-metric"><div class="b-dash-metric-val">4.9&#x2605;</div><div class="b-dash-metric-lbl">Your Rating</div></div>
       </div>
       <div style="padding:0 24px 24px;display:flex;flex-direction:column;gap:12px">
-        <div style="background:#EBF7F1;border:1px solid #5BA87A;border-radius:12px;padding:14px 18px;font-size:14px;color:#5BA87A">&#x2705; 3 orders ready for pickup — customers notified automatically</div>
-        <div style="background:#EDF4FF;border:1px solid #A0BEF0;border-radius:12px;padding:14px 18px;font-size:14px;color:#3A6EC8">&#x1F4A7; 2 orders have hang dry requested — air dry only, no heat</div>
+        <div style="background:#EBF7F1;border:1px solid #5BA87A;border-radius:12px;padding:14px 18px;font-size:14px;color:#5BA87A">&#x2705; 3 orders ready for pickup &#x2014; customers notified automatically</div>
+        <div style="background:#EDF4FF;border:1px solid #A0BEF0;border-radius:12px;padding:14px 18px;font-size:14px;color:#3A6EC8">&#x1F4A7; 2 orders have hang dry requested &#x2014; air dry only, no heat</div>
       </div>
     </div>
   </section>
@@ -533,7 +541,7 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
     <div class="lbl">Common questions</div>
     <h2 class="sec-title">Before you sign up.</h2>
     <div class="b-faq-grid">
-      <div class="b-faq-item"><div class="b-faq-q">Do you take a cut of my orders?</div><div class="b-faq-a">No. You keep 100% of what customers pay you. Dry. charges customers a separate 5% booking fee. You pay only the flat monthly subscription.</div></div>
+      <div class="b-faq-item"><div class="b-faq-q">Do you take a cut of my orders?</div><div class="b-faq-a">No. You keep 100% of what customers pay you for services. Dry. charges customers a separate 5% booking fee on their end. You pay only the flat monthly subscription.</div></div>
       <div class="b-faq-item"><div class="b-faq-q">How quickly can I go live?</div><div class="b-faq-a">Immediately. When you sign up, you receive a login link by email. After completing the 4-step onboarding flow in your dashboard, your listing is live and customers can book you.</div></div>
       <div class="b-faq-item"><div class="b-faq-q">Can I set my own prices?</div><div class="b-faq-a">Yes, entirely. You set your own per-item and per-service pricing in your dashboard. You can update pricing at any time and changes reflect in the app immediately.</div></div>
       <div class="b-faq-item"><div class="b-faq-q">What if I want to cancel?</div><div class="b-faq-a">Cancel anytime from your dashboard settings. You retain access through the end of your paid period. No cancellation fees, no partial refunds, no penalties.</div></div>
@@ -555,8 +563,9 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
           <div id="bline2" class="b-step-line"></div>
           <div id="bdot3" class="b-step-dot">3</div>
         </div>
+
         <div id="bfs1">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:20px">Step 1 of 3 — Your Business Details</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:20px">Step 1 of 3 &#x2014; Your Business Details</div>
           <div class="b-field-row">
             <div class="b-field"><label>Business Name *</label><input id="bf-name" placeholder="Your business name"/></div>
             <div class="b-field"><label>Owner / Contact Name *</label><input id="bf-owner" placeholder="Your name"/></div>
@@ -571,9 +580,10 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
             <button class="btn btn-primary" id="bf-next1">Continue &#x2192;</button>
           </div>
         </div>
+
         <div id="bfs2" class="hidden">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:8px">Step 2 of 3 — Your Services</div>
-          <div style="font-size:13px;color:var(--ink-lt);font-style:italic;margin-bottom:20px">Check all services your location offers.</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:8px">Step 2 of 3 &#x2014; Your Services</div>
+          <div style="font-size:13px;color:var(--ink-lt);font-style:italic;margin-bottom:20px">Check all services your location offers. Update anytime from your dashboard.</div>
           <div class="b-field"><label>Services Offered</label>
             <div class="b-svc-grid">
               <label class="b-svc-check"><input type="checkbox" value="dry_clean" checked/> &#x2728; Dry Clean</label>
@@ -598,8 +608,9 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
             <button class="btn btn-primary" id="bf-next2">Continue &#x2192;</button>
           </div>
         </div>
+
         <div id="bfs3" class="hidden">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:8px">Step 3 of 3 — Choose Your Plan</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:8px">Step 3 of 3 &#x2014; Choose Your Plan</div>
           <div style="font-size:13px;color:var(--ink-lt);font-style:italic;margin-bottom:20px">14-day free trial on both plans. Upgrade or downgrade anytime.</div>
           <div class="b-plan-select">
             <div id="bpo-basic" class="b-plan-opt" data-plan-opt="basic">
@@ -614,9 +625,16 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
             </div>
           </div>
           <div class="b-field" style="margin-top:20px"><label>How did you hear about Dry.?</label>
-            <select id="bf-heard"><option value="">Select one&#x2026;</option><option>Word of mouth / another cleaner</option><option>Google search</option><option>Social media</option><option>A Dry. customer told me</option><option>Other</option></select>
+            <select id="bf-heard">
+              <option value="">Select one&#x2026;</option>
+              <option>Word of mouth / another cleaner</option>
+              <option>Google search</option>
+              <option>Social media</option>
+              <option>A Dry. customer told me</option>
+              <option>Other</option>
+            </select>
           </div>
-          <div class="b-field"><label>Anything else?</label><textarea id="bf-notes" rows="3" placeholder="Additional services, certifications, questions&#x2026;"></textarea></div>
+          <div class="b-field"><label>Anything else you'd like us to know?</label><textarea id="bf-notes" rows="3" placeholder="Additional services, certifications, questions&#x2026;"></textarea></div>
           <div id="bf-err" class="hidden" style="font-size:13px;color:#c0392b;padding:12px 16px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
           <div style="font-size:12px;color:var(--ink-lt);font-style:italic;margin-bottom:16px">By creating an account you agree to the Dry. Business Partner Terms of Service.</div>
           <div style="display:flex;justify-content:space-between;align-items:center">
@@ -624,10 +642,15 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
             <button id="bf-submit" class="btn btn-primary">Create My Account &#x2192;</button>
           </div>
         </div>
+
         <div id="bfs-done" class="hidden" style="text-align:center;padding:20px 0">
           <div style="font-size:52px;margin-bottom:16px">&#x1F33F;</div>
           <div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--ink);margin-bottom:10px">Account created!</div>
           <div id="bfs-done-msg" style="font-size:15px;color:var(--ink-mid);font-style:italic;line-height:1.7;max-width:420px;margin:0 auto 24px">Check your email for a login link. Click it to set your password and complete your setup.</div>
+          <div style="background:var(--lav-glow);border:1.5px solid var(--lav-soft);border-radius:16px;padding:16px 20px;max-width:420px;margin:0 auto 24px;text-align:left">
+            <div style="font-size:13px;color:var(--lav-deep);font-family:'Cormorant Garamond',serif;margin-bottom:8px">What happens next</div>
+            <div style="font-size:13px;color:var(--ink-mid);font-style:italic;line-height:1.8">1. Check your inbox for an email from Dry.<br>2. Click the login link to set your password<br>3. Complete your 4-step setup in the dashboard<br>4. Your 14-day free trial starts immediately</div>
+          </div>
           <button class="btn btn-outline" data-scroll="b-hero">Back to Top</button>
         </div>
       </div>
@@ -641,80 +664,231 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
       <div class="ft-col"><h4>For Customers</h4><a data-action="show-customer">Consumer App</a><a data-action="show-customer">Find a Cleaner</a></div>
       <div class="ft-col"><h4>Contact</h4><a data-action="show-customer" data-scroll="c-contact">Get Support</a><a data-scroll="b-signup">Partner Inquiries</a></div>
     </div>
-    <div class="ft-bottom"><div>&#x00A9; 2026 Dry Technologies, LLC. All rights reserved.</div></div>
+    <div class="ft-bottom"><div>&#x00A9; 2026 Dry Technologies, LLC. All rights reserved.</div><div><a data-action="show-customer" data-after-scroll="c-contact">Privacy</a>&nbsp;&nbsp;<a data-action="show-customer" data-after-scroll="c-contact">Terms</a></div></div>
   </footer>
 </div>
 
-<!-- AUTH MODAL -->
-<div id="c-auth-modal" style="display:none;position:fixed;inset:0;background:rgba(44,31,61,.5);backdrop-filter:blur(6px);z-index:500;align-items:center;justify-content:center;padding:20px">
-  <div style="background:#fff;border-radius:28px;width:min(440px,95vw);overflow:hidden;box-shadow:0 32px 80px rgba(44,31,61,.28);position:relative">
-    <div style="background:linear-gradient(135deg,var(--lav-deep),var(--lav));padding:32px 36px 28px;text-align:center">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-style:italic;color:#fff;margin-bottom:4px">dry.</div>
-      <div style="font-size:12px;color:rgba(255,255,255,.7);letter-spacing:1.5px;text-transform:uppercase;font-family:'EB Garamond',Georgia">Your Account</div>
-    </div>
-    <div style="padding:32px 36px">
-      <div id="auth-tabs" style="display:flex;gap:0;margin-bottom:28px;border:1.5px solid var(--bdlt);border-radius:12px;overflow:hidden">
-        <button id="auth-tab-in" style="flex:1;padding:10px;border:none;background:var(--lav);color:#fff;font-family:'EB Garamond',Georgia;font-size:14px;cursor:pointer">Sign In</button>
-        <button id="auth-tab-up" style="flex:1;padding:10px;border:none;background:#fff;color:var(--ink-lt);font-family:'EB Garamond',Georgia;font-size:14px;cursor:pointer">Create Account</button>
-      </div>
-      <!-- Sign In -->
-      <div id="auth-signin">
-        <div class="acct-field"><label>Email</label><input id="auth-in-email" type="email" placeholder="your email address"/></div>
-        <div class="acct-field" style="margin-bottom:24px"><label>Password</label><input id="auth-in-pass" type="password" placeholder="••••••••"/></div>
-        <div id="auth-in-err" class="hidden" style="font-size:13px;color:#c0392b;padding:10px 14px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
-        <button id="auth-signin-btn" class="btn btn-primary" style="width:100%">Sign In</button>
-        <div style="text-align:center;margin-top:14px;font-size:13px;color:var(--ink-lt)">No account? <span id="switch-to-up" style="color:var(--lav);cursor:pointer;text-decoration:underline">Create one</span></div>
-      </div>
-      <!-- Sign Up -->
-      <div id="auth-signup" class="hidden">
-        <div class="acct-field"><label>Full Name</label><input id="auth-up-name" type="text" placeholder="Your name"/></div>
-        <div class="acct-field"><label>Email</label><input id="auth-up-email" type="email" placeholder="your email address"/></div>
-        <div class="acct-field" style="margin-bottom:24px"><label>Password</label><input id="auth-up-pass" type="password" placeholder="••••••••"/></div>
-        <div id="auth-up-err" class="hidden" style="font-size:13px;color:#c0392b;padding:10px 14px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
-        <button id="auth-signup-btn" class="btn btn-primary" style="width:100%">Create Account</button>
-        <div style="text-align:center;margin-top:12px;font-size:12px;color:var(--ink-lt)">Already have an account? <span id="switch-to-in" style="color:var(--lav);cursor:pointer;text-decoration:underline">Sign in</span></div>
-      </div>
-      <!-- Signed In -->
-      <div id="auth-signedin" class="hidden" style="text-align:center">
-        <div style="font-size:44px;margin-bottom:12px">&#x2713;</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);margin-bottom:6px">You're signed in</div>
-        <div id="auth-user-email" style="font-size:14px;color:var(--ink-mid);font-style:italic;margin-bottom:24px"></div>
-        <button id="auth-signout-btn" class="btn btn-outline" style="width:100%;margin-bottom:10px">Sign Out</button>
-        <button id="auth-close-btn" class="btn btn-primary" style="width:100%">Continue</button>
-      </div>
-    </div>
-    <button id="auth-modal-close" style="position:absolute;top:14px;right:14px;background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;line-height:1">&#x2715;</button>
-  </div>
-</div>
+<script type="module">
+// ══ CONFIG ══════════════════════════════════════════════
+const SB_URL  = 'https://ftaqabwiqnuzoyjjkipj.supabase.co';
+const SB_ANON = 'sb_publishable_mVpLiNGElB4QNu76cMfX7Q_GltdnrJh';
 
-<!-- ACCOUNT DETAILS MODAL -->
-<div id="acct-modal" style="display:none;position:fixed;inset:0;background:rgba(44,31,61,.5);backdrop-filter:blur(6px);z-index:500;align-items:center;justify-content:center;padding:20px">
-  <div style="background:#fff;border-radius:28px;width:min(460px,95vw);box-shadow:0 32px 80px rgba(44,31,61,.28);position:relative;overflow:hidden">
-    <div style="background:linear-gradient(135deg,var(--lav-deep),var(--lav));padding:28px 36px;display:flex;align-items:center;justify-content:space-between">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#fff">Account Details</div>
-      <button id="acct-modal-close" style="background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;line-height:1">&#x2715;</button>
-    </div>
-    <div style="padding:32px 36px">
-      <div class="acct-field"><label>Full Name</label><input id="acct-name" type="text" placeholder="Your name"/></div>
-      <div class="acct-field"><label>Email Address</label><input id="acct-email" type="email" disabled style="background:#f0ecf7;color:var(--ink-lt)"/></div>
-      <div style="border-top:1px solid var(--bdlt);margin:20px 0 20px"></div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--ink);margin-bottom:14px">Change Password</div>
-      <div class="acct-field"><label>New Password (leave blank to keep current)</label><input id="acct-pw" type="password" placeholder="New password (min 6 characters)"/></div>
-      <div id="acct-msg" class="hidden" style="font-size:13px;padding:10px 14px;border-radius:10px;margin-bottom:16px"></div>
-      <button id="acct-save-btn" class="btn btn-primary" style="width:100%">Save Changes</button>
-    </div>
-  </div>
-</div>
+// ══ NAVIGATION ══════════════════════════════════════════
+function showSection(id) {
+  document.getElementById('entry').style.display    = 'none';
+  document.getElementById('customer').style.display = 'none';
+  document.getElementById('business').style.display = 'none';
+  document.getElementById(id).style.display = 'block';
+  window.scrollTo(0, 0);
+  document.dispatchEvent(new CustomEvent('sectionShown', { detail: id }));
+}
+
+function scrollToId(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Single event listener handles ALL clicks — no inline onclick needed
+document.addEventListener('click', (e) => {
+  const t = e.target.closest('[data-action],[data-scroll],[data-plan-opt],[data-plan],[data-filter]');
+  if (!t) return;
+
+  const action = t.dataset.action;
+  const scroll = t.dataset.scroll;
+  const planOpt = t.dataset.planOpt;
+  const plan = t.dataset.plan;
+  const filter = t.dataset.filter;
+
+  if (action === 'show-customer') { showSection('customer'); if (scroll) setTimeout(() => scrollToId(scroll), 100); }
+  if (action === 'show-business') { showSection('business'); }
+  if (action === 'go-home') { showSection('entry'); }
+  if (scroll && !action) { scrollToId(scroll); if (plan) selectBizPlan(plan); }
+  if (planOpt) selectBizPlan(planOpt);
+  if (filter) scrollToId('c-find');
+});
+
+// Entry cards
+document.querySelectorAll('.entry-card').forEach(card => {
+  card.addEventListener('click', () => {
+    if (card.dataset.action === 'show-customer') showSection('customer');
+    if (card.dataset.action === 'show-business') showSection('business');
+  });
+});
+
+// Business dashboard login button
+document.getElementById('biz-login-btn')?.addEventListener('click', () => {
+  window.open('https://drybusinessdashboard.vercel.app', '_blank');
+});
+
+// ══ WAITLIST / NOTIFY ME ════════════════════════════════
+document.getElementById('notify-btn')?.addEventListener('click', async () => {
+  const email = document.getElementById('notify-email')?.value?.trim();
+  if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+  try {
+    await fetch(SB_URL + '/rest/v1/waitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ email })
+    });
+  } catch(e) {}
+  document.getElementById('notify-thanks').classList.remove('hidden');
+  document.getElementById('notify-email').style.display = 'none';
+  document.getElementById('notify-btn').style.display = 'none';
+});
+
+document.getElementById('search-btn')?.addEventListener('click', () => scrollToId('c-find'));
+
+// ══ CONTACT FORM ════════════════════════════════════════
+document.getElementById('contact-submit-btn')?.addEventListener('click', async () => {
+  const name    = document.getElementById('cf-name')?.value?.trim();
+  const email   = document.getElementById('cf-email')?.value?.trim();
+  const topic   = document.getElementById('cf-topic')?.value;
+  const message = document.getElementById('cf-message')?.value?.trim();
+  const err     = document.getElementById('cf-err');
+  const btn     = document.getElementById('contact-submit-btn');
+  err.classList.add('hidden');
+
+  if (!name || !email || !topic || !message) {
+    err.textContent = 'Please fill in all fields.';
+    err.classList.remove('hidden');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  try {
+    await fetch(SB_URL + '/rest/v1/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ category: topic, message: name + ' (' + email + '): ' + message })
+    });
+  } catch(e) {}
+
+  document.getElementById('contact-form-inner').classList.add('hidden');
+  document.getElementById('contact-success').classList.remove('hidden');
+});
+
+// ══ BUSINESS SIGNUP FORM ════════════════════════════════
+let _bizPlan = 'pro';
+
+function selectBizPlan(plan) {
+  _bizPlan = plan;
+  const basic = document.getElementById('bpo-basic');
+  const pro   = document.getElementById('bpo-pro');
+  if (!basic || !pro) return;
+  basic.classList.toggle('selected', plan === 'basic');
+  pro.classList.toggle('selected',   plan === 'pro');
+}
+
+function bfGo(step) {
+  [1, 2, 3].forEach(s => {
+    const el = document.getElementById('bfs' + s);
+    if (el) el.classList.toggle('hidden', s !== step);
+  });
+  document.getElementById('bfs-done').classList.add('hidden');
+  for (let i = 1; i <= 3; i++) {
+    const dot  = document.getElementById('bdot' + i);
+    const line = document.getElementById('bline' + i);
+    if (dot) {
+      dot.classList.remove('active', 'done');
+      if (i < step) dot.classList.add('done');
+      else if (i === step) dot.classList.add('active');
+    }
+    if (line && i < 3) line.classList.toggle('done', i < step);
+  }
+}
+
+document.getElementById('bf-next1')?.addEventListener('click', () => {
+  const name    = document.getElementById('bf-name')?.value?.trim();
+  const owner   = document.getElementById('bf-owner')?.value?.trim();
+  const email   = document.getElementById('bf-email')?.value?.trim();
+  const address = document.getElementById('bf-address')?.value?.trim();
+  const phone = document.getElementById('bf-phone')?.value?.trim();
+  if (!name || !owner || !email || !address || !phone) { alert('Please fill in all required fields (marked *).'); return; }
+  bfGo(2);
+});
+
+document.getElementById('bf-back2')?.addEventListener('click', () => bfGo(1));
+document.getElementById('bf-next2')?.addEventListener('click', () => bfGo(3));
+document.getElementById('bf-back3')?.addEventListener('click', () => bfGo(2));
+
+document.getElementById('bf-submit')?.addEventListener('click', async () => {
+  const btn = document.getElementById('bf-submit');
+  const err = document.getElementById('bf-err');
+  btn.disabled = true;
+  btn.textContent = 'Creating your account…';
+  err.classList.add('hidden');
+
+  const services = Array.from(document.querySelectorAll('#bfs2 input[type=checkbox]:checked'))
+    .map(c => c.value).filter(v => v && v !== 'on');
+
+  const payload = {
+    business_name:    document.getElementById('bf-name')?.value?.trim(),
+    owner_name:       document.getElementById('bf-owner')?.value?.trim(),
+    email:            document.getElementById('bf-email')?.value?.trim(),
+    phone:            document.getElementById('bf-phone')?.value?.trim(),
+    address:          document.getElementById('bf-address')?.value?.trim(),
+    zip:              document.getElementById('bf-zip')?.value?.trim(),
+    selected_plan:    _bizPlan,
+    services_offered: services,
+    feature_nontoxic: !!document.getElementById('bf-nontoxic')?.checked,
+    feature_express:  !!document.getElementById('bf-express')?.checked,
+    feature_luxury:   !!document.getElementById('bf-luxury')?.checked,
+    how_heard:        document.getElementById('bf-heard')?.value,
+    notes:            document.getElementById('bf-notes')?.value?.trim(),
+  };
+
+  try {
+    // Try edge function first
+    const res = await fetch(SB_URL + '/functions/v1/signup-business', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SB_ANON },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Server error');
+    [1, 2, 3].forEach(s => { const el = document.getElementById('bfs' + s); if (el) el.classList.add('hidden'); });
+    document.getElementById('bfs-done').classList.remove('hidden');
+    for (let i = 1; i <= 3; i++) {
+      const dot = document.getElementById('bdot' + i);
+      if (dot) { dot.classList.remove('active'); dot.classList.add('done'); }
+    }
+  } catch(e) {
+    // Fallback: save to business_signups so no lead is lost
+    try {
+      await fetch(SB_URL + '/rest/v1/business_signups', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Prefer': 'return=minimal' },
+        body: JSON.stringify(payload)
+      });
+      [1, 2, 3].forEach(s => { const el = document.getElementById('bfs' + s); if (el) el.classList.add('hidden'); });
+      document.getElementById('bfs-done').classList.remove('hidden');
+      document.getElementById('bfs-done-msg').textContent = "We've received your details and will email your login within a few hours.";
+      for (let i = 1; i <= 3; i++) {
+        const dot = document.getElementById('bdot' + i);
+        if (dot) { dot.classList.remove('active'); dot.classList.add('done'); }
+      }
+    } catch(e2) {
+      err.textContent = 'Something went wrong. Please try again or reach out to us directly.';
+      err.classList.remove('hidden');
+      btn.disabled = false;
+      btn.textContent = 'Create My Account →';
+    }
+  }
+});
+
+// ══ CONSUMER AUTH + CLEANERS + ORDERS (Supabase) ════════════════════════════
+</script>
 
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-
-const cfg = document.getElementById('sb-config').dataset;
-const sb = createClient(cfg.url, cfg.anon);
-
+const SB_URL  = 'https://ftaqabwiqnuzoyjjkipj.supabase.co';
+const SB_ANON = 'sb_publishable_mVpLiNGElB4QNu76cMfX7Q_GltdnrJh';
+const sb = createClient(SB_URL, SB_ANON);
 let _user = null;
 
-// ── AUTH STATE ──────────────────────────────────────────
+// ── Auth state ──────────────────────────────────────────────────────────────
 sb.auth.getSession().then(({data:{session}}) => {
   if (session) { _user = session.user; onSignedIn(); }
   else { loadCleaners(); }
@@ -725,196 +899,129 @@ sb.auth.onAuthStateChange((_e, session) => {
 });
 
 function onSignedIn() {
-  updateNavButtons();
+  updateNavBtns();
   loadCleaners();
   loadOrders();
-  document.getElementById('c-orders-section').classList.remove('hidden');
+  document.getElementById('c-orders-section')?.classList.remove('hidden');
 }
 function onSignedOut() {
-  updateNavButtons();
+  updateNavBtns();
   loadCleaners();
-  document.getElementById('c-orders-section').classList.add('hidden');
+  document.getElementById('c-orders-section')?.classList.add('hidden');
 }
-function updateNavButtons() {
+function updateNavBtns() {
   const si = document.getElementById('c-signin-btn');
   const gs = document.getElementById('c-getstarted-btn');
   if (si) si.textContent = _user ? 'My Account' : 'Sign In';
   if (gs) gs.textContent = _user ? 'My Orders' : 'Get Started';
 }
 
-// ── NAVIGATION ──────────────────────────────────────────
-function showSection(id) {
-  ['entry','customer','business'].forEach(s => {
-    document.getElementById(s).style.display = s === id ? 'block' : 'none';
-  });
-  window.scrollTo(0, 0);
-  if (id === 'customer') { loadCleaners(); if (_user) loadOrders(); }
-}
-function scrollToId(id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-document.addEventListener('click', e => {
-  const t = e.target.closest('[data-action],[data-scroll],[data-plan-opt],[data-plan],[data-filter]');
-  if (!t) return;
-  const { action, scroll, planOpt, plan, filter } = t.dataset;
-  if (action === 'show-customer') { showSection('customer'); if (scroll) setTimeout(() => scrollToId(scroll), 120); }
-  if (action === 'show-business') showSection('business');
-  if (action === 'go-home') showSection('entry');
-  if (scroll && !action) { scrollToId(scroll); if (plan) selectBizPlan(plan); }
-  if (planOpt) selectBizPlan(planOpt);
-  if (filter) scrollToId('c-find');
-});
-
-document.querySelectorAll('.entry-card').forEach(card => {
-  card.addEventListener('click', () => {
-    if (card.dataset.action === 'show-customer') showSection('customer');
-    if (card.dataset.action === 'show-business') showSection('business');
-  });
-});
-
-// ── CLEANER LOADING ─────────────────────────────────────
+// ── Load cleaners ────────────────────────────────────────────────────────────
 async function loadCleaners() {
   const grid = document.getElementById('cleaners-grid');
   const waitlist = document.getElementById('waitlist-box');
   if (!grid) return;
-  grid.innerHTML = '<div style="text-align:center;padding:32px;color:var(--ink-lt);font-style:italic">Loading cleaners…</div>';
-
-  const { data, error } = await sb
-    .from('businesses')
-    .select('id,name,address,city,state,services,rating,review_count,plan,non_toxic,express_available,pickup_delivery')
-    .eq('is_active', true)
-    .eq('is_approved', true)
-    .order('plan', { ascending: false })
-    .order('rating', { ascending: false });
-
+  const { data } = await sb.from('businesses').select('id,name,address,city,services,rating,review_count,plan,feature_nontoxic,feature_express,pickup_delivery').eq('is_active', true).eq('is_approved', true).order('rating', { ascending: false });
   if (!data || !data.length) {
     grid.innerHTML = '';
-    waitlist.classList.remove('hidden');
+    waitlist?.classList.remove('hidden');
     return;
   }
-
-  waitlist.classList.add('hidden');
-  const svcLabels = {dry_clean:'✨ Dry Clean',launder:'👔 Launder & Press',wash_fold:'🧺 Wash & Fold',press_only:'👔 Press Only',alterations:'🪡 Alterations',bedding:'🛏️ Bedding',leather:'🧥 Leather',pickup:'🚗 Pickup'};
-
+  waitlist?.classList.add('hidden');
+  const svcMap = {dry_clean:'✨ Dry Clean',launder:'👔 Launder & Press',wash_fold:'🧺 Wash & Fold',press_only:'👔 Press Only',alterations:'🪡 Alterations',bedding:'🛏 Bedding',leather:'🧥 Leather',pickup:'🚗 Pickup'};
   grid.innerHTML = data.map(b => `
-    <div style="background:#fff;border:1px solid var(--bdlt);border-radius:18px;padding:24px;margin-bottom:14px;transition:box-shadow .2s" onmouseover="this.style.boxShadow='0 8px 28px rgba(123,94,167,.12)'" onmouseout="this.style.boxShadow='none'">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+    <div style="background:#fff;border:1px solid var(--bdlt);border-radius:18px;padding:22px;margin-bottom:14px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;flex-wrap:wrap;gap:8px">
         <div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:2px">${b.name}</div>
-          <div style="font-size:13px;color:var(--ink-lt)">${b.address || ''}${b.city ? ' · ' + b.city : ''}</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ink);margin-bottom:2px">${b.name}${b.plan==='pro'?' <span style=\"background:linear-gradient(135deg,var(--lav-deep),var(--lav));color:#fff;font-size:10px;padding:2px 7px;border-radius:8px\">PRO</span>':''}</div>
+          <div style="font-size:13px;color:var(--ink-lt)">${b.address||''}${b.city?(' · '+b.city):''}</div>
         </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          ${b.plan === 'pro' ? '<span style="background:linear-gradient(135deg,var(--lav-deep),var(--lav));color:#fff;font-size:10px;padding:3px 8px;border-radius:10px;letter-spacing:.5px">PRO</span>' : ''}
-          <span style="color:var(--gold);font-size:14px">★ ${b.rating || '—'}</span>
-          <span style="font-size:12px;color:var(--ink-lt)">(${b.review_count || 0})</span>
-        </div>
+        <div style="color:var(--gold);font-size:14px">&#x2605; ${b.rating||'—'} <span style="color:var(--ink-lt);font-size:12px">(${b.review_count||0})</span></div>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">
-        ${(b.services || []).slice(0,5).map(s => `<span style="background:var(--lav-mist);color:var(--lav-deep);font-size:11px;padding:3px 9px;border-radius:12px">${svcLabels[s] || s}</span>`).join('')}
-        ${b.non_toxic ? '<span style="background:#EBF7F1;color:#5BA87A;font-size:11px;padding:3px 9px;border-radius:12px">🌿 Non-Toxic</span>' : ''}
-        ${b.express_available ? '<span style="background:#FFF8E6;color:#C97B2A;font-size:11px;padding:3px 9px;border-radius:12px">⚡ Express</span>' : ''}
-        ${b.pickup_delivery ? '<span style="background:#EDF4FF;color:#3A6EC8;font-size:11px;padding:3px 9px;border-radius:12px">🚗 Pickup</span>' : ''}
+        ${(b.services||[]).slice(0,4).map(s=>`<span style="background:var(--lav-mist);color:var(--lav-deep);font-size:11px;padding:3px 9px;border-radius:12px">${svcMap[s]||s}</span>`).join('')}
+        ${b.feature_nontoxic?'<span style="background:#EBF7F1;color:#5BA87A;font-size:11px;padding:3px 9px;border-radius:12px">&#x1F33F; Non-Toxic</span>':''}
+        ${b.feature_express?'<span style="background:#FFF8E6;color:#C97B2A;font-size:11px;padding:3px 9px;border-radius:12px">&#x26A1; Express</span>':''}
       </div>
-      <button class="btn btn-primary btn-sm" style="width:100%" onclick="handleBookCleaner('${b.id}','${b.name.replace(/'/g,"\\'")}')">
-        ${_user ? 'Book ' + b.name : 'Sign In to Book'}
-      </button>
-    </div>
-  `).join('');
+      <button class="btn btn-primary btn-sm" style="width:100%" onclick="handleBook('${b.id}','${b.name.replace(/'/g,"\'")}')">${_user ? 'Book '+b.name : 'Sign In to Book'}</button>
+    </div>`).join('');
 }
-
-window.handleBookCleaner = function(bizId, bizName) {
+window.handleBook = function(id, name) {
   if (!_user) { openAuthModal('up'); return; }
-  alert('Booking for ' + bizName + ' — use the Dry. app to complete your order.');
+  alert('Use the Dry. app to complete your booking with ' + name + '.');
 };
 
-// ── ORDER LOADING ───────────────────────────────────────
+// ── Load orders ──────────────────────────────────────────────────────────────
 async function loadOrders() {
   if (!_user) return;
   const list = document.getElementById('c-orders-list');
   if (!list) return;
-
-  const { data: orders } = await sb
-    .from('orders')
-    .select('*')
-    .eq('user_id', _user.id)
-    .order('created_at', { ascending: false })
-    .limit(20);
-
+  const { data: orders } = await sb.from('orders').select('*').eq('user_id', _user.id).order('created_at', { ascending: false }).limit(20);
   if (!orders || !orders.length) {
     list.innerHTML = '<div style="text-align:center;padding:48px;color:var(--ink-lt);font-style:italic">No orders yet — find a cleaner and place your first order.</div>';
     return;
   }
-
-  // Get business names separately
   const bizIds = [...new Set(orders.map(o => o.business_id).filter(Boolean))];
   const bizMap = {};
   if (bizIds.length) {
     const { data: bizzes } = await sb.from('businesses').select('id,name').in('id', bizIds);
-    (bizzes || []).forEach(b => { bizMap[b.id] = b.name; });
+    (bizzes||[]).forEach(b => { bizMap[b.id] = b.name; });
   }
-
-  const SC = { scheduled:'var(--lav)', received:'#C97B2A', in_cleaning:'#3A6EC8', qc:'#B8860B', ready:'#5BA87A', completed:'var(--ink-lt)' };
-  const SL = { scheduled:'Scheduled', received:'Received', in_cleaning:'In Cleaning', qc:'Quality Check', ready:'✅ Ready for Pickup', completed:'Completed' };
-
+  const SC = {scheduled:'var(--lav)',received:'#C97B2A',in_cleaning:'#3A6EC8',qc:'#B8860B',ready:'#5BA87A',completed:'var(--ink-lt)'};
+  const SL = {scheduled:'Scheduled',received:'Received',in_cleaning:'In Cleaning',qc:'Quality Check',ready:'&#x2705; Ready for Pickup',completed:'Completed'};
   list.innerHTML = orders.map(o => `
-    <div class="order-card">
-      <div class="order-card-info">
-        <div class="order-card-cleaner">${bizMap[o.business_id] || 'Your Cleaner'}</div>
-        <div class="order-card-meta">${o.garments_summary || 'Order'} · $${o.total || '—'}</div>
-        <div class="order-card-meta" style="margin-top:2px">${new Date(o.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
+    <div style="background:#fff;border:1px solid var(--bdlt);border-radius:16px;padding:18px 22px;margin-bottom:12px;display:flex;align-items:center;gap:16px">
+      <div style="flex:1">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:3px">${bizMap[o.business_id]||'Your Cleaner'}</div>
+        <div style="font-size:13px;color:var(--ink-lt)">${o.garments_summary||'Order'} &middot; $${o.total||'—'}</div>
+        <div style="font-size:12px;color:var(--ink-lt);margin-top:2px">${new Date(o.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
       </div>
-      <div class="order-status-pill" style="background:${SC[o.status] || 'var(--lav)'}22">
-        <div style="width:7px;height:7px;border-radius:50%;background:${SC[o.status] || 'var(--lav)'}"></div>
-        <span style="color:${SC[o.status] || 'var(--lav)'}">${SL[o.status] || o.status}</span>
+      <div style="display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;background:${SC[o.status]||'var(--lav)'}22;flex-shrink:0">
+        <div style="width:7px;height:7px;border-radius:50%;background:${SC[o.status]||'var(--lav)'}"></div>
+        <span style="font-size:11px;color:${SC[o.status]||'var(--lav)'}">${SL[o.status]||o.status}</span>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-// ── AUTH MODAL ──────────────────────────────────────────
+// ── Auth modal ───────────────────────────────────────────────────────────────
 function openAuthModal(tab) {
   const modal = document.getElementById('c-auth-modal');
+  if (!modal) return;
   modal.style.display = 'flex';
-  if (_user) {
-    showAuthState('signedin');
-    document.getElementById('auth-user-email').textContent = _user.email;
-  } else {
-    showAuthState(tab || 'in');
-  }
+  if (_user) { showAuthState('signedin'); document.getElementById('auth-user-name').textContent = _user.email; }
+  else switchAuthTab(tab || 'in');
 }
 function closeAuthModal() {
-  document.getElementById('c-auth-modal').style.display = 'none';
+  const modal = document.getElementById('c-auth-modal');
+  if (modal) modal.style.display = 'none';
 }
-function showAuthState(state) {
-  document.getElementById('auth-signin').classList.toggle('hidden', state !== 'in');
-  document.getElementById('auth-signup').classList.toggle('hidden', state !== 'up');
-  document.getElementById('auth-signedin').classList.toggle('hidden', state !== 'signedin');
-  document.getElementById('auth-tabs').classList.toggle('hidden', state === 'signedin');
+function switchAuthTab(tab) {
+  document.getElementById('auth-signin')?.classList.toggle('hidden', tab !== 'in');
+  document.getElementById('auth-signup')?.classList.toggle('hidden', tab !== 'up');
+  document.getElementById('auth-signedin')?.classList.add('hidden');
   const ti = document.getElementById('auth-tab-in');
   const tu = document.getElementById('auth-tab-up');
-  if (state === 'in') { ti.style.background='var(--lav)';ti.style.color='#fff';tu.style.background='#fff';tu.style.color='var(--ink-lt)'; }
-  if (state === 'up') { tu.style.background='var(--lav)';tu.style.color='#fff';ti.style.background='#fff';ti.style.color='var(--ink-lt)'; }
+  if (ti) { ti.style.background = tab==='in'?'var(--lav)':'#fff'; ti.style.color = tab==='in'?'#fff':'var(--ink-lt)'; }
+  if (tu) { tu.style.background = tab==='up'?'var(--lav)':'#fff'; tu.style.color = tab==='up'?'#fff':'var(--ink-lt)'; }
 }
-
+function showAuthState(s) {
+  document.getElementById('auth-signin')?.classList.toggle('hidden', s !== 'in');
+  document.getElementById('auth-signup')?.classList.toggle('hidden', s !== 'up');
+  document.getElementById('auth-signedin')?.classList.toggle('hidden', s !== 'signedin');
+}
+// Expose to window for inline onclick attributes in the modal HTML
 window.openAuthModal = openAuthModal;
 window.closeAuthModal = closeAuthModal;
+window.switchAuthTab = switchAuthTab;
 
-document.getElementById('c-signin-btn').addEventListener('click', () => openAuthModal('in'));
-document.getElementById('c-getstarted-btn').addEventListener('click', () => {
-  if (_user) { document.getElementById('c-orders-section').scrollIntoView({behavior:'smooth'}); }
+document.getElementById('c-signin-btn')?.addEventListener('click', () => openAuthModal('in'));
+document.getElementById('c-getstarted-btn')?.addEventListener('click', () => {
+  if (_user) { document.getElementById('c-orders-section')?.scrollIntoView({behavior:'smooth'}); }
   else openAuthModal('up');
 });
-document.getElementById('auth-modal-close').addEventListener('click', closeAuthModal);
-document.getElementById('auth-close-btn').addEventListener('click', closeAuthModal);
-document.getElementById('c-auth-modal').addEventListener('click', e => { if (e.target.id === 'c-auth-modal') closeAuthModal(); });
-document.getElementById('auth-tab-in').addEventListener('click', () => showAuthState('in'));
-document.getElementById('auth-tab-up').addEventListener('click', () => showAuthState('up'));
-document.getElementById('switch-to-up').addEventListener('click', () => showAuthState('up'));
-document.getElementById('switch-to-in').addEventListener('click', () => showAuthState('in'));
+document.getElementById('c-auth-modal')?.addEventListener('click', e => { if (e.target.id === 'c-auth-modal') closeAuthModal(); });
 
-document.getElementById('auth-signin-btn').addEventListener('click', async () => {
+document.getElementById('auth-signin-btn')?.addEventListener('click', async () => {
   const email = document.getElementById('auth-in-email').value.trim();
   const pass  = document.getElementById('auth-in-pass').value;
   const err   = document.getElementById('auth-in-err');
@@ -923,14 +1030,14 @@ document.getElementById('auth-signin-btn').addEventListener('click', async () =>
   if (!email || !pass) { err.textContent = 'Please enter your email and password.'; err.classList.remove('hidden'); return; }
   btn.disabled = true; btn.textContent = 'Signing in…';
   const { error } = await sb.auth.signInWithPassword({ email, password: pass });
-  if (error) { err.textContent = error.message; err.classList.remove('hidden'); btn.disabled=false; btn.textContent='Sign In'; return; }
+  if (error) { err.textContent = error.message; err.classList.remove('hidden'); btn.disabled = false; btn.textContent = 'Sign In'; return; }
   showAuthState('signedin');
-  document.getElementById('auth-user-email').textContent = email;
+  document.getElementById('auth-user-name').textContent = email;
   setTimeout(closeAuthModal, 700);
   btn.disabled = false; btn.textContent = 'Sign In';
 });
 
-document.getElementById('auth-signup-btn').addEventListener('click', async () => {
+document.getElementById('auth-signup-btn')?.addEventListener('click', async () => {
   const name  = document.getElementById('auth-up-name').value.trim();
   const email = document.getElementById('auth-up-email').value.trim();
   const pass  = document.getElementById('auth-up-pass').value;
@@ -941,192 +1048,147 @@ document.getElementById('auth-signup-btn').addEventListener('click', async () =>
   if (pass.length < 6) { err.textContent = 'Password must be at least 6 characters.'; err.classList.remove('hidden'); return; }
   btn.disabled = true; btn.textContent = 'Creating account…';
   const { data, error } = await sb.auth.signUp({ email, password: pass });
-  if (error) { err.textContent = error.message; err.classList.remove('hidden'); btn.disabled=false; btn.textContent='Create Account'; return; }
+  if (error) { err.textContent = error.message; err.classList.remove('hidden'); btn.disabled = false; btn.textContent = 'Create Account'; return; }
   if (data.user) await sb.from('users').upsert({ id: data.user.id, full_name: name, email });
   showAuthState('signedin');
-  document.getElementById('auth-user-email').textContent = name + ' — welcome to Dry.!';
+  document.getElementById('auth-user-name').textContent = name + ' — welcome to Dry.!';
   setTimeout(closeAuthModal, 800);
   btn.disabled = false; btn.textContent = 'Create Account';
 });
 
-document.getElementById('auth-signout-btn').addEventListener('click', async () => {
+document.getElementById('auth-signout-btn')?.addEventListener('click', async () => {
   await sb.auth.signOut();
   closeAuthModal();
 });
 
-// ── ACCOUNT DETAILS MODAL ───────────────────────────────
-function openAccountModal() {
+// ── Account details modal ────────────────────────────────────────────────────
+document.getElementById('open-account-btn')?.addEventListener('click', () => {
   if (!_user) return;
-  const modal = document.getElementById('acct-modal');
-  modal.style.display = 'flex';
+  document.getElementById('acct-modal').style.display = 'flex';
   document.getElementById('acct-email').value = _user.email || '';
-  // Load name from users table
-  sb.from('users').select('full_name').eq('id', _user.id).single().then(({data}) => {
-    document.getElementById('acct-name').value = data?.full_name || '';
-  });
   document.getElementById('acct-pw').value = '';
-  const msg = document.getElementById('acct-msg');
-  msg.classList.add('hidden');
-}
-function closeAccountModal() {
+  document.getElementById('acct-msg').classList.add('hidden');
+  sb.from('users').select('full_name').eq('id', _user.id).single().then(({data}) => {
+    if (data) document.getElementById('acct-name').value = data.full_name || '';
+  });
+});
+document.getElementById('acct-modal-close')?.addEventListener('click', () => {
   document.getElementById('acct-modal').style.display = 'none';
-}
-document.getElementById('open-account-btn').addEventListener('click', openAccountModal);
-document.getElementById('acct-modal-close').addEventListener('click', closeAccountModal);
-document.getElementById('acct-modal').addEventListener('click', e => { if (e.target.id === 'acct-modal') closeAccountModal(); });
-
-document.getElementById('acct-save-btn').addEventListener('click', async () => {
+});
+document.getElementById('acct-modal')?.addEventListener('click', e => {
+  if (e.target.id === 'acct-modal') document.getElementById('acct-modal').style.display = 'none';
+});
+document.getElementById('acct-save-btn')?.addEventListener('click', async () => {
   const name = document.getElementById('acct-name').value.trim();
   const pw   = document.getElementById('acct-pw').value;
   const msg  = document.getElementById('acct-msg');
   const btn  = document.getElementById('acct-save-btn');
   msg.classList.add('hidden');
   btn.disabled = true; btn.textContent = 'Saving…';
-
   try {
     if (name) await sb.from('users').upsert({ id: _user.id, full_name: name, email: _user.email });
     if (pw) {
-      if (pw.length < 6) { msg.textContent='Password must be at least 6 characters.'; msg.style.background='#fdf0f0'; msg.style.color='#c0392b'; msg.classList.remove('hidden'); btn.disabled=false; btn.textContent='Save Changes'; return; }
+      if (pw.length < 6) { msg.textContent = 'Password must be at least 6 characters.'; msg.style.cssText = 'background:#fdf0f0;color:#c0392b;padding:10px 14px;border-radius:10px;font-family:Georgia'; msg.classList.remove('hidden'); btn.disabled = false; btn.textContent = 'Save Changes'; return; }
       const { error } = await sb.auth.updateUser({ password: pw });
       if (error) throw error;
     }
     msg.textContent = '✓ Saved successfully!';
-    msg.style.background = '#EBF7F1';
-    msg.style.color = '#5BA87A';
+    msg.style.cssText = 'background:#EBF7F1;color:#5BA87A;padding:10px 14px;border-radius:10px;font-family:Georgia';
     msg.classList.remove('hidden');
     document.getElementById('acct-pw').value = '';
   } catch(e) {
-    msg.textContent = e.message || 'Something went wrong. Please try again.';
-    msg.style.background = '#fdf0f0';
-    msg.style.color = '#c0392b';
+    msg.textContent = e.message || 'Something went wrong.';
+    msg.style.cssText = 'background:#fdf0f0;color:#c0392b;padding:10px 14px;border-radius:10px;font-family:Georgia';
     msg.classList.remove('hidden');
   }
   btn.disabled = false; btn.textContent = 'Save Changes';
 });
-
-// ── BIZU DASHBOARD LOGIN ────────────────────────────────
-document.getElementById('biz-login-btn').addEventListener('click', () => {
-  window.open('https://drybusinessdashboard.vercel.app', '_blank');
-});
-
-// ── WAITLIST ────────────────────────────────────────────
-document.getElementById('notify-btn')?.addEventListener('click', async () => {
-  const email = document.getElementById('notify-email')?.value?.trim();
-  if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
-  try {
-    await fetch(cfg.url + '/rest/v1/waitlist', {
-      method: 'POST',
-      headers: { 'Content-Type':'application/json', 'apikey':cfg.anon, 'Authorization':'Bearer '+cfg.anon, 'Prefer':'return=minimal' },
-      body: JSON.stringify({ email })
-    });
-  } catch(e) {}
-  document.getElementById('notify-thanks').classList.remove('hidden');
-  document.getElementById('notify-email').style.display = 'none';
-  document.getElementById('notify-btn').style.display = 'none';
-});
-
-document.getElementById('search-btn')?.addEventListener('click', () => {
-  const q = document.getElementById('find-input')?.value?.trim().toLowerCase();
-  if (!q) return;
-  // Filter shown cleaner cards by name/city
-  document.querySelectorAll('#cleaners-grid > div').forEach(card => {
-    const txt = card.textContent.toLowerCase();
-    card.style.display = txt.includes(q) ? '' : 'none';
-  });
-});
-
-// ── CONTACT FORM ────────────────────────────────────────
-document.getElementById('contact-submit-btn')?.addEventListener('click', async () => {
-  const name    = document.getElementById('cf-name')?.value?.trim();
-  const email   = document.getElementById('cf-email')?.value?.trim();
-  const topic   = document.getElementById('cf-topic')?.value;
-  const message = document.getElementById('cf-message')?.value?.trim();
-  const err     = document.getElementById('cf-err');
-  const btn     = document.getElementById('contact-submit-btn');
-  err.classList.add('hidden');
-  if (!name || !email || !topic || !message) { err.textContent='Please fill in all fields.'; err.classList.remove('hidden'); return; }
-  btn.disabled = true; btn.textContent = 'Sending…';
-  try {
-    await fetch(cfg.url + '/rest/v1/feedback', {
-      method:'POST',
-      headers:{'Content-Type':'application/json','apikey':cfg.anon,'Authorization':'Bearer '+cfg.anon,'Prefer':'return=minimal'},
-      body: JSON.stringify({ category: topic, message: name+' ('+email+'): '+message })
-    });
-  } catch(e) {}
-  document.getElementById('contact-form-inner').classList.add('hidden');
-  document.getElementById('contact-success').classList.remove('hidden');
-});
-
-// ── BUSINESS SIGNUP ─────────────────────────────────────
-let _bizPlan = 'pro';
-function selectBizPlan(plan) {
-  _bizPlan = plan;
-  document.getElementById('bpo-basic').classList.toggle('selected', plan === 'basic');
-  document.getElementById('bpo-pro').classList.toggle('selected', plan === 'pro');
-}
-function bfGo(step) {
-  [1,2,3].forEach(s => { const el=document.getElementById('bfs'+s); if(el) el.classList.toggle('hidden',s!==step); });
-  document.getElementById('bfs-done').classList.add('hidden');
-  for (let i=1;i<=3;i++) {
-    const dot=document.getElementById('bdot'+i); const line=document.getElementById('bline'+i);
-    if(dot){dot.classList.remove('active','done'); if(i<step)dot.classList.add('done'); else if(i===step)dot.classList.add('active');}
-    if(line&&i<3)line.classList.toggle('done',i<step);
-  }
-}
-document.getElementById('bf-next1')?.addEventListener('click',()=>{
-  const n=document.getElementById('bf-name')?.value?.trim();
-  const o=document.getElementById('bf-owner')?.value?.trim();
-  const e=document.getElementById('bf-email')?.value?.trim();
-  const a=document.getElementById('bf-address')?.value?.trim();
-  const p=document.getElementById('bf-phone')?.value?.trim();
-  if(!n||!o||!e||!a||!p){alert('Please fill in all required fields.');return;}
-  bfGo(2);
-});
-document.getElementById('bf-back2')?.addEventListener('click',()=>bfGo(1));
-document.getElementById('bf-next2')?.addEventListener('click',()=>bfGo(3));
-document.getElementById('bf-back3')?.addEventListener('click',()=>bfGo(2));
-document.getElementById('bf-submit')?.addEventListener('click',async()=>{
-  const btn=document.getElementById('bf-submit');
-  const err=document.getElementById('bf-err');
-  btn.disabled=true; btn.textContent='Creating your account…';
-  err.classList.add('hidden');
-  const services=Array.from(document.querySelectorAll('#bfs2 input[type=checkbox]:checked')).map(c=>c.value).filter(v=>v&&v!=='on');
-  const payload={
-    business_name:document.getElementById('bf-name')?.value?.trim(),
-    owner_name:document.getElementById('bf-owner')?.value?.trim(),
-    email:document.getElementById('bf-email')?.value?.trim(),
-    phone:document.getElementById('bf-phone')?.value?.trim(),
-    address:document.getElementById('bf-address')?.value?.trim(),
-    zip:document.getElementById('bf-zip')?.value?.trim(),
-    selected_plan:_bizPlan,services_offered:services,
-    feature_nontoxic:!!document.getElementById('bf-nontoxic')?.checked,
-    feature_express:!!document.getElementById('bf-express')?.checked,
-    feature_luxury:!!document.getElementById('bf-luxury')?.checked,
-    how_heard:document.getElementById('bf-heard')?.value,
-    notes:document.getElementById('bf-notes')?.value?.trim(),
-  };
-  const done=()=>{
-    [1,2,3].forEach(s=>{const el=document.getElementById('bfs'+s);if(el)el.classList.add('hidden');});
-    document.getElementById('bfs-done').classList.remove('hidden');
-    for(let i=1;i<=3;i++){const dot=document.getElementById('bdot'+i);if(dot){dot.classList.remove('active');dot.classList.add('done');}}
-  };
-  try {
-    const res=await fetch(cfg.url+'/functions/v1/signup-business',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+cfg.anon},body:JSON.stringify(payload)});
-    const data=await res.json();
-    if(!res.ok)throw new Error(data.error||'Server error');
-    done();
-  } catch(e) {
-    try {
-      await fetch(cfg.url+'/rest/v1/business_signups',{method:'POST',headers:{'Content-Type':'application/json','apikey':cfg.anon,'Authorization':'Bearer '+cfg.anon,'Prefer':'return=minimal'},body:JSON.stringify(payload)});
-      document.getElementById('bfs-done-msg').textContent="We've received your details and will email your login within a few hours.";
-      done();
-    } catch(e2) {
-      err.textContent='Something went wrong. Please try again.';
-      err.classList.remove('hidden');
-      btn.disabled=false; btn.textContent='Create My Account →';
-    }
-  }
-});
 </script>
+
+<!-- CONSUMER AUTH MODAL -->
+<div id="c-auth-modal" style="display:none;position:fixed;inset:0;background:rgba(44,31,61,.5);backdrop-filter:blur(6px);z-index:500;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:28px;width:min(440px,95vw);overflow:hidden;box-shadow:0 32px 80px rgba(44,31,61,.28)">
+    <div style="background:linear-gradient(135deg,var(--lav-deep),var(--lav));padding:32px 36px 28px;text-align:center">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-style:italic;color:#fff;margin-bottom:4px">dry.</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.7);letter-spacing:1.5px;text-transform:uppercase;font-family:'EB Garamond',Georgia">Your Account</div>
+    </div>
+    <div style="padding:32px 36px">
+      <!-- Tab switcher -->
+      <div style="display:flex;gap:0;margin-bottom:28px;border:1.5px solid var(--bdlt);border-radius:12px;overflow:hidden">
+        <button id="auth-tab-in" onclick="switchAuthTab('in')" style="flex:1;padding:10px;border:none;background:var(--lav);color:#fff;font-family:'EB Garamond',Georgia;font-size:14px;cursor:pointer">Sign In</button>
+        <button id="auth-tab-up" onclick="switchAuthTab('up')" style="flex:1;padding:10px;border:none;background:#fff;color:var(--ink-lt);font-family:'EB Garamond',Georgia;font-size:14px;cursor:pointer">Create Account</button>
+      </div>
+      <!-- Sign In form -->
+      <div id="auth-signin">
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Email</label>
+          <input id="auth-in-email" type="email" placeholder="your email address" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        </div>
+        <div style="margin-bottom:24px">
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Password</label>
+          <input id="auth-in-pass" type="password" placeholder="••••••••" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        </div>
+        <div id="auth-in-err" class="hidden" style="font-size:13px;color:#c0392b;padding:10px 14px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
+        <button id="auth-signin-btn" class="btn btn-primary" style="width:100%">Sign In</button>
+        <div style="text-align:center;margin-top:16px;font-size:13px;color:var(--ink-lt);font-family:'EB Garamond',Georgia">Don't have an account? <span onclick="switchAuthTab('up')" style="color:var(--lav);cursor:pointer;text-decoration:underline">Create one</span></div>
+      </div>
+      <!-- Sign Up form -->
+      <div id="auth-signup" class="hidden">
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Full Name</label>
+          <input id="auth-up-name" type="text" placeholder="Your name" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        </div>
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Email</label>
+          <input id="auth-up-email" type="email" placeholder="your email address" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        </div>
+        <div style="margin-bottom:24px">
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Password</label>
+          <input id="auth-up-pass" type="password" placeholder="••••••••" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        </div>
+        <div id="auth-up-err" class="hidden" style="font-size:13px;color:#c0392b;padding:10px 14px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
+        <button id="auth-signup-btn" class="btn btn-primary" style="width:100%">Create Account</button>
+        <div style="text-align:center;margin-top:16px;font-size:12px;color:var(--ink-lt);font-family:'EB Garamond',Georgia;line-height:1.6">By creating an account you agree to the Dry. Terms of Service and Privacy Policy.</div>
+      </div>
+      <!-- Signed in state -->
+      <div id="auth-signedin" class="hidden" style="text-align:center">
+        <div style="font-size:44px;margin-bottom:12px">✓</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);margin-bottom:8px">You're signed in</div>
+        <div id="auth-user-name" style="font-size:14px;color:var(--ink-mid);font-style:italic;margin-bottom:24px"></div>
+        <button id="auth-signout-btn" class="btn btn-outline" style="width:100%;margin-bottom:12px">Sign Out</button>
+        <button onclick="closeAuthModal()" class="btn btn-primary" style="width:100%">Continue</button>
+      </div>
+    </div>
+    <button onclick="closeAuthModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
+  </div>
+</div>
+<!-- ACCOUNT DETAILS MODAL -->
+<div id="acct-modal" style="display:none;position:fixed;inset:0;background:rgba(44,31,61,.5);backdrop-filter:blur(6px);z-index:600;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:28px;width:min(460px,95vw);box-shadow:0 32px 80px rgba(44,31,61,.28);position:relative;overflow:hidden">
+    <div style="background:linear-gradient(135deg,var(--lav-deep),var(--lav));padding:28px 36px;display:flex;align-items:center;justify-content:space-between">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#fff;font-style:italic">Account Details</div>
+      <button id="acct-modal-close" style="background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer">&#x2715;</button>
+    </div>
+    <div style="padding:32px 36px">
+      <div style="margin-bottom:16px">
+        <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Full Name</label>
+        <input id="acct-name" type="text" placeholder="Your name" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+      </div>
+      <div style="margin-bottom:20px">
+        <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Email Address</label>
+        <input id="acct-email" type="email" disabled style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink-lt);outline:none;box-sizing:border-box;background:#f0ecf7"/>
+      </div>
+      <div style="border-top:1px solid var(--bdlt);margin-bottom:20px"></div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--ink);margin-bottom:14px">Change Password</div>
+      <div style="margin-bottom:20px">
+        <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">New Password (leave blank to keep current)</label>
+        <input id="acct-pw" type="password" placeholder="New password" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+      </div>
+      <div id="acct-msg" class="hidden" style="padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:13px;font-family:'EB Garamond',Georgia"></div>
+      <button id="acct-save-btn" class="btn btn-primary" style="width:100%">Save Changes</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
