@@ -649,8 +649,10 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
 
 <script type="module">
 // ══ CONFIG ══════════════════════════════════════════════
-const SB_URL  = 'SUPABASE_URL_PLACEHOLDER';
-const SB_ANON = 'SUPABASE_ANON_PLACEHOLDER';
+const SB_URL  = 'https://ftaqabwiqnuzoyjjkipj.supabase.co';
+const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0YXFhYndpcW51em95ampraXBqIiwicm9sZSI6ImFub24iLCJpYXQiOj';
+window._SB_URL  = SB_URL;
+window._SB_ANON = SB_ANON;
 
 // ══ NAVIGATION ══════════════════════════════════════════
 function showSection(id) {
@@ -915,5 +917,101 @@ document.getElementById('bf-submit')?.addEventListener('click', async () => {
     <button onclick="closeAuthModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
   </div>
 </div>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+const SB_URL  = window._SB_URL  || 'https://ftaqabwiqnuzoyjjkipj.supabase.co';
+const SB_ANON = window._SB_ANON || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0YXFhYndpcW51em95ampraXBqIiwicm9sZSI6ImFub24iLCJpYXQiOj';
+const sb = createClient(SB_URL, SB_ANON);
+let _user = null;
+
+sb.auth.getSession().then(({data:{session}})=>{ if(session){_user=session.user;updateAuthUI();loadOrders();} });
+sb.auth.onAuthStateChange((_e,session)=>{ _user=session?.user||null; updateAuthUI(); if(_user) loadOrders(); });
+
+function updateAuthUI(){
+  const si=document.getElementById('c-signin-btn');
+  const gs=document.getElementById('c-getstarted-btn');
+  if(si) si.textContent=_user?'My Account':'Sign In';
+  if(gs) gs.textContent=_user?'My Orders':'Get Started';
+  document.getElementById('c-orders-section')?.classList.toggle('hidden',!_user);
+}
+
+window.openAuthModal=function(tab){
+  document.getElementById('c-auth-modal').style.display='flex';
+  if(_user){ showState('signedin'); document.getElementById('auth-user-name').textContent=_user.email; }
+  else switchTab(tab||'in');
+};
+window.closeAuthModal=function(){ document.getElementById('c-auth-modal').style.display='none'; };
+window.switchAuthTab=switchTab;
+function switchTab(tab){
+  document.getElementById('auth-signin').classList.toggle('hidden',tab!=='in');
+  document.getElementById('auth-signup').classList.toggle('hidden',tab!=='up');
+  document.getElementById('auth-signedin').classList.add('hidden');
+  const ti=document.getElementById('auth-tab-in');
+  const tu=document.getElementById('auth-tab-up');
+  ti.style.background=tab==='in'?'var(--lav)':'#fff'; ti.style.color=tab==='in'?'#fff':'var(--ink-lt)';
+  tu.style.background=tab==='up'?'var(--lav)':'#fff'; tu.style.color=tab==='up'?'#fff':'var(--ink-lt)';
+}
+function showState(s){
+  document.getElementById('auth-signin').classList.toggle('hidden',s!=='in');
+  document.getElementById('auth-signup').classList.toggle('hidden',s!=='up');
+  document.getElementById('auth-signedin').classList.toggle('hidden',s!=='signedin');
+}
+
+document.getElementById('c-signin-btn')?.addEventListener('click',()=>window.openAuthModal('in'));
+document.getElementById('c-getstarted-btn')?.addEventListener('click',()=>window.openAuthModal(_user?'in':'up'));
+document.getElementById('c-auth-modal')?.addEventListener('click',e=>{ if(e.target.id==='c-auth-modal') window.closeAuthModal(); });
+
+document.getElementById('auth-signin-btn')?.addEventListener('click',async()=>{
+  const email=document.getElementById('auth-in-email').value.trim();
+  const pass=document.getElementById('auth-in-pass').value;
+  const err=document.getElementById('auth-in-err');
+  const btn=document.getElementById('auth-signin-btn');
+  err.classList.add('hidden');
+  if(!email||!pass){err.textContent='Please enter your email and password.';err.classList.remove('hidden');return;}
+  btn.disabled=true;btn.textContent='Signing in…';
+  const{error}=await sb.auth.signInWithPassword({email,password:pass});
+  if(error){err.textContent=error.message;err.classList.remove('hidden');btn.disabled=false;btn.textContent='Sign In';return;}
+  showState('signedin');
+  document.getElementById('auth-user-name').textContent=email;
+  setTimeout(()=>window.closeAuthModal(),800);
+  btn.disabled=false;btn.textContent='Sign In';
+});
+
+document.getElementById('auth-signup-btn')?.addEventListener('click',async()=>{
+  const name=document.getElementById('auth-up-name').value.trim();
+  const email=document.getElementById('auth-up-email').value.trim();
+  const pass=document.getElementById('auth-up-pass').value;
+  const err=document.getElementById('auth-up-err');
+  const btn=document.getElementById('auth-signup-btn');
+  err.classList.add('hidden');
+  if(!name||!email||!pass){err.textContent='Please fill in all fields.';err.classList.remove('hidden');return;}
+  if(pass.length<6){err.textContent='Password must be at least 6 characters.';err.classList.remove('hidden');return;}
+  btn.disabled=true;btn.textContent='Creating account…';
+  const{data,error}=await sb.auth.signUp({email,password:pass});
+  if(error){err.textContent=error.message;err.classList.remove('hidden');btn.disabled=false;btn.textContent='Create Account';return;}
+  if(data.user) await sb.from('users').upsert({id:data.user.id,full_name:name,email});
+  showState('signedin');
+  document.getElementById('auth-user-name').textContent=name+' — welcome to Dry.!';
+  setTimeout(()=>window.closeAuthModal(),800);
+  btn.disabled=false;btn.textContent='Create Account';
+});
+
+document.getElementById('auth-signout-btn')?.addEventListener('click',async()=>{
+  await sb.auth.signOut();
+  window.closeAuthModal();
+});
+
+async function loadOrders(){
+  if(!_user)return;
+  const list=document.getElementById('c-orders-list');
+  if(!list)return;
+  const{data:orders}=await sb.from('orders').select('*,businesses(name)').eq('user_id',_user.id).order('created_at',{ascending:false}).limit(10);
+  if(!orders?.length){list.innerHTML='<div style="text-align:center;padding:40px;color:var(--ink-lt);font-style:italic">No orders yet.</div>';return;}
+  const SC={scheduled:'var(--lav)',received:'#C97B2A',in_cleaning:'#3A6EC8',qc:'#B8860B',ready:'#5BA87A',completed:'var(--ink-lt)'};
+  const SL={scheduled:'Scheduled',received:'Received',in_cleaning:'In Cleaning',qc:'Quality Check',ready:'Ready for Pickup',completed:'Completed'};
+  list.innerHTML=orders.map(o=>`<div style="background:var(--off);border:1px solid var(--bdlt);border-radius:16px;padding:18px 20px;margin-bottom:12px;display:flex;align-items:center;gap:16px"><div style="flex:1"><div style="font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);margin-bottom:4px">${o.businesses?.name||'Your Cleaner'}</div><div style="font-size:13px;color:var(--ink-lt)">${o.garments_summary||''} · $${o.total||'—'}</div><div style="font-size:12px;color:var(--ink-lt);margin-top:2px">${new Date(o.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div></div><div style="display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;background:${SC[o.status]||'var(--lav)'}22;flex-shrink:0"><div style="width:6px;height:6px;border-radius:50%;background:${SC[o.status]||'var(--lav)'}"></div><span style="font-size:11px;color:${SC[o.status]||'var(--lav)'}">${SL[o.status]||o.status}</span></div></div>`).join('');
+}
+</script>
 </body>
 </html>
