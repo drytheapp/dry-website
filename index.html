@@ -237,8 +237,8 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
     </div>
     <div class="nav-right">
       <span class="nav-back" data-action="go-home">&#8592; Change</span>
-      <button class="btn btn-outline btn-sm" data-scroll="c-find">Sign In</button>
-      <button class="btn btn-primary btn-sm" style="color:#fff" data-scroll="c-find">Get Started</button>
+      <button class="btn btn-outline btn-sm" id="c-signin-btn">Sign In</button>
+      <button class="btn btn-primary btn-sm" style="color:#fff" id="c-getstarted-btn">Get Started</button>
     </div>
   </nav>
 
@@ -390,7 +390,7 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
     <div class="ft">
       <div><div class="ft-logo">dry.</div><p class="ft-tagline">Your grandmother's dry cleaner, with your efficiency.</p></div>
       <div class="ft-col"><h4>Product</h4><a data-scroll="c-how">How It Works</a><a data-scroll="c-svc">Services</a><a data-scroll="c-find">Find a Cleaner</a><a data-scroll="c-faq">FAQ</a></div>
-      <div class="ft-col"><h4>For Businesses</h4><a data-action="show-business">Get Started Free</a><a data-action="show-business">Pricing</a><a data-action="show-business">Business Dashboard</a></div>
+      <div class="ft-col"><h4>For Businesses</h4><a data-action="show-business">Get Started</a><a data-action="show-business">Pricing</a><a data-action="show-business">Business Dashboard</a></div>
       <div class="ft-col"><h4>Contact</h4><a data-scroll="c-contact">Customer Support</a><a data-scroll="c-contact">General Inquiries</a><a data-scroll="c-contact">Legal &amp; Privacy</a></div>
     </div>
     <div class="ft-bottom"><div>&#x00A9; 2026 Dry Technologies, LLC. All rights reserved.</div><div><a data-scroll="c-faq">FAQ</a>&nbsp;&nbsp;<a data-scroll="c-contact">Privacy</a>&nbsp;&nbsp;<a data-scroll="c-contact">Terms</a></div></div>
@@ -411,7 +411,7 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
     <div class="nav-right">
       <span class="nav-back" data-action="go-home">&#8592; Change</span>
       <button class="btn btn-outline btn-sm" id="biz-login-btn">Log In</button>
-      <button class="btn btn-primary btn-sm" style="color:#fff" data-scroll="b-signup">Get Started Free</button>
+      <button class="btn btn-primary btn-sm" style="color:#fff" data-scroll="b-signup">Get Started</button>
     </div>
   </nav>
 
@@ -429,7 +429,7 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
         <h1>Grow your business.<br>Keep every dollar.</h1>
         <p class="b-hero-sub">Dry. puts your location in front of customers already looking for a cleaner. You set your own prices, offer your own services, and keep 100% of your order revenue. We charge a flat monthly subscription — no commissions, no transaction cuts.</p>
         <div class="b-hero-btns">
-          <button class="btn btn-white" data-scroll="b-signup">Get Started Free</button>
+          <button class="btn btn-white" data-scroll="b-signup">Get Started</button>
           <button class="btn btn-ghost" data-scroll="b-pricing">See Pricing</button>
         </div>
       </div>
@@ -551,7 +551,7 @@ footer{background:var(--lav-deep);padding:56px 6% 36px;color:rgba(255,255,255,.6
           </div>
           <div class="b-field-row">
             <div class="b-field"><label>Email Address *</label><input id="bf-email" type="email" placeholder="your business email"/></div>
-            <div class="b-field"><label>Phone Number</label><input id="bf-phone" placeholder="(212) 555-0000"/></div>
+            <div class="b-field"><label>Phone Number *</label><input id="bf-phone" placeholder="(212) 555-0000"/></div>
           </div>
           <div class="b-field"><label>Business Address *</label><input id="bf-address" placeholder="Street address, City, State"/></div>
           <div class="b-field"><label>Zip Code</label><input id="bf-zip" placeholder="10018"/></div>
@@ -659,6 +659,7 @@ function showSection(id) {
   document.getElementById('business').style.display = 'none';
   document.getElementById(id).style.display = 'block';
   window.scrollTo(0, 0);
+  document.dispatchEvent(new CustomEvent('sectionShown', { detail: id }));
 }
 
 function scrollToId(id) {
@@ -782,7 +783,8 @@ document.getElementById('bf-next1')?.addEventListener('click', () => {
   const owner   = document.getElementById('bf-owner')?.value?.trim();
   const email   = document.getElementById('bf-email')?.value?.trim();
   const address = document.getElementById('bf-address')?.value?.trim();
-  if (!name || !owner || !email || !address) { alert('Please fill in all required fields (marked *).'); return; }
+  const phone = document.getElementById('bf-phone')?.value?.trim();
+  if (!name || !owner || !email || !address || !phone) { alert('Please fill in all required fields (marked *).'); return; }
   bfGo(2);
 });
 
@@ -855,5 +857,63 @@ document.getElementById('bf-submit')?.addEventListener('click', async () => {
   }
 });
 </script>
+
+<!-- CONSUMER AUTH MODAL -->
+<div id="c-auth-modal" style="display:none;position:fixed;inset:0;background:rgba(44,31,61,.5);backdrop-filter:blur(6px);z-index:500;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:28px;width:min(440px,95vw);overflow:hidden;box-shadow:0 32px 80px rgba(44,31,61,.28)">
+    <div style="background:linear-gradient(135deg,var(--lav-deep),var(--lav));padding:32px 36px 28px;text-align:center">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-style:italic;color:#fff;margin-bottom:4px">dry.</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.7);letter-spacing:1.5px;text-transform:uppercase;font-family:'EB Garamond',Georgia">Your Account</div>
+    </div>
+    <div style="padding:32px 36px">
+      <!-- Tab switcher -->
+      <div style="display:flex;gap:0;margin-bottom:28px;border:1.5px solid var(--bdlt);border-radius:12px;overflow:hidden">
+        <button id="auth-tab-in" onclick="switchAuthTab('in')" style="flex:1;padding:10px;border:none;background:var(--lav);color:#fff;font-family:'EB Garamond',Georgia;font-size:14px;cursor:pointer">Sign In</button>
+        <button id="auth-tab-up" onclick="switchAuthTab('up')" style="flex:1;padding:10px;border:none;background:#fff;color:var(--ink-lt);font-family:'EB Garamond',Georgia;font-size:14px;cursor:pointer">Create Account</button>
+      </div>
+      <!-- Sign In form -->
+      <div id="auth-signin">
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Email</label>
+          <input id="auth-in-email" type="email" placeholder="your email address" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        </div>
+        <div style="margin-bottom:24px">
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Password</label>
+          <input id="auth-in-pass" type="password" placeholder="••••••••" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        </div>
+        <div id="auth-in-err" class="hidden" style="font-size:13px;color:#c0392b;padding:10px 14px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
+        <button id="auth-signin-btn" class="btn btn-primary" style="width:100%">Sign In</button>
+        <div style="text-align:center;margin-top:16px;font-size:13px;color:var(--ink-lt);font-family:'EB Garamond',Georgia">Don't have an account? <span onclick="switchAuthTab('up')" style="color:var(--lav);cursor:pointer;text-decoration:underline">Create one</span></div>
+      </div>
+      <!-- Sign Up form -->
+      <div id="auth-signup" class="hidden">
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Full Name</label>
+          <input id="auth-up-name" type="text" placeholder="Your name" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        </div>
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Email</label>
+          <input id="auth-up-email" type="email" placeholder="your email address" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        </div>
+        <div style="margin-bottom:24px">
+          <label style="display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-lt);font-family:'EB Garamond',Georgia;margin-bottom:6px">Password</label>
+          <input id="auth-up-pass" type="password" placeholder="••••••••" style="width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--bdlt);font-size:14px;font-family:'EB Garamond',Georgia;color:var(--ink);outline:none;box-sizing:border-box;background:var(--off)"/>
+        </div>
+        <div id="auth-up-err" class="hidden" style="font-size:13px;color:#c0392b;padding:10px 14px;background:#fdf0f0;border-radius:10px;margin-bottom:16px"></div>
+        <button id="auth-signup-btn" class="btn btn-primary" style="width:100%">Create Account</button>
+        <div style="text-align:center;margin-top:16px;font-size:12px;color:var(--ink-lt);font-family:'EB Garamond',Georgia;line-height:1.6">By creating an account you agree to the Dry. Terms of Service and Privacy Policy.</div>
+      </div>
+      <!-- Signed in state -->
+      <div id="auth-signedin" class="hidden" style="text-align:center">
+        <div style="font-size:44px;margin-bottom:12px">✓</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);margin-bottom:8px">You're signed in</div>
+        <div id="auth-user-name" style="font-size:14px;color:var(--ink-mid);font-style:italic;margin-bottom:24px"></div>
+        <button id="auth-signout-btn" class="btn btn-outline" style="width:100%;margin-bottom:12px">Sign Out</button>
+        <button onclick="closeAuthModal()" class="btn btn-primary" style="width:100%">Continue</button>
+      </div>
+    </div>
+    <button onclick="closeAuthModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
+  </div>
+</div>
 </body>
 </html>
